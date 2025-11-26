@@ -202,7 +202,7 @@
           {{ formatCost(usageStats.totalCost) }}
         </el-descriptions-item>
         <el-descriptions-item label="当前模型">
-          {{ aiStore.currentConfig?.modelId || "-" }}
+          {{ aiStore.currentConfig?.model || "-" }}
         </el-descriptions-item>
       </el-descriptions>
     </el-card>
