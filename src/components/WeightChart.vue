@@ -35,9 +35,19 @@ ChartJS.register(
   Filler
 );
 
+type MetricKey =
+  | "weight"
+  | "bodyFat"
+  | "muscleMass"
+  | "waistCircumference"
+  | "hipCircumference"
+  | "chestCircumference"
+  | "thighCircumference"
+  | "armCircumference";
+
 const props = defineProps<{
   metrics: BodyMetric[];
-  dataKey?: "weight" | "bodyFat" | "muscleMass";
+  dataKey?: MetricKey;
   title?: string;
   color?: string;
 }>();
@@ -45,7 +55,7 @@ const props = defineProps<{
 const loaded = computed(() => props.metrics && props.metrics.length > 0);
 
 const chartData = computed<ChartData<"line">>(() => {
-  const dataKey = props.dataKey || "weight";
+  const dataKey: MetricKey = props.dataKey || "weight";
   const sortedMetrics = [...props.metrics].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
@@ -79,7 +89,7 @@ const chartData = computed<ChartData<"line">>(() => {
 });
 
 const chartOptions = computed<ChartOptions<"line">>(() => {
-  const dataKey = props.dataKey || "weight";
+  const dataKey: MetricKey = props.dataKey || "weight";
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -103,7 +113,7 @@ const chartOptions = computed<ChartOptions<"line">>(() => {
             }
             if (context.parsed.y !== null) {
               label += context.parsed.y.toFixed(1);
-              label += dataKey === "weight" ? " kg" : " %";
+              label += getUnit(dataKey);
             }
             return label;
           },
@@ -115,7 +125,7 @@ const chartOptions = computed<ChartOptions<"line">>(() => {
         beginAtZero: false,
         ticks: {
           callback: (value) => {
-            return value + (dataKey === "weight" ? " kg" : " %");
+            return value + getUnit(dataKey);
           },
         },
       },
@@ -123,13 +133,25 @@ const chartOptions = computed<ChartOptions<"line">>(() => {
   };
 });
 
-function getLabel(key: string): string {
-  const labels: Record<string, string> = {
+function getLabel(key: MetricKey): string {
+  const labels: Record<MetricKey, string> = {
     weight: "体重",
     bodyFat: "体脂率",
     muscleMass: "骨骼肌率",
+    waistCircumference: "腰围",
+    hipCircumference: "臀围",
+    chestCircumference: "胸围",
+    thighCircumference: "大腿围",
+    armCircumference: "大臂围",
   };
   return labels[key] || key;
+}
+
+function getUnit(key: MetricKey): string {
+  if (key === "weight") return " kg";
+  if (key === "bodyFat" || key === "muscleMass") return " %";
+  // 围度类统一使用 cm
+  return " cm";
 }
 </script>
 

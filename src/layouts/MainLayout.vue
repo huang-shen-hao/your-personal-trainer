@@ -17,20 +17,20 @@
         <span class="brand-text">GYM AI</span>
       </div>
       <div class="header-actions">
-        <el-button
+        <!-- <el-button
           circle
           @click="router.push('/settings')"
           class="settings-btn"
         >
           <Cog6ToothIcon style="width: 20px; height: 20px; display: block" />
-        </el-button>
-        <el-button circle @click="toggleTheme">
+        </el-button> -->
+        <!-- <el-button circle @click="toggleTheme">
           <MoonIcon
             v-if="settingsStore.theme !== 'dark'"
             style="width: 20px; height: 20px; display: block"
           />
           <SunIcon v-else style="width: 20px; height: 20px; display: block" />
-        </el-button>
+        </el-button> -->
         <el-popover
           placement="bottom-end"
           :width="280"
@@ -49,10 +49,6 @@
           </template>
           <div class="user-profile-info" v-if="userStore.profile">
             <div class="profile-header">
-              <UserIcon
-                style="width: 40px; height: 40px"
-                class="profile-icon"
-              />
               <div class="profile-name">
                 <div class="nickname">
                   {{
@@ -99,10 +95,6 @@
           </div>
           <div class="user-profile-info" v-else>
             <div class="profile-header">
-              <UserIcon
-                style="width: 40px; height: 40px"
-                class="profile-icon"
-              />
               <div class="profile-name">
                 <div class="nickname">未登录</div>
               </div>
@@ -317,14 +309,14 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useSettingsStore } from "@/stores/settings";
+// import { useSettingsStore } from "@/stores/settings";
 import { useUserStore } from "@/stores/user";
 import { EXPERIENCE_LEVEL_LABELS } from "@/types/user";
 import {
   UserIcon,
-  Cog6ToothIcon,
-  MoonIcon,
-  SunIcon,
+  // Cog6ToothIcon,
+  // MoonIcon,
+  // SunIcon,
   Bars3Icon,
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -348,7 +340,7 @@ import settingsLine from "@/assets/images/aside/settings-2-line.svg?raw";
 
 const route = useRoute();
 const router = useRouter();
-const settingsStore = useSettingsStore();
+// const settingsStore = useSettingsStore();
 const userStore = useUserStore();
 
 // 经验等级标签
@@ -419,10 +411,10 @@ onUnmounted(() => {
   window.removeEventListener("resize", handleResize);
 });
 
-function toggleTheme() {
-  const newTheme = settingsStore.theme === "dark" ? "light" : "dark";
-  settingsStore.setTheme(newTheme);
-}
+// function toggleTheme() {
+//   const newTheme = settingsStore.theme === "dark" ? "light" : "dark";
+//   settingsStore.setTheme(newTheme);
+// }
 
 function toggleSidebar() {
   sidebarCollapsed.value = !sidebarCollapsed.value;
@@ -449,11 +441,11 @@ function handleMobileMenuSelect(index: string) {
   background:
     radial-gradient(
       20.01% 15% at 14.06% 10.9%,
-      rgba(255, 125, 125, 0.2) 0%,
+      rgb(255 199 199 / 20%) 0%,
       rgba(255, 239, 239, 0) 100%
     ),
-    linear-gradient(144deg, rgb(222, 227, 255) 0.9%, rgb(246, 242, 241) 21.87%),
-    rgb(244, 245, 249);
+    linear-gradient(144deg, rgb(252 255 235) 0.9%, rgb(244 245 255) 21.87%),
+    rgb(29 255 0);
 }
 
 .header {
@@ -760,7 +752,6 @@ function handleMobileMenuSelect(index: string) {
       padding-bottom: 8px;
 
       .profile-icon {
-        color: $--el-color-primary;
         background-color: $--el-color-primary-lighter;
         border-radius: 50%;
         padding: 8px;
@@ -772,13 +763,13 @@ function handleMobileMenuSelect(index: string) {
         .nickname {
           font-size: $--el-font-size-large;
           font-weight: 600;
-          color: $--text-color-primary;
+          color: #fff;
           margin-bottom: 4px;
         }
 
         .real-name {
           font-size: $--el-font-size-small;
-          color: $--text-color-secondary;
+          color: #fff;
         }
       }
     }

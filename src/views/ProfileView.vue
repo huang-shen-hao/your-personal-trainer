@@ -423,7 +423,6 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .profile-view {
-  max-width: 1000px;
   margin: 0 auto;
 }
 

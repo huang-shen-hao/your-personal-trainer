@@ -28,6 +28,7 @@
   --surface-card: #ffffff;
   --surface-raised: #edf2ff;
   --surface-overlay: rgba(15, 23, 42, 0.72);
+  // --surface-overlay: rgba(255, 255, 255, 0.8);
 
   --border-subtle: #e5e7eb;
   --border-strong: #cbd5e1;
@@ -260,6 +261,26 @@ a {
   .el-dialog__body {
     padding: $--el-spacing-lg;
   }
+}
+
+/* Element Plus popper / popover styling */
+.el-popover.el-popper {
+  background-color: #ffffff !important;
+  color: #666666 !important; // description / body text
+  border-radius: $--el-border-radius-base;
+  border: 1px solid $--border-color-light;
+  box-shadow: $--el-box-shadow-card;
+}
+
+.el-popover__title {
+  color: #333333 !important; // title text
+  font-weight: var(--font-weight-medium);
+}
+
+/* Hide Element Plus popper arrow globally */
+.el-popper__arrow,
+.el-popper[data-popper-arrow] {
+  display: none !important;
 }
 
 .el-menu-item {

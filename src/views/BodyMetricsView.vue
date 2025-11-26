@@ -88,6 +88,130 @@
       </el-col>
     </el-row>
 
+    <!-- 其他体测趋势 -->
+    <el-row :gutter="20" class="charts-row">
+      <el-col :xs="24" :md="12">
+        <el-card shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <span>骨骼肌率趋势</span>
+              <el-select v-model="weightDays" size="small" style="width: 100px">
+                <el-option label="7天" :value="7" />
+                <el-option label="30天" :value="30" />
+                <el-option label="90天" :value="90" />
+              </el-select>
+            </div>
+          </template>
+          <WeightChart
+            :metrics="recentMetrics"
+            data-key="muscleMass"
+            color="#e6a23c"
+          />
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :md="12">
+        <el-card shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <span>腰围趋势</span>
+              <el-select v-model="weightDays" size="small" style="width: 100px">
+                <el-option label="7天" :value="7" />
+                <el-option label="30天" :value="30" />
+                <el-option label="90天" :value="90" />
+              </el-select>
+            </div>
+          </template>
+          <WeightChart
+            :metrics="recentMetrics"
+            data-key="waistCircumference"
+            color="#f56c6c"
+          />
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20" class="charts-row">
+      <el-col :xs="24" :md="12">
+        <el-card shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <span>臀围趋势</span>
+              <el-select v-model="weightDays" size="small" style="width: 100px">
+                <el-option label="7天" :value="7" />
+                <el-option label="30天" :value="30" />
+                <el-option label="90天" :value="90" />
+              </el-select>
+            </div>
+          </template>
+          <WeightChart
+            :metrics="recentMetrics"
+            data-key="hipCircumference"
+            color="#909399"
+          />
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :md="12">
+        <el-card shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <span>胸围趋势</span>
+              <el-select v-model="weightDays" size="small" style="width: 100px">
+                <el-option label="7天" :value="7" />
+                <el-option label="30天" :value="30" />
+                <el-option label="90天" :value="90" />
+              </el-select>
+            </div>
+          </template>
+          <WeightChart
+            :metrics="recentMetrics"
+            data-key="chestCircumference"
+            color="#67c23a"
+          />
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20" class="charts-row">
+      <el-col :xs="24" :md="12">
+        <el-card shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <span>大腿围趋势</span>
+              <el-select v-model="weightDays" size="small" style="width: 100px">
+                <el-option label="7天" :value="7" />
+                <el-option label="30天" :value="30" />
+                <el-option label="90天" :value="90" />
+              </el-select>
+            </div>
+          </template>
+          <WeightChart
+            :metrics="recentMetrics"
+            data-key="thighCircumference"
+            color="#8e44ad"
+          />
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :md="12">
+        <el-card shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <span>大臂围趋势</span>
+              <el-select v-model="weightDays" size="small" style="width: 100px">
+                <el-option label="7天" :value="7" />
+                <el-option label="30天" :value="30" />
+                <el-option label="90天" :value="90" />
+              </el-select>
+            </div>
+          </template>
+          <WeightChart
+            :metrics="recentMetrics"
+            data-key="armCircumference"
+            color="#2ecc71"
+          />
+        </el-card>
+      </el-col>
+    </el-row>
+
     <!-- 数据列表 -->
     <el-card shadow="hover" class="data-table">
       <template #header>
@@ -117,6 +241,26 @@
             {{ row.waistCircumference ? row.waistCircumference.toFixed(1) : '-' }}
           </template>
         </el-table-column>
+        <el-table-column prop="hipCircumference" label="臀围 (cm)" width="100">
+          <template #default="{ row }">
+            {{ row.hipCircumference ? row.hipCircumference.toFixed(1) : '-' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="chestCircumference" label="胸围 (cm)" width="100">
+          <template #default="{ row }">
+            {{ row.chestCircumference ? row.chestCircumference.toFixed(1) : '-' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="thighCircumference" label="大腿围 (cm)" width="110">
+          <template #default="{ row }">
+            {{ row.thighCircumference ? row.thighCircumference.toFixed(1) : '-' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="armCircumference" label="大臂围 (cm)" width="120">
+          <template #default="{ row }">
+            {{ row.armCircumference ? row.armCircumference.toFixed(1) : '-' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="notes" label="备注" min-width="150">
           <template #default="{ row }">
             {{ row.notes || '-' }}
@@ -139,6 +283,7 @@
     <MetricForm
       v-model="dialogVisible"
       :metric="currentMetric"
+      :latest-metric="latestMetric"
       @success="handleSuccess"
       ref="metricFormRef"
     />
