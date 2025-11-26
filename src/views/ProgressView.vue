@@ -295,14 +295,13 @@ watch(overviewRange, () => {
 
 <style scoped lang="scss">
 .progress-view {
-  max-width: 1400px;
   margin: 0 auto;
 
   .page-header {
     margin-bottom: 24px;
 
     h1 {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: bold;
       color: var(--el-text-color-primary);
       margin: 0;

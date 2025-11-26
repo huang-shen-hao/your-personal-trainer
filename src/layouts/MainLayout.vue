@@ -146,13 +146,13 @@
           </el-tooltip>
           <el-tooltip
             :disabled="!sidebarCollapsed"
-            content="AI 对话"
+            content="对话"
             placement="right"
             :show-after="200"
           >
             <el-menu-item index="/chat">
               <span class="menu-icon" v-html="getAsideIcon('/chat')"></span>
-              <span>AI 对话</span>
+              <span>对话</span>
             </el-menu-item>
           </el-tooltip>
           <el-tooltip
@@ -163,34 +163,34 @@
           >
             <el-menu-item index="/plan">
               <span class="menu-icon" v-html="getAsideIcon('/plan')"></span>
-              <span>训练计划</span>
+              <span>计划</span>
             </el-menu-item>
           </el-tooltip>
           <el-tooltip
             :disabled="!sidebarCollapsed"
-            content="开始训练"
+            content="训练"
             placement="right"
             :show-after="200"
           >
             <el-menu-item index="/workout">
               <span class="menu-icon" v-html="getAsideIcon('/workout')"></span>
-              <span>开始训练</span>
+              <span>训练</span>
             </el-menu-item>
           </el-tooltip>
           <el-tooltip
             :disabled="!sidebarCollapsed"
-            content="进度统计"
+            content="统计"
             placement="right"
             :show-after="200"
           >
             <el-menu-item index="/progress">
               <span class="menu-icon" v-html="getAsideIcon('/progress')"></span>
-              <span>进度统计</span>
+              <span>统计</span>
             </el-menu-item>
           </el-tooltip>
           <el-tooltip
             :disabled="!sidebarCollapsed"
-            content="体测数据"
+            content="数据"
             placement="right"
             :show-after="200"
           >
@@ -199,12 +199,12 @@
                 class="menu-icon"
                 v-html="getAsideIcon('/body-metrics')"
               ></span>
-              <span>体测数据</span>
+              <span>数据</span>
             </el-menu-item>
           </el-tooltip>
           <el-tooltip
             :disabled="!sidebarCollapsed"
-            content="AI 配置"
+            content="配置"
             placement="right"
             :show-after="200"
           >
@@ -213,7 +213,7 @@
                 class="menu-icon"
                 v-html="getAsideIcon('/ai-config')"
               ></span>
-              <span>AI 配置</span>
+              <span>配置</span>
             </el-menu-item>
           </el-tooltip>
         </el-menu>

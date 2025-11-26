@@ -323,7 +323,6 @@ function resetCreateForm() {
 @import '@/styles/variables.scss';
 
 .plan-view {
-  max-width: 1400px;
   margin: 0 auto;
   padding: $--el-spacing-md;
 

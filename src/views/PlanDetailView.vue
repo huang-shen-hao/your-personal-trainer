@@ -328,7 +328,6 @@ function formatDate(date: Date | string): string {
 
 <style scoped lang="scss">
 .plan-detail-view {
-  max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
 

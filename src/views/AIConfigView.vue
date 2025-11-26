@@ -395,7 +395,6 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .ai-config-view {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
 }

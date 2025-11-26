@@ -291,7 +291,6 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .body-metrics-view {
-  max-width: 1400px;
   margin: 0 auto;
 
   .top-bar {

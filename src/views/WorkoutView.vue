@@ -569,7 +569,7 @@ onMounted(async () => {
 <style scoped lang="scss">
 .workout-view {
   padding: 16px;
-  max-width: 1200px;
+
   margin: 0 auto;
 }
 

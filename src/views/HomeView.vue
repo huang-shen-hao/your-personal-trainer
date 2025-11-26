@@ -147,7 +147,6 @@ onMounted(async () => {
 @import "@/styles/variables.scss";
 
 .home-view {
-  max-width: 1200px;
   margin: 0 auto;
 }
 
