@@ -1,0 +1,60 @@
+// Design tokens are driven by CSS variables that come from src/theme.
+// SASS variables below are aliases so existing SCSS keeps working while
+// values still respond to runtime theme switches.
+
+// Brand & functional colors
+$--el-color-primary: var(--color-primary, #3370ff);
+$--el-color-primary-light: var(--color-primary-hover, #4a86ff);
+$--el-color-primary-lighter: var(--color-primary-muted, #e8f0ff);
+$--el-color-primary-dark: var(--color-primary-active, #1f64ff);
+
+$--el-color-success: var(--color-success, #22c55e);
+$--el-color-warning: var(--color-warning, #f59e0b);
+$--el-color-danger: var(--color-danger, #ef4444);
+$--el-color-info: var(--color-info, #0ea5e9);
+
+// Surfaces & text
+$--bg-color-base: var(--surface-base, #f6f8fb);
+$--bg-color-card: var(--surface-card, #ffffff);
+$--bg-color-hover: var(--state-hover, #f2f6ff);
+$--bg-color-active: var(--state-active, #e5edff);
+
+$--text-color-primary: var(--text-primary, #111827);
+$--text-color-regular: var(--text-secondary, #4b5563);
+$--text-color-secondary: var(--text-tertiary, #6b7280);
+$--text-color-placeholder: var(--text-placeholder, #9ca3af);
+
+// Borders
+$--border-color-base: var(--border-strong, #cbd5e1);
+$--border-color-light: var(--border-subtle, #e5e7eb);
+$--border-color-lighter: var(--state-muted, #eef2f7);
+
+// Typography
+$--el-font-size-base: var(--font-size-md, 14px);
+$--el-font-size-small: var(--font-size-sm, 13px);
+$--el-font-size-large: var(--font-size-lg, 16px);
+$--el-font-size-xl: var(--font-size-xl, 18px);
+$--el-font-size-xxl: 20px;
+
+// Spacing scale (4px base)
+$--el-spacing-xs: var(--space-xxs, 4px);
+$--el-spacing-sm: var(--space-xs, 8px);
+$--el-spacing-md: var(--space-md, 16px);
+$--el-spacing-lg: var(--space-lg, 20px);
+$--el-spacing-xl: var(--space-xxl, 32px);
+
+// Radius tokens
+$--el-border-radius-base: var(--radius-md, 12px);
+$--el-border-radius-small: var(--radius-sm, 8px);
+$--el-border-radius-round: var(--radius-full, 999px);
+$--el-border-radius-mini: var(--radius-xs, 6px);
+
+// Shadows
+$--el-box-shadow-base: var(--shadow-soft, 0 4px 20px rgba(15, 23, 42, 0.06));
+$--el-box-shadow-light: var(--shadow-card, 0 10px 30px rgba(15, 23, 42, 0.08));
+$--el-box-shadow-hover: var(--shadow-pop, 0 18px 40px rgba(15, 23, 42, 0.14));
+$--el-box-shadow-card: var(--shadow-card, 0 10px 30px rgba(15, 23, 42, 0.08));
+
+// Motion
+$--transition-base: var(--motion-normal, 220ms cubic-bezier(0.4, 0, 0.2, 1));
+$--transition-fast: var(--motion-fast, 180ms cubic-bezier(0.4, 0, 0.2, 1));

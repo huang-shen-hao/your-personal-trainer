@@ -1,0 +1,2626 @@
+[
+  {
+    "id": "ex001",
+    "name": "深蹲",
+    "nameEn": "Squat",
+    "category": "legs",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings", "core"],
+    "description": "下肢力量训练的王牌动作，全面发展腿部肌群",
+    "instructions": [
+      "双脚与肩同宽站立，杠铃置于斜方肌上方",
+      "保持背部挺直，核心收紧",
+      "屈膝下蹲至大腿与地面平行或更低",
+      "推动脚跟站起，回到起始位置"
+    ],
+    "tips": [
+      "膝盖与脚尖方向一致",
+      "避免膝盖内扣",
+      "保持脊柱中立"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex002",
+    "name": "卧推",
+    "nameEn": "Bench Press",
+    "category": "chest",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": ["triceps", "anterior_deltoid"],
+    "description": "上肢推力的基础动作，主要发展胸大肌",
+    "instructions": [
+      "仰卧在平板凳上，双脚踩实地面",
+      "双手握杠，略宽于肩",
+      "缓慢下降杠铃至胸部",
+      "用力推起杠铃至手臂伸直"
+    ],
+    "tips": [
+      "肩胛骨后缩下沉",
+      "保持臀部和上背贴紧凳面",
+      "控制下降速度"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex003",
+    "name": "硬拉",
+    "nameEn": "Deadlift",
+    "category": "back",
+    "equipment": "barbell",
+    "difficulty": "advanced",
+    "primaryMuscles": ["erector_spinae", "glutes", "hamstrings"],
+    "secondaryMuscles": ["quadriceps", "trapezius", "forearms"],
+    "description": "后链发展的核心动作，全身力量的体现",
+    "instructions": [
+      "双脚与髋同宽，杠铃靠近小腿",
+      "屈髋屈膝下蹲握杠，背部挺直",
+      "伸髋伸膝拉起杠铃至直立",
+      "控制下降，回到起始位置"
+    ],
+    "tips": [
+      "始终保持脊柱中立",
+      "使用髋部发力，不是腰部",
+      "杠铃贴近身体运动"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex004",
+    "name": "引体向上",
+    "nameEn": "Pull-up",
+    "category": "back",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi"],
+    "secondaryMuscles": ["biceps", "trapezius", "rear_deltoid"],
+    "description": "背部垂直拉力的黄金动作",
+    "instructions": [
+      "双手正握单杠，略宽于肩",
+      "悬挂起始，肩胛骨下沉",
+      "拉起身体直至下巴过杠",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "避免摆动身体",
+      "肩胛骨主动下沉",
+      "全程控制动作"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex005",
+    "name": "推举",
+    "nameEn": "Overhead Press",
+    "category": "shoulders",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["anterior_deltoid", "lateral_deltoid"],
+    "secondaryMuscles": ["triceps", "upper_chest", "core"],
+    "description": "肩部推力的基础动作",
+    "instructions": [
+      "站立，杠铃置于锁骨前方",
+      "核心收紧，臀部夹紧",
+      "向上推起杠铃至手臂伸直",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "避免过度后仰",
+      "保持核心稳定",
+      "肘关节对准前方"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex006",
+    "name": "俯卧撑",
+    "nameEn": "Push-up",
+    "category": "chest",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": ["triceps", "anterior_deltoid", "core"],
+    "description": "经典的上肢推力自重训练",
+    "instructions": [
+      "手掌撑地，略宽于肩，身体呈直线",
+      "屈肘下降身体至胸部接近地面",
+      "推起身体至起始位置"
+    ],
+    "tips": [
+      "保持身体一条直线",
+      "核心全程收紧",
+      "避免塌腰"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex007",
+    "name": "箭步蹲",
+    "nameEn": "Lunge",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings", "calves"],
+    "description": "单腿力量与平衡训练",
+    "instructions": [
+      "站立，一脚向前跨出一大步",
+      "下蹲至前腿大腿与地面平行",
+      "后腿膝盖接近地面",
+      "推动前脚跟站起"
+    ],
+    "tips": [
+      "保持躯干直立",
+      "前膝不超过脚尖",
+      "后膝轻触地面"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex008",
+    "name": "仰卧起坐",
+    "nameEn": "Sit-up",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["rectus_abdominis"],
+    "secondaryMuscles": ["hip_flexors"],
+    "description": "传统的腹部训练动作",
+    "instructions": [
+      "仰卧，屈膝，双脚固定",
+      "双手交叉胸前或置于耳侧",
+      "收缩腹肌，卷起上半身",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "避免用力拉颈部",
+      "感受腹肌发力",
+      "控制动作节奏"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex009",
+    "name": "平板支撑",
+    "nameEn": "Plank",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["core"],
+    "secondaryMuscles": ["shoulders", "glutes"],
+    "description": "核心稳定性的等长训练",
+    "instructions": [
+      "俯卧，前臂撑地，肘关节在肩下方",
+      "身体呈直线，核心收紧",
+      "保持这个姿势"
+    ],
+    "tips": [
+      "避免塌腰或撅臀",
+      "保持自然呼吸",
+      "循序渐进增加时间"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex010",
+    "name": "哑铃弯举",
+    "nameEn": "Dumbbell Curl",
+    "category": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["biceps"],
+    "secondaryMuscles": ["forearms"],
+    "description": "孤立训练肱二头肌",
+    "instructions": [
+      "站立或坐姿，双手各握一哑铃",
+      "手臂自然下垂于身体两侧",
+      "屈肘向上弯举哑铃至肩部",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "肘关节固定不动",
+      "避免身体摆动",
+      "顶峰收缩1-2秒"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex011",
+    "name": "杠铃划船",
+    "nameEn": "Barbell Row",
+    "category": "back",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi", "trapezius"],
+    "secondaryMuscles": ["biceps", "rear_deltoid", "erector_spinae"],
+    "description": "背部水平拉力的核心动作",
+    "instructions": [
+      "屈髋俯身，背部挺直，握杠",
+      "杠铃悬垂在膝盖下方",
+      "拉起杠铃至腹部",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "保持背部挺直",
+      "肘关节贴近身体",
+      "顶峰挤压背部"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex012",
+    "name": "腿举",
+    "nameEn": "Leg Press",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "机械辅助的腿部训练",
+    "instructions": [
+      "坐入腿举机，双脚踩在踏板上",
+      "释放安全锁，屈膝下降",
+      "下降至膝盖约90度",
+      "推动踏板回到起始位置"
+    ],
+    "tips": [
+      "保持下背贴紧靠背",
+      "避免膝盖完全锁死",
+      "控制动作速度"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex013",
+    "name": "哑铃飞鸟",
+    "nameEn": "Dumbbell Fly",
+    "category": "chest",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": ["anterior_deltoid"],
+    "description": "胸部孤立训练动作",
+    "instructions": [
+      "仰卧平板凳，双手各握哑铃",
+      "手臂微屈，向两侧打开",
+      "感受胸部拉伸",
+      "收缩胸肌将哑铃合拢"
+    ],
+    "tips": [
+      "保持手肘微屈角度",
+      "控制下降深度",
+      "顶峰挤压胸肌"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex014",
+    "name": "侧平举",
+    "nameEn": "Lateral Raise",
+    "category": "shoulders",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["lateral_deltoid"],
+    "secondaryMuscles": ["trapezius"],
+    "description": "孤立训练三角肌中束",
+    "instructions": [
+      "站立，双手各握哑铃于身体两侧",
+      "手臂微屈，向两侧抬起",
+      "抬至肩部高度",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "避免耸肩",
+      "保持躯干稳定",
+      "动作要流畅"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex015",
+    "name": "三头肌下压",
+    "nameEn": "Tricep Pushdown",
+    "category": "arms",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": [],
+    "description": "孤立训练肱三头肌",
+    "instructions": [
+      "站立面对高位绳索",
+      "双手握绳索把手",
+      "肘关节固定，下压绳索",
+      "控制回到起始位置"
+    ],
+    "tips": [
+      "肘关节保持固定",
+      "避免身体前倾",
+      "顶峰挤压三头"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex016",
+    "name": "罗马尼亚硬拉",
+    "nameEn": "Romanian Deadlift",
+    "category": "legs",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["hamstrings", "glutes"],
+    "secondaryMuscles": ["erector_spinae"],
+    "description": "后链孤立训练，强化腘绳肌",
+    "instructions": [
+      "站立握杠，双脚与髋同宽",
+      "保持膝盖微屈，屈髋下降",
+      "杠铃沿小腿下滑至中小腿",
+      "伸髋拉起杠铃至直立"
+    ],
+    "tips": [
+      "保持背部挺直",
+      "感受腘绳肌拉伸",
+      "杠铃贴近身体"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex017",
+    "name": "高位下拉",
+    "nameEn": "Lat Pulldown",
+    "category": "back",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["latissimus_dorsi"],
+    "secondaryMuscles": ["biceps", "trapezius"],
+    "description": "背部垂直拉力的机械辅助动作",
+    "instructions": [
+      "坐入高拉机，大腿固定",
+      "宽握把手，手臂伸直",
+      "下拉至锁骨位置",
+      "控制回到起始位置"
+    ],
+    "tips": [
+      "保持躯干直立",
+      "肩胛骨下沉后缩",
+      "感受背部发力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex018",
+    "name": "腿弯举",
+    "nameEn": "Leg Curl",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["hamstrings"],
+    "secondaryMuscles": [],
+    "description": "孤立训练腘绳肌",
+    "instructions": [
+      "俯卧在腿弯举机上",
+      "脚踝置于滚轮下方",
+      "弯曲膝盖向上卷起",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "避免抬起臀部",
+      "全程控制动作",
+      "顶峰挤压腘绳肌"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex019",
+    "name": "前平举",
+    "nameEn": "Front Raise",
+    "category": "shoulders",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["anterior_deltoid"],
+    "secondaryMuscles": ["upper_chest"],
+    "description": "孤立训练三角肌前束",
+    "instructions": [
+      "站立，双手各握哑铃于大腿前",
+      "保持手臂微屈",
+      "向前抬起至肩部高度",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "避免借力摆动",
+      "保持躯干稳定",
+      "动作流畅"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex020",
+    "name": "坐姿推举",
+    "nameEn": "Seated Shoulder Press",
+    "category": "shoulders",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["anterior_deltoid", "lateral_deltoid"],
+    "secondaryMuscles": ["triceps"],
+    "description": "肩部推力的坐姿变式",
+    "instructions": [
+      "坐在有靠背的凳子上",
+      "哑铃举至肩部高度",
+      "向上推举至手臂伸直",
+      "控制下降至起始位置"
+    ],
+    "tips": [
+      "背部贴紧靠背",
+      "避免过度后仰",
+      "核心收紧"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex021",
+    "name": "山羊挺身",
+    "nameEn": "Back Extension",
+    "category": "back",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["erector_spinae", "glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "下背部力量训练",
+    "instructions": [
+      "俯卧在罗马椅上",
+      "双手交叉胸前",
+      "屈髋下降上半身",
+      "伸髋抬起至水平位置"
+    ],
+    "tips": [
+      "避免过度伸展",
+      "保持动作控制",
+      "感受下背发力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex022",
+    "name": "卷腹",
+    "nameEn": "Crunch",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["rectus_abdominis"],
+    "secondaryMuscles": [],
+    "description": "孤立训练腹直肌",
+    "instructions": [
+      "仰卧，屈膝，双脚踩地",
+      "双手置于耳侧",
+      "卷起上半身，下背保持贴地",
+      "缓慢下降至起始位置"
+    ],
+    "tips": [
+      "下背不离地",
+      "感受腹肌收缩",
+      "避免拉颈部"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex023",
+    "name": "俄罗斯转体",
+    "nameEn": "Russian Twist",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["obliques"],
+    "secondaryMuscles": ["rectus_abdominis"],
+    "description": "旋转训练腹斜肌",
+    "instructions": [
+      "坐姿，上半身后倾45度",
+      "双脚离地或踩地",
+      "双手合十，左右旋转躯干",
+      "手触地面两侧"
+    ],
+    "tips": [
+      "保持核心紧张",
+      "动作要流畅",
+      "避免过度旋转"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex024",
+    "name": "提踵",
+    "nameEn": "Calf Raise",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["calves"],
+    "secondaryMuscles": [],
+    "description": "小腿肌群训练",
+    "instructions": [
+      "站立，双脚与髋同宽",
+      "抬起脚跟至最高点",
+      "保持1-2秒",
+      "缓慢下降至起始位置"
+    ],
+    "tips": [
+      "全程控制动作",
+      "顶峰挤压小腿",
+      "可负重增加难度"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex025",
+    "name": "保加利亚分腿蹲",
+    "nameEn": "Bulgarian Split Squat",
+    "category": "legs",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "单腿力量的进阶训练",
+    "instructions": [
+      "后脚放在凳子或台阶上",
+      "前脚向前一步",
+      "下蹲至前腿大腿平行地面",
+      "推动前脚跟站起"
+    ],
+    "tips": [
+      "保持躯干直立",
+      "重心在前腿",
+      "控制平衡"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex026",
+    "name": "窄距俯卧撑",
+    "nameEn": "Close-Grip Push-up",
+    "category": "arms",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": ["pectoralis", "anterior_deltoid"],
+    "description": "强化三头肌的俯卧撑变式",
+    "instructions": [
+      "双手撑地，间距窄于肩宽",
+      "身体呈直线",
+      "屈肘下降，肘部贴近身体",
+      "推起至起始位置"
+    ],
+    "tips": [
+      "肘关节贴近身体",
+      "保持核心稳定",
+      "控制下降速度"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex027",
+    "name": "上斜卧推",
+    "nameEn": "Incline Bench Press",
+    "category": "chest",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["upper_chest"],
+    "secondaryMuscles": ["anterior_deltoid", "triceps"],
+    "description": "强化胸肌上部",
+    "instructions": [
+      "仰卧在上斜凳（30-45度）",
+      "握杠，略宽于肩",
+      "下降杠铃至上胸部",
+      "推起至手臂伸直"
+    ],
+    "tips": [
+      "肩胛骨后缩",
+      "保持稳定",
+      "控制轨迹"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex028",
+    "name": "下斜卧推",
+    "nameEn": "Decline Bench Press",
+    "category": "chest",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["lower_chest"],
+    "secondaryMuscles": ["triceps", "anterior_deltoid"],
+    "description": "强化胸肌下部",
+    "instructions": [
+      "仰卧在下斜凳",
+      "双脚固定",
+      "下降杠铃至下胸部",
+      "推起至手臂伸直"
+    ],
+    "tips": [
+      "保持稳定",
+      "控制速度",
+      "感受下胸发力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex029",
+    "name": "锤式弯举",
+    "nameEn": "Hammer Curl",
+    "category": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["biceps", "brachialis"],
+    "secondaryMuscles": ["forearms"],
+    "description": "中立握强化肱肌和肱二头肌",
+    "instructions": [
+      "站立，双手各握哑铃",
+      "手心相对（中立握）",
+      "屈肘向上弯举",
+      "控制下降"
+    ],
+    "tips": [
+      "肘关节固定",
+      "避免摆动",
+      "全程控制"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex030",
+    "name": "反向飞鸟",
+    "nameEn": "Reverse Fly",
+    "category": "shoulders",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["rear_deltoid"],
+    "secondaryMuscles": ["trapezius", "rhomboids"],
+    "description": "孤立训练三角肌后束",
+    "instructions": [
+      "俯身，背部与地面平行",
+      "双手各握哑铃自然下垂",
+      "手臂微屈，向两侧打开",
+      "控制回到起始位置"
+    ],
+    "tips": [
+      "保持背部挺直",
+      "肩胛骨挤压",
+      "动作要控制"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex031",
+    "name": "单臂哑铃划船",
+    "nameEn": "One-Arm Dumbbell Row",
+    "category": "back",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi"],
+    "secondaryMuscles": ["biceps", "trapezius"],
+    "description": "单侧背部训练，改善不平衡",
+    "instructions": [
+      "一手一膝支撑在凳上",
+      "另一手握哑铃自然下垂",
+      "拉起哑铃至腰侧",
+      "控制下降"
+    ],
+    "tips": [
+      "保持背部平直",
+      "肘关节贴近身体",
+      "顶峰收缩"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex032",
+    "name": "坐姿划船",
+    "nameEn": "Seated Row",
+    "category": "back",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "primaryMuscles": ["latissimus_dorsi", "trapezius"],
+    "secondaryMuscles": ["biceps", "rear_deltoid"],
+    "description": "水平拉力的坐姿训练",
+    "instructions": [
+      "坐在划船机上，脚踩踏板",
+      "握住把手，背部挺直",
+      "拉至腹部，肩胛骨后缩",
+      "控制回到起始位置"
+    ],
+    "tips": [
+      "避免过度前后摆动",
+      "保持躯干稳定",
+      "感受背部收缩"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex033",
+    "name": "腿屈伸",
+    "nameEn": "Leg Extension",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps"],
+    "secondaryMuscles": [],
+    "description": "孤立训练股四头肌",
+    "instructions": [
+      "坐在腿屈伸机上",
+      "脚踝置于滚轮下方",
+      "伸直膝盖抬起滚轮",
+      "控制下降"
+    ],
+    "tips": [
+      "避免过快下降",
+      "顶峰挤压股四头肌",
+      "全程控制"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex034",
+    "name": "哈克深蹲",
+    "nameEn": "Hack Squat",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps"],
+    "secondaryMuscles": ["glutes", "hamstrings"],
+    "description": "机械辅助的深蹲变式",
+    "instructions": [
+      "站在哈克机上，肩部顶住垫子",
+      "双脚与肩同宽",
+      "释放安全锁，下蹲",
+      "推起至起始位置"
+    ],
+    "tips": [
+      "保持背部贴紧靠背",
+      "控制下降深度",
+      "避免膝盖完全锁死"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex035",
+    "name": "臀桥",
+    "nameEn": "Hip Thrust",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "孤立训练臀大肌",
+    "instructions": [
+      "仰卧，屈膝，双脚踩地",
+      "抬起臀部至身体呈直线",
+      "顶峰挤压臀部",
+      "控制下降"
+    ],
+    "tips": [
+      "顶峰停留1-2秒",
+      "避免过度伸展下背",
+      "感受臀部发力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex036",
+    "name": "登山者",
+    "nameEn": "Mountain Climber",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["core"],
+    "secondaryMuscles": ["shoulders", "hip_flexors"],
+    "description": "动态核心训练",
+    "instructions": [
+      "高平板支撑起始姿势",
+      "交替将膝盖拉向胸部",
+      "保持核心稳定",
+      "持续快速交替"
+    ],
+    "tips": [
+      "保持臀部稳定",
+      "避免塌腰",
+      "控制节奏"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex037",
+    "name": "死虫",
+    "nameEn": "Dead Bug",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["core"],
+    "secondaryMuscles": [],
+    "description": "核心抗伸展训练",
+    "instructions": [
+      "仰卧，手臂指向天花板",
+      "双腿屈膝90度抬起",
+      "对侧手臂和腿同时伸展",
+      "交替进行"
+    ],
+    "tips": [
+      "下背始终贴地",
+      "保持核心收紧",
+      "动作要缓慢"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex038",
+    "name": "侧平板支撑",
+    "nameEn": "Side Plank",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["obliques"],
+    "secondaryMuscles": ["core", "shoulders"],
+    "description": "侧链稳定性训练",
+    "instructions": [
+      "侧卧，前臂撑地",
+      "抬起臀部，身体呈直线",
+      "保持这个姿势"
+    ],
+    "tips": [
+      "避免臀部下沉",
+      "保持身体一条直线",
+      "两侧均衡训练"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex039",
+    "name": "悬垂举腿",
+    "nameEn": "Hanging Leg Raise",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "advanced",
+    "primaryMuscles": ["rectus_abdominis", "hip_flexors"],
+    "secondaryMuscles": ["obliques"],
+    "description": "高难度腹部训练",
+    "instructions": [
+      "悬挂在单杠上",
+      "保持核心紧张",
+      "抬起双腿至水平或更高",
+      "控制下降"
+    ],
+    "tips": [
+      "避免摆动",
+      "感受腹部发力",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex040",
+    "name": "反向卷腹",
+    "nameEn": "Reverse Crunch",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["rectus_abdominis"],
+    "secondaryMuscles": [],
+    "description": "强化下腹部",
+    "instructions": [
+      "仰卧，双腿屈膝抬起",
+      "卷起臀部离地",
+      "膝盖靠近胸部",
+      "控制下降"
+    ],
+    "tips": [
+      "避免用力甩腿",
+      "感受下腹收缩",
+      "动作要控制"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex041",
+    "name": "农夫行走",
+    "nameEn": "Farmer's Walk",
+    "category": "full_body",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["forearms", "trapezius", "core"],
+    "secondaryMuscles": ["legs", "shoulders"],
+    "description": "全身功能性力量训练",
+    "instructions": [
+      "双手各握重物（哑铃/壶铃）",
+      "保持躯干直立",
+      "向前行走一定距离",
+      "保持核心稳定"
+    ],
+    "tips": [
+      "保持肩部稳定",
+      "避免身体倾斜",
+      "循序渐进增加重量"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex042",
+    "name": "壶铃摇摆",
+    "nameEn": "Kettlebell Swing",
+    "category": "full_body",
+    "equipment": "kettlebell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["glutes", "hamstrings"],
+    "secondaryMuscles": ["core", "shoulders"],
+    "description": "爆发力和后链训练",
+    "instructions": [
+      "双手握壶铃，屈髋下蹲",
+      "爆发式伸髋，摆动壶铃",
+      "壶铃摆至肩部高度",
+      "控制下降"
+    ],
+    "tips": [
+      "髋部主导发力",
+      "保持背部挺直",
+      "控制摆动幅度"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex043",
+    "name": "土耳其起立",
+    "nameEn": "Turkish Get-up",
+    "category": "full_body",
+    "equipment": "kettlebell",
+    "difficulty": "advanced",
+    "primaryMuscles": ["core", "shoulders"],
+    "secondaryMuscles": ["legs", "arms"],
+    "description": "全身协调与稳定性训练",
+    "instructions": [
+      "仰卧，一手握壶铃伸直",
+      "按步骤起身至站立",
+      "保持壶铃始终在上方",
+      "反向步骤回到仰卧"
+    ],
+    "tips": [
+      "动作要缓慢",
+      "保持壶铃稳定",
+      "循序渐进学习"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex044",
+    "name": "波比跳",
+    "nameEn": "Burpee",
+    "category": "full_body",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["全身"],
+    "secondaryMuscles": [],
+    "description": "高强度全身有氧训练",
+    "instructions": [
+      "站立起始",
+      "下蹲，双手撑地",
+      "跳回到俯卧撑姿势",
+      "跳回下蹲，站起跳跃"
+    ],
+    "tips": [
+      "保持节奏",
+      "注意安全",
+      "量力而行"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex045",
+    "name": "深蹲跳",
+    "nameEn": "Jump Squat",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["calves"],
+    "description": "爆发力训练",
+    "instructions": [
+      "站立，双脚与肩同宽",
+      "下蹲至大腿平行地面",
+      "爆发式跳起",
+      "轻盈落地，缓冲下蹲"
+    ],
+    "tips": [
+      "注意落地缓冲",
+      "保持核心稳定",
+      "量力而行"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex046",
+    "name": "箱式深蹲",
+    "nameEn": "Box Squat",
+    "category": "legs",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "控制深度的深蹲变式",
+    "instructions": [
+      "箱子置于身后",
+      "下蹲至坐在箱上",
+      "短暂停留",
+      "爆发式站起"
+    ],
+    "tips": [
+      "控制坐下速度",
+      "不要完全放松",
+      "保持张力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex047",
+    "name": "前蹲",
+    "nameEn": "Front Squat",
+    "category": "legs",
+    "equipment": "barbell",
+    "difficulty": "advanced",
+    "primaryMuscles": ["quadriceps"],
+    "secondaryMuscles": ["core", "glutes"],
+    "description": "强化股四头肌的深蹲变式",
+    "instructions": [
+      "杠铃置于锁骨前方",
+      "手臂交叉固定杠铃",
+      "下蹲至底部",
+      "站起至起始位置"
+    ],
+    "tips": [
+      "保持躯干直立",
+      "肘部抬高",
+      "核心稳定"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex048",
+    "name": "相扑硬拉",
+    "nameEn": "Sumo Deadlift",
+    "category": "legs",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["glutes", "quadriceps"],
+    "secondaryMuscles": ["hamstrings", "adductors"],
+    "description": "宽站距的硬拉变式",
+    "instructions": [
+      "双脚宽距站立，脚尖外展",
+      "下蹲握杠，手臂在双腿内侧",
+      "伸髋伸膝拉起",
+      "控制下降"
+    ],
+    "tips": [
+      "保持背部挺直",
+      "髋部主导",
+      "杠铃贴近身体"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex049",
+    "name": "单腿硬拉",
+    "nameEn": "Single-Leg Deadlift",
+    "category": "legs",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["hamstrings", "glutes"],
+    "secondaryMuscles": ["core"],
+    "description": "单腿平衡与后链训练",
+    "instructions": [
+      "单腿站立，微屈膝",
+      "屈髋前倾，后腿向后伸展",
+      "手持哑铃下降至小腿",
+      "回到起始位置"
+    ],
+    "tips": [
+      "保持平衡",
+      "背部挺直",
+      "感受腘绳肌拉伸"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex050",
+    "name": "跨步行走",
+    "nameEn": "Walking Lunge",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "动态箭步蹲",
+    "instructions": [
+      "向前跨步并下蹲",
+      "后腿膝盖接近地面",
+      "前腿推起,换腿前进",
+      "持续交替"
+    ],
+    "tips": [
+      "保持躯干直立",
+      "控制平衡",
+      "步幅适中"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex051",
+    "name": "杠铃弯举",
+    "nameEn": "Barbell Curl",
+    "category": "arms",
+    "equipment": "barbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["biceps"],
+    "secondaryMuscles": ["forearms"],
+    "description": "经典的二头肌训练",
+    "instructions": [
+      "站立，双手握杠，肩宽握距",
+      "手臂自然下垂",
+      "屈肘向上弯举至肩部",
+      "控制下降"
+    ],
+    "tips": [
+      "肘关节固定",
+      "避免摆动身体",
+      "顶峰收缩"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex052",
+    "name": "集中弯举",
+    "nameEn": "Concentration Curl",
+    "category": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["biceps"],
+    "secondaryMuscles": [],
+    "description": "孤立二头肌的单臂训练",
+    "instructions": [
+      "坐姿，肘部抵住大腿内侧",
+      "单手握哑铃",
+      "弯举至肩部",
+      "控制下降"
+    ],
+    "tips": [
+      "肘部完全固定",
+      "感受二头肌收缩",
+      "动作缓慢"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex053",
+    "name": "颈后臂屈伸",
+    "nameEn": "Overhead Tricep Extension",
+    "category": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": [],
+    "description": "拉伸式三头训练",
+    "instructions": [
+      "站立或坐姿，双手握哑铃举过头顶",
+      "屈肘下降哑铃至颈后",
+      "伸肘举起至起始位置"
+    ],
+    "tips": [
+      "保持上臂固定",
+      "避免肘部外展",
+      "控制下降"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex054",
+    "name": "钻石俯卧撑",
+    "nameEn": "Diamond Push-up",
+    "category": "arms",
+    "equipment": "bodyweight",
+    "difficulty": "advanced",
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": ["pectoralis", "anterior_deltoid"],
+    "description": "高难度三头自重训练",
+    "instructions": [
+      "双手拇指和食指相触成钻石形",
+      "身体呈直线",
+      "屈肘下降",
+      "推起"
+    ],
+    "tips": [
+      "保持核心稳定",
+      "肘部贴近身体",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex055",
+    "name": "反握杠铃弯举",
+    "nameEn": "Reverse Curl",
+    "category": "arms",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["brachialis", "forearms"],
+    "secondaryMuscles": ["biceps"],
+    "description": "前臂和肱肌训练",
+    "instructions": [
+      "反握杠铃（掌心向下）",
+      "肘关节固定",
+      "向上弯举",
+      "控制下降"
+    ],
+    "tips": [
+      "避免借力",
+      "感受前臂发力",
+      "重量适中"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex056",
+    "name": "腕弯举",
+    "nameEn": "Wrist Curl",
+    "category": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["forearms"],
+    "secondaryMuscles": [],
+    "description": "前臂屈肌训练",
+    "instructions": [
+      "坐姿，前臂放在大腿上",
+      "手腕悬空握哑铃",
+      "屈腕向上",
+      "控制下降"
+    ],
+    "tips": [
+      "只动手腕",
+      "前臂保持固定",
+      "全幅度运动"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex057",
+    "name": "反向腕弯举",
+    "nameEn": "Reverse Wrist Curl",
+    "category": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["forearms"],
+    "secondaryMuscles": [],
+    "description": "前臂伸肌训练",
+    "instructions": [
+      "坐姿，前臂放在大腿上",
+      "手腕悬空，反握哑铃",
+      "伸腕向上",
+      "控制下降"
+    ],
+    "tips": [
+      "只动手腕",
+      "前臂固定",
+      "重量轻一些"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex058",
+    "name": "缆绳飞鸟",
+    "nameEn": "Cable Fly",
+    "category": "chest",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": ["anterior_deltoid"],
+    "description": "持续张力的胸部训练",
+    "instructions": [
+      "站在缆绳机中间",
+      "双手握把手，手臂微屈",
+      "向前合拢至胸前",
+      "控制打开"
+    ],
+    "tips": [
+      "保持手肘微屈",
+      "全程保持张力",
+      "挤压胸肌"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex059",
+    "name": "双杠臂屈伸",
+    "nameEn": "Dips",
+    "category": "chest",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["pectoralis", "triceps"],
+    "secondaryMuscles": ["anterior_deltoid"],
+    "description": "下胸和三头的复合训练",
+    "instructions": [
+      "双手撑在双杠上",
+      "身体前倾（练胸）或直立（练三头）",
+      "屈肘下降",
+      "推起"
+    ],
+    "tips": [
+      "控制下降深度",
+      "避免肩部不适",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex060",
+    "name": "站姿飞鸟",
+    "nameEn": "Standing Cable Fly",
+    "category": "chest",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": ["core"],
+    "description": "站姿胸部孤立训练",
+    "instructions": [
+      "站立在缆绳机中间",
+      "双手从两侧拉向前方",
+      "在胸前交叉",
+      "控制回到起始"
+    ],
+    "tips": [
+      "核心保持稳定",
+      "手肘微屈",
+      "顶峰收缩"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex061",
+    "name": "龙门架夹胸",
+    "nameEn": "Cable Crossover",
+    "category": "chest",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": ["anterior_deltoid"],
+    "description": "多角度胸部刺激",
+    "instructions": [
+      "高位或低位握把",
+      "向中间拉拢",
+      "感受胸肌收缩",
+      "控制回到起始"
+    ],
+    "tips": [
+      "可调整角度针对不同部位",
+      "保持张力",
+      "挤压胸肌"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex062",
+    "name": "阿诺德推举",
+    "nameEn": "Arnold Press",
+    "category": "shoulders",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["anterior_deltoid", "lateral_deltoid"],
+    "secondaryMuscles": ["triceps"],
+    "description": "旋转式肩部推举",
+    "instructions": [
+      "坐姿，哑铃举至肩部，掌心向内",
+      "推起的同时旋转手腕",
+      "顶部时掌心向前",
+      "反向下降"
+    ],
+    "tips": [
+      "动作流畅",
+      "控制旋转",
+      "感受肩部全面刺激"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex063",
+    "name": "直立划船",
+    "nameEn": "Upright Row",
+    "category": "shoulders",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["lateral_deltoid", "trapezius"],
+    "secondaryMuscles": [],
+    "description": "肩部和斜方肌训练",
+    "instructions": [
+      "窄握杠铃于大腿前",
+      "拉起杠铃至锁骨",
+      "肘部高于手腕",
+      "控制下降"
+    ],
+    "tips": [
+      "避免拉得过高（肩部不适）",
+      "肘部引导运动",
+      "控制节奏"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex064",
+    "name": "面拉",
+    "nameEn": "Face Pull",
+    "category": "shoulders",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "primaryMuscles": ["rear_deltoid", "trapezius"],
+    "secondaryMuscles": ["rhomboids"],
+    "description": "后肩和上背训练",
+    "instructions": [
+      "高位绳索，双手握绳",
+      "拉向面部，绳索分开",
+      "肩胛骨后缩",
+      "控制回到起始"
+    ],
+    "tips": [
+      "肘部高于手腕",
+      "挤压肩胛骨",
+      "轻重量高次数"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex065",
+    "name": "缆绳侧平举",
+    "nameEn": "Cable Lateral Raise",
+    "category": "shoulders",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "primaryMuscles": ["lateral_deltoid"],
+    "secondaryMuscles": [],
+    "description": "持续张力的侧平举",
+    "instructions": [
+      "单手握缆绳把手",
+      "向侧面抬起至肩高",
+      "控制下降",
+      "换边进行"
+    ],
+    "tips": [
+      "保持全程张力",
+      "避免耸肩",
+      "控制动作"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex066",
+    "name": "耸肩",
+    "nameEn": "Shrug",
+    "category": "back",
+    "equipment": "barbell",
+    "difficulty": "beginner",
+    "primaryMuscles": ["trapezius"],
+    "secondaryMuscles": [],
+    "description": "孤立训练斜方肌",
+    "instructions": [
+      "双手握杠铃于身体两侧",
+      "向上耸肩",
+      "顶峰收缩",
+      "控制下降"
+    ],
+    "tips": [
+      "垂直向上运动",
+      "避免转动肩部",
+      "顶峰停留1-2秒"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex067",
+    "name": "T杠划船",
+    "nameEn": "T-Bar Row",
+    "category": "back",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi", "trapezius"],
+    "secondaryMuscles": ["biceps", "erector_spinae"],
+    "description": "中背部厚度训练",
+    "instructions": [
+      "跨站在T杠上",
+      "俯身握把",
+      "拉向腹部",
+      "控制下降"
+    ],
+    "tips": [
+      "保持背部挺直",
+      "肘部贴近身体",
+      "挤压背部"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex068",
+    "name": "引体向上（反握）",
+    "nameEn": "Chin-up",
+    "category": "back",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi", "biceps"],
+    "secondaryMuscles": ["trapezius"],
+    "description": "反握的引体向上",
+    "instructions": [
+      "反握单杠（掌心向自己）",
+      "拉起至下巴过杠",
+      "控制下降"
+    ],
+    "tips": [
+      "二头肌参与更多",
+      "全程控制",
+      "避免摆动"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex069",
+    "name": "直臂下拉",
+    "nameEn": "Straight-Arm Pulldown",
+    "category": "back",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi"],
+    "secondaryMuscles": [],
+    "description": "孤立背阔肌训练",
+    "instructions": [
+      "站立面对高位滑轮",
+      "双手宽握，手臂伸直",
+      "向下拉至大腿",
+      "控制回到起始"
+    ],
+    "tips": [
+      "手臂保持伸直",
+      "感受背阔肌收缩",
+      "避免弯曲手肘"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex070",
+    "name": "单臂划船（缆绳）",
+    "nameEn": "One-Arm Cable Row",
+    "category": "back",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi"],
+    "secondaryMuscles": ["biceps"],
+    "description": "单侧背部训练",
+    "instructions": [
+      "单手握缆绳把手",
+      "向腰侧拉",
+      "肩胛骨后缩",
+      "控制回到起始"
+    ],
+    "tips": [
+      "躯干保持稳定",
+      "感受背部发力",
+      "两侧均衡"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex071",
+    "name": "哈克深蹲",
+    "nameEn": "Hack Squat Machine",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps"],
+    "secondaryMuscles": ["glutes"],
+    "description": "固定轨迹的深蹲",
+    "instructions": [
+      "站在哈克机上",
+      "肩部顶住垫子",
+      "下蹲",
+      "推起"
+    ],
+    "tips": [
+      "保持背部贴紧",
+      "控制深度",
+      "避免膝盖锁死"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex072",
+    "name": "史密斯深蹲",
+    "nameEn": "Smith Machine Squat",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "固定轨迹深蹲",
+    "instructions": [
+      "站在史密斯机下",
+      "杠铃置于肩部",
+      "下蹲",
+      "推起"
+    ],
+    "tips": [
+      "适合新手",
+      "保持稳定",
+      "注意膝盖方向"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex073",
+    "name": "单腿腿举",
+    "nameEn": "Single-Leg Press",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": [],
+    "description": "单腿力量训练",
+    "instructions": [
+      "坐入腿举机",
+      "单脚踩踏板",
+      "推起",
+      "控制下降"
+    ],
+    "tips": [
+      "两侧均衡",
+      "控制平衡",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex074",
+    "name": "侧弓步",
+    "nameEn": "Lateral Lunge",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps", "adductors"],
+    "secondaryMuscles": ["glutes"],
+    "description": "侧向腿部训练",
+    "instructions": [
+      "站立",
+      "向侧面跨步并下蹲",
+      "另一腿伸直",
+      "推回起始位置"
+    ],
+    "tips": [
+      "保持躯干直立",
+      "感受内侧肌群",
+      "控制动作"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex075",
+    "name": "坐姿提踵",
+    "nameEn": "Seated Calf Raise",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["calves"],
+    "secondaryMuscles": [],
+    "description": "孤立比目鱼肌",
+    "instructions": [
+      "坐在提踵机上",
+      "前脚掌踩在踏板上",
+      "抬起脚跟",
+      "控制下降"
+    ],
+    "tips": [
+      "全幅度运动",
+      "顶峰停留",
+      "缓慢下降"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex076",
+    "name": "站姿提踵",
+    "nameEn": "Standing Calf Raise",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["calves"],
+    "secondaryMuscles": [],
+    "description": "小腿训练",
+    "instructions": [
+      "站在提踵机上",
+      "肩部顶住垫子",
+      "抬起脚跟至最高",
+      "控制下降"
+    ],
+    "tips": [
+      "膝盖微屈或伸直",
+      "全幅度",
+      "顶峰收缩"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex077",
+    "name": "腿外展",
+    "nameEn": "Hip Abduction",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["glutes", "abductors"],
+    "secondaryMuscles": [],
+    "description": "臀部外侧训练",
+    "instructions": [
+      "坐在腿外展机上",
+      "双腿向外推开",
+      "控制回到起始"
+    ],
+    "tips": [
+      "动作要缓慢",
+      "感受臀部发力",
+      "避免借力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex078",
+    "name": "腿内收",
+    "nameEn": "Hip Adduction",
+    "category": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["adductors"],
+    "secondaryMuscles": [],
+    "description": "大腿内侧训练",
+    "instructions": [
+      "坐在腿内收机上",
+      "双腿向内合拢",
+      "控制打开"
+    ],
+    "tips": [
+      "动作缓慢",
+      "感受内侧发力",
+      "全程控制"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex079",
+    "name": "驴式提踵",
+    "nameEn": "Donkey Calf Raise",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["calves"],
+    "secondaryMuscles": [],
+    "description": "小腿训练变式",
+    "instructions": [
+      "俯身，前脚掌踩在台阶上",
+      "腰部放置重物或伙伴坐在背上",
+      "抬起脚跟",
+      "控制下降"
+    ],
+    "tips": [
+      "保持俯身姿势",
+      "全幅度",
+      "顶峰收缩"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex080",
+    "name": "杠铃臀推",
+    "nameEn": "Barbell Hip Thrust",
+    "category": "legs",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["glutes"],
+    "secondaryMuscles": ["hamstrings"],
+    "description": "臀部力量训练",
+    "instructions": [
+      "上背靠在凳上",
+      "杠铃置于髋部",
+      "伸髋推起至身体呈直线",
+      "控制下降"
+    ],
+    "tips": [
+      "顶峰挤压臀部",
+      "避免过度伸展腰部",
+      "感受臀部发力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex081",
+    "name": "器械夹胸",
+    "nameEn": "Pec Deck Fly",
+    "category": "chest",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": [],
+    "description": "孤立胸部训练",
+    "instructions": [
+      "坐在夹胸机上",
+      "双臂放在垫子上",
+      "向前合拢",
+      "控制打开"
+    ],
+    "tips": [
+      "感受胸肌拉伸",
+      "顶峰挤压",
+      "全程控制"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex082",
+    "name": "史密斯卧推",
+    "nameEn": "Smith Machine Bench Press",
+    "category": "chest",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "primaryMuscles": ["pectoralis"],
+    "secondaryMuscles": ["triceps", "anterior_deltoid"],
+    "description": "固定轨迹卧推",
+    "instructions": [
+      "仰卧在史密斯机下",
+      "握杠",
+      "下降至胸部",
+      "推起"
+    ],
+    "tips": [
+      "适合新手",
+      "保持稳定",
+      "控制速度"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex083",
+    "name": "悬挂屈膝举腿",
+    "nameEn": "Hanging Knee Raise",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["rectus_abdominis"],
+    "secondaryMuscles": ["hip_flexors"],
+    "description": "悬挂腹部训练",
+    "instructions": [
+      "悬挂在单杠上",
+      "屈膝抬起至腰部",
+      "控制下降"
+    ],
+    "tips": [
+      "避免摆动",
+      "感受腹部发力",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex084",
+    "name": "腹肌轮",
+    "nameEn": "Ab Wheel Rollout",
+    "category": "core",
+    "equipment": "other",
+    "difficulty": "advanced",
+    "primaryMuscles": ["core"],
+    "secondaryMuscles": ["shoulders"],
+    "description": "高难度核心训练",
+    "instructions": [
+      "跪姿或站姿握腹肌轮",
+      "向前滚动至身体接近地面",
+      "收缩核心拉回"
+    ],
+    "tips": [
+      "保持核心紧张",
+      "避免塌腰",
+      "从跪姿开始"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex085",
+    "name": "药球砸地",
+    "nameEn": "Medicine Ball Slam",
+    "category": "core",
+    "equipment": "other",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["core"],
+    "secondaryMuscles": ["shoulders", "全身"],
+    "description": "爆发力核心训练",
+    "instructions": [
+      "举起药球过头",
+      "用力砸向地面",
+      "接住反弹的球",
+      "重复"
+    ],
+    "tips": [
+      "全身发力",
+      "注意安全",
+      "控制节奏"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex086",
+    "name": "鸟狗式",
+    "nameEn": "Bird Dog",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["core", "erector_spinae"],
+    "secondaryMuscles": ["glutes"],
+    "description": "核心稳定性训练",
+    "instructions": [
+      "四点支撑",
+      "对侧手臂和腿同时伸展",
+      "保持平衡",
+      "交替进行"
+    ],
+    "tips": [
+      "保持脊柱中立",
+      "避免旋转",
+      "动作缓慢"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex087",
+    "name": "自行车卷腹",
+    "nameEn": "Bicycle Crunch",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["obliques", "rectus_abdominis"],
+    "secondaryMuscles": [],
+    "description": "旋转式腹部训练",
+    "instructions": [
+      "仰卧，双手置于耳侧",
+      "对侧肘膝相碰",
+      "像骑自行车一样交替"
+    ],
+    "tips": [
+      "控制节奏",
+      "充分旋转",
+      "感受腹斜肌"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex088",
+    "name": "V字卷腹",
+    "nameEn": "V-up",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["rectus_abdominis"],
+    "secondaryMuscles": ["hip_flexors"],
+    "description": "全幅度腹部训练",
+    "instructions": [
+      "仰卧，手臂和腿伸直",
+      "同时抬起手和脚",
+      "在顶部形成V字",
+      "控制下降"
+    ],
+    "tips": [
+      "保持手臂和腿伸直",
+      "感受腹部收缩",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex089",
+    "name": "木板拖拉",
+    "nameEn": "Plank Drag",
+    "category": "core",
+    "equipment": "other",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["core"],
+    "secondaryMuscles": ["shoulders"],
+    "description": "动态平板支撑",
+    "instructions": [
+      "平板支撑姿势",
+      "一侧放置哑铃或重物",
+      "用对侧手拖到另一侧",
+      "交替进行"
+    ],
+    "tips": [
+      "保持臀部稳定",
+      "避免旋转",
+      "核心紧张"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex090",
+    "name": "熊爬",
+    "nameEn": "Bear Crawl",
+    "category": "full_body",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["core", "shoulders"],
+    "secondaryMuscles": ["全身"],
+    "description": "全身协调性训练",
+    "instructions": [
+      "四点支撑，膝盖离地",
+      "对侧手脚同时移动",
+      "向前爬行"
+    ],
+    "tips": [
+      "保持低姿态",
+      "核心稳定",
+      "控制节奏"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex091",
+    "name": "螃蟹走",
+    "nameEn": "Crab Walk",
+    "category": "full_body",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["glutes", "triceps"],
+    "secondaryMuscles": ["core", "shoulders"],
+    "description": "反向移动训练",
+    "instructions": [
+      "坐姿，双手双脚支撑",
+      "抬起臀部",
+      "像螃蟹一样移动"
+    ],
+    "tips": [
+      "保持臀部抬高",
+      "核心紧张",
+      "控制方向"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex092",
+    "name": "战绳",
+    "nameEn": "Battle Rope",
+    "category": "full_body",
+    "equipment": "other",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["shoulders", "core"],
+    "secondaryMuscles": ["全身"],
+    "description": "高强度全身训练",
+    "instructions": [
+      "双手握战绳",
+      "交替或同时上下甩动",
+      "保持节奏"
+    ],
+    "tips": [
+      "核心稳定",
+      "控制呼吸",
+      "间歇训练"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex093",
+    "name": "跳箱",
+    "nameEn": "Box Jump",
+    "category": "legs",
+    "equipment": "other",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["calves"],
+    "description": "爆发力训练",
+    "instructions": [
+      "站在箱子前",
+      "屈膝蓄力",
+      "跳上箱子",
+      "轻盈落地"
+    ],
+    "tips": [
+      "选择合适高度",
+      "注意落地安全",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex094",
+    "name": "跳绳",
+    "nameEn": "Jump Rope",
+    "category": "cardio",
+    "equipment": "other",
+    "difficulty": "beginner",
+    "primaryMuscles": ["calves"],
+    "secondaryMuscles": ["全身"],
+    "description": "有氧和协调性训练",
+    "instructions": [
+      "双手握跳绳",
+      "轻盈跳跃",
+      "保持节奏"
+    ],
+    "tips": [
+      "前脚掌着地",
+      "手腕发力",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex095",
+    "name": "高抬腿",
+    "nameEn": "High Knees",
+    "category": "cardio",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["hip_flexors", "quadriceps"],
+    "secondaryMuscles": ["core", "calves"],
+    "description": "原地跑步变式",
+    "instructions": [
+      "原地站立",
+      "快速交替抬膝",
+      "膝盖抬至腰部高度",
+      "保持快速节奏"
+    ],
+    "tips": [
+      "保持躯干直立",
+      "摆臂配合",
+      "前脚掌着地"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex096",
+    "name": "开合跳",
+    "nameEn": "Jumping Jack",
+    "category": "cardio",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["全身"],
+    "secondaryMuscles": [],
+    "description": "热身和有氧训练",
+    "instructions": [
+      "站立，双脚并拢",
+      "跳起，双脚分开，双手过头击掌",
+      "跳回起始位置",
+      "重复"
+    ],
+    "tips": [
+      "保持节奏",
+      "轻盈落地",
+      "适合热身"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex097",
+    "name": "波比跳（简化版）",
+    "nameEn": "Modified Burpee",
+    "category": "full_body",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["全身"],
+    "secondaryMuscles": [],
+    "description": "降低难度的波比跳",
+    "instructions": [
+      "站立",
+      "下蹲，双手撑地",
+      "双脚向后一步",
+      "双脚向前一步，站起"
+    ],
+    "tips": [
+      "适合新手",
+      "控制节奏",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex098",
+    "name": "登山跑",
+    "nameEn": "Mountain Climber Run",
+    "category": "cardio",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["core", "hip_flexors"],
+    "secondaryMuscles": ["shoulders"],
+    "description": "快速登山者",
+    "instructions": [
+      "高平板支撑",
+      "快速交替膝盖拉向胸部",
+      "像跑步一样"
+    ],
+    "tips": [
+      "保持臀部稳定",
+      "快速节奏",
+      "核心紧张"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex099",
+    "name": "滑冰者",
+    "nameEn": "Skater",
+    "category": "cardio",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["glutes", "quadriceps"],
+    "secondaryMuscles": ["core"],
+    "description": "侧向跳跃训练",
+    "instructions": [
+      "单腿站立",
+      "向侧面跳跃",
+      "用对侧腿着地",
+      "持续交替"
+    ],
+    "tips": [
+      "保持平衡",
+      "控制落地",
+      "摆臂配合"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex100",
+    "name": "拳击出拳",
+    "nameEn": "Shadow Boxing",
+    "category": "cardio",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["shoulders", "core"],
+    "secondaryMuscles": ["全身"],
+    "description": "拳击模拟训练",
+    "instructions": [
+      "站立，拳击姿势",
+      "快速出拳（直拳、勾拳、上勾拳）",
+      "移动步伐",
+      "保持节奏"
+    ],
+    "tips": [
+      "保持核心紧张",
+      "控制呼吸",
+      "全身协调"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex101",
+    "name": "仰卧起坐（负重）",
+    "nameEn": "Weighted Sit-up",
+    "category": "core",
+    "equipment": "other",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["rectus_abdominis"],
+    "secondaryMuscles": ["hip_flexors"],
+    "description": "负重腹部训练",
+    "instructions": [
+      "仰卧，手持哑铃或药球",
+      "卷起上半身",
+      "控制下降"
+    ],
+    "tips": [
+      "循序渐进增加重量",
+      "避免拉颈部",
+      "感受腹肌收缩"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex102",
+    "name": "反向划船",
+    "nameEn": "Inverted Row",
+    "category": "back",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus_dorsi", "trapezius"],
+    "secondaryMuscles": ["biceps", "core"],
+    "description": "自重水平拉力",
+    "instructions": [
+      "仰卧在低杠下",
+      "正握杠铃",
+      "拉起身体至胸部触杠",
+      "控制下降"
+    ],
+    "tips": [
+      "身体保持一条直线",
+      "肩胛骨后缩",
+      "全程控制"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex103",
+    "name": "澳式引体向上",
+    "nameEn": "Australian Pull-up",
+    "category": "back",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["latissimus_dorsi"],
+    "secondaryMuscles": ["biceps", "core"],
+    "description": "降低难度的引体向上",
+    "instructions": [
+      "仰卧在低杠下",
+      "拉起身体",
+      "脚保持在地面或台阶上"
+    ],
+    "tips": [
+      "适合新手",
+      "循序渐进",
+      "保持身体挺直"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex104",
+    "name": "超人式",
+    "nameEn": "Superman",
+    "category": "back",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["erector_spinae", "glutes"],
+    "secondaryMuscles": [],
+    "description": "下背部力量训练",
+    "instructions": [
+      "俯卧，手臂向前伸",
+      "同时抬起手臂和腿",
+      "保持1-2秒",
+      "控制下降"
+    ],
+    "tips": [
+      "避免过度伸展",
+      "感受下背发力",
+      "保持平稳呼吸"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex105",
+    "name": "弹力带侧走",
+    "nameEn": "Band Lateral Walk",
+    "category": "legs",
+    "equipment": "other",
+    "difficulty": "beginner",
+    "primaryMuscles": ["glutes", "abductors"],
+    "secondaryMuscles": [],
+    "description": "臀部外侧激活",
+    "instructions": [
+      "弹力带套在大腿或小腿",
+      "半蹲姿势",
+      "向侧面行走",
+      "保持张力"
+    ],
+    "tips": [
+      "保持半蹲",
+      "步幅不要太大",
+      "感受臀部发力"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex106",
+    "name": "蚌式开合",
+    "nameEn": "Clamshell",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["glutes"],
+    "secondaryMuscles": [],
+    "description": "臀部激活训练",
+    "instructions": [
+      "侧卧，屈膝",
+      "上侧膝盖向上打开",
+      "保持脚并拢",
+      "控制回到起始"
+    ],
+    "tips": [
+      "动作缓慢",
+      "感受臀部外侧",
+      "可加弹力带"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex107",
+    "name": "火腿卷",
+    "nameEn": "Hamstring Curl (Swiss Ball)",
+    "category": "legs",
+    "equipment": "other",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["hamstrings", "glutes"],
+    "secondaryMuscles": ["core"],
+    "description": "瑞士球腘绳肌训练",
+    "instructions": [
+      "仰卧，双脚放在瑞士球上",
+      "抬起臀部",
+      "屈膝拉球向臀部",
+      "伸腿推回"
+    ],
+    "tips": [
+      "保持臀部抬高",
+      "感受腘绳肌收缩",
+      "控制平衡"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex108",
+    "name": "单腿桥",
+    "nameEn": "Single-Leg Bridge",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["glutes", "hamstrings"],
+    "secondaryMuscles": ["core"],
+    "description": "单腿臀桥",
+    "instructions": [
+      "仰卧，一腿屈膝",
+      "另一腿伸直或抬起",
+      "抬起臀部",
+      "控制下降"
+    ],
+    "tips": [
+      "两侧均衡",
+      "顶峰挤压",
+      "保持平衡"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex109",
+    "name": "北欧腘绳肌卷曲",
+    "nameEn": "Nordic Hamstring Curl",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "advanced",
+    "primaryMuscles": ["hamstrings"],
+    "secondaryMuscles": ["glutes", "core"],
+    "description": "高难度腘绳肌训练",
+    "instructions": [
+      "跪姿，固定双脚",
+      "身体缓慢向前倾倒",
+      "用腘绳肌控制下降",
+      "用手支撑后推回"
+    ],
+    "tips": [
+      "非常难，循序渐进",
+      "可用弹力带辅助",
+      "注意安全"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "ex110",
+    "name": "哥本哈根平板支撑",
+    "nameEn": "Copenhagen Plank",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "advanced",
+    "primaryMuscles": ["adductors", "core"],
+    "secondaryMuscles": ["obliques"],
+    "description": "内收肌和侧链训练",
+    "instructions": [
+      "侧平板支撑",
+      "上侧腿放在凳上",
+      "抬起臀部和下侧腿",
+      "保持姿势"
+    ],
+    "tips": [
+      "高难度",
+      "保持稳定",
+      "循序渐进"
+    ],
+    "videoUrl": "",
+    "imageUrl": ""
+  }
+]
+
