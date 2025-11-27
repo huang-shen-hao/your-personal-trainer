@@ -3,9 +3,9 @@
  */
 
 import exercisesData from '@/data/exercises.json'
-import type { 
-  Exercise, 
-  ExerciseFilter, 
+import type {
+  Exercise,
+  ExerciseFilter,
   ExerciseCategory,
   ExerciseEquipment,
   ExerciseDifficulty,
@@ -18,17 +18,206 @@ import type {
 interface ExerciseJsonData {
   id: string
   name: string
-  nameEn: string
-  category: string
-  equipment: string
-  difficulty: string
-  primaryMuscles: string[]
+  // 新版姿势数据中 nameEn、category、equipment 等字段可能缺失或为中文
+  nameEn?: string
+  category?: string
+  equipment?: string | string[]
+  difficulty?: string
+  primaryMuscles?: string[]
   secondaryMuscles?: string[]
-  description: string
-  instructions: string[]
-  tips: string[]
+  description?: string
+  instructions?: string[]
+  tips?: string[]
   videoUrl?: string
   imageUrl?: string
+}
+
+/**
+ * 将原始 category（可能是中文或英文）映射为内部枚举
+ */
+function mapCategory(raw?: string): ExerciseCategory {
+  if (!raw) return 'full_body'
+  switch (raw) {
+    // 中文映射
+    case '胸部':
+      return 'chest'
+    case '背部':
+      return 'back'
+    case '肩部':
+      return 'shoulders'
+    // 下肢相关分类统一归为 legs
+    case '腿部':
+    case '大腿':
+    case '小腿':
+    case '下肢':
+      return 'legs'
+    case '手臂':
+      return 'arms'
+    case '核心':
+      return 'core'
+    case '有氧':
+      return 'cardio'
+    case '全身':
+      return 'full_body'
+    // 旧版英文值直接透传
+    case 'chest':
+    case 'back':
+    case 'shoulders':
+    case 'legs':
+    case 'arms':
+    case 'core':
+    case 'cardio':
+    case 'full_body':
+      return raw
+    default:
+      return 'full_body'
+  }
+}
+
+/**
+ * 将原始器械字段映射为内部枚举
+ */
+function mapEquipment(raw: string): ExerciseEquipment {
+  switch (raw) {
+    // 中文
+    case '杠铃':
+      return 'barbell'
+    case '哑铃':
+      return 'dumbbell'
+    case '壶铃':
+      return 'kettlebell'
+    case '绳索':
+      return 'cable'
+    case '器械':
+      return 'machine'
+    case '自重':
+      return 'bodyweight'
+    case '泡沫轴':
+      return 'foam_roller'
+    case '药球':
+      return 'medicine_ball'
+    // 旧版英文值
+    case 'barbell':
+    case 'dumbbell':
+    case 'kettlebell':
+    case 'cable':
+    case 'machine':
+    case 'bodyweight':
+    case 'foam_roller':
+    case 'medicine_ball':
+    case 'other':
+      return raw
+    default:
+      return 'other'
+  }
+}
+
+/**
+ * 将原始肌肉名称（可能是中文或英文）映射为内部枚举
+ * 这里只做与计划生成相关的主肌群粗略映射，避免因为字段变化导致筛选不到动作
+ */
+function mapMuscle(raw: string): MuscleGroup {
+  switch (raw) {
+    // 中文
+    case '胸部':
+    case '胸肌':
+    case '胸大肌':
+      return 'chest'
+    case '背部':
+    case '上背部':
+    case '背阔肌':
+      return 'back'
+    case '下背部':
+      return 'lower_back'
+    case '肩部':
+    case '三角肌':
+      return 'shoulders'
+    case '肱二头肌':
+      return 'biceps'
+    case '肱三头肌':
+      return 'triceps'
+    case '前臂':
+      return 'forearms'
+    case '股四头肌':
+      return 'quadriceps'
+    case '腘绳肌':
+      return 'hamstrings'
+    case '臀部':
+    case '臀大肌':
+      return 'glutes'
+    case '小腿':
+      return 'calves'
+    case '腹部':
+    case '腹肌':
+    case '腹直肌':
+      return 'abs'
+    case '腹斜肌':
+      return 'obliques'
+    case '核心':
+      return 'core'
+    case '有氧':
+      return 'cardio'
+    case '全身':
+      return 'full_body'
+    // 已有英文枚举值（直接透传，兼容旧数据）
+    case 'chest':
+    case 'back':
+    case 'shoulders':
+    case 'triceps':
+    case 'biceps':
+    case 'forearms':
+    case 'quads':
+    case 'hamstrings':
+    case 'glutes':
+    case 'calves':
+    case 'abs':
+    case 'obliques':
+    case 'lower_back':
+    case 'cardio':
+    case 'full_body':
+    case 'pectoralis':
+    case 'upper_chest':
+    case 'lower_chest':
+    case 'latissimus_dorsi':
+    case 'trapezius':
+    case 'rhomboids':
+    case 'erector_spinae':
+    case 'anterior_deltoid':
+    case 'lateral_deltoid':
+    case 'rear_deltoid':
+    case 'quadriceps':
+    case 'adductors':
+    case 'abductors':
+    case 'brachialis':
+    case 'rectus_abdominis':
+    case 'core':
+    case 'hip_flexors':
+    case '全身':
+      return raw
+    default:
+      return 'full_body'
+  }
+}
+
+/**
+ * 将原始难度字段规范为内部枚举
+ */
+function mapDifficulty(raw?: string): ExerciseDifficulty {
+  if (!raw) return 'beginner'
+  switch (raw) {
+    case 'beginner':
+    case 'intermediate':
+    case 'advanced':
+      return raw
+    case '初级':
+      return 'beginner'
+    case '中级':
+      return 'intermediate'
+    case '高级':
+      return 'advanced'
+    default:
+      return 'beginner'
+  }
 }
 
 /**
@@ -62,15 +251,37 @@ function inferMovementPattern(category: string, name: string): MovementPattern {
  * 将 JSON 数据转换为 Exercise 类型
  */
 function normalizeExercise(data: ExerciseJsonData): Exercise {
+  const category = mapCategory(data.category)
+
+  const rawEquipment = Array.isArray(data.equipment)
+    ? data.equipment
+    : data.equipment
+      ? [data.equipment]
+      : ['bodyweight']
+
+  const equipment = rawEquipment.map(eq => mapEquipment(eq))
+
+  const primaryMuscles = (data.primaryMuscles || []).map(m => mapMuscle(m))
+  const secondaryMuscles = (data.secondaryMuscles || []).map(m => mapMuscle(m))
+
   return {
-    ...data,
-    category: data.category as ExerciseCategory,
-    equipment: [data.equipment as ExerciseEquipment],
-    difficulty: data.difficulty as ExerciseDifficulty,
-    primaryMuscles: data.primaryMuscles as MuscleGroup[],
-    secondaryMuscles: data.secondaryMuscles as MuscleGroup[] | undefined,
-    type: inferExerciseType(data.category),
-    movementPattern: inferMovementPattern(data.category, data.name)
+    // 基础字段
+    id: data.id,
+    name: data.name,
+    nameEn: data.nameEn || data.name,
+    description: data.description || '',
+    primaryMuscles,
+    secondaryMuscles: secondaryMuscles.length > 0 ? secondaryMuscles : undefined,
+    equipment,
+    difficulty: mapDifficulty(data.difficulty),
+    type: inferExerciseType(category),
+    movementPattern: inferMovementPattern(category, data.name),
+    instructions: data.instructions || [],
+    tips: data.tips || [],
+    // 兼容字段
+    category,
+    videoUrl: data.videoUrl,
+    imageUrl: data.imageUrl
   }
 }
 

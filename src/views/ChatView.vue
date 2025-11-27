@@ -647,7 +647,7 @@ watch(
 
 .chat-view {
   display: flex;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 92px);
   background-color: $--bg-color-base;
 }
 

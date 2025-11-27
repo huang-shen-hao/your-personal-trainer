@@ -9,7 +9,7 @@
     <el-card class="config-list" v-if="aiStore.configs.length > 0">
       <div class="list-header">
         <h3>已配置的服务</h3>
-        <el-button type="primary" @click="showAddDialog = true">
+        <el-button type="primary" @click="openCreateDialog">
           <PlusIcon style="width: 20px; height: 20px;" />
           添加配置
         </el-button>
@@ -39,9 +39,12 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" width="220">
+        <el-table-column label="操作" width="260">
           <template #default="{ row }">
             <el-button-group>
+              <el-button size="small" @click="openEditDialog(row)">
+                编辑
+              </el-button>
               <el-button size="small" @click="testConfig(row)">
                 <LinkIcon style="width: 20px; height: 20px;" />
                 测试
@@ -75,7 +78,11 @@
     </el-empty>
 
     <!-- 添加/编辑配置对话框 -->
-    <el-dialog v-model="showAddDialog" title="添加 AI 配置" width="600px">
+    <el-dialog
+      v-model="showAddDialog"
+      :title="isEditing ? '编辑 AI 配置' : '添加 AI 配置'"
+      width="600px"
+    >
       <el-form
         ref="configFormRef"
         :model="configForm"
@@ -121,6 +128,26 @@
               </span>
             </el-option>
           </el-select>
+        </el-form-item>
+
+        <el-form-item label="AI 昵称">
+          <el-input
+            v-model="configForm.displayName"
+            placeholder="在聊天界面中显示的 AI 名字，如「AI 教练」"
+          />
+          <div class="form-hint">
+            用于聊天消息头部展示的教练名称
+          </div>
+        </el-form-item>
+
+        <el-form-item label="AI 头像 URL">
+          <el-input
+            v-model="configForm.avatarUrl"
+            placeholder="可选，支持网络图片地址或本地静态资源 URL"
+          />
+          <div class="form-hint">
+            留空则使用默认图标；填写后将在聊天界面显示为 AI 教练头像
+          </div>
         </el-form-item>
 
         <el-form-item label="API Key" prop="apiKey">
@@ -231,6 +258,8 @@ const userStore = useUserStore();
 const showAddDialog = ref(false);
 const configFormRef = ref<FormInstance>();
 const saving = ref(false);
+const isEditing = ref(false);
+const editingConfigId = ref<string | null>(null);
 const usageStats = ref({
   totalRequests: 0,
   totalTokens: 0,
@@ -245,6 +274,9 @@ const configForm = reactive({
   useProxy: false,
   temperature: 0.7,
   maxTokens: 4096,
+  // AI 展示配置
+  displayName: "AI 教练",
+  avatarUrl: "",
   isDefault: false,
 });
 
@@ -262,6 +294,36 @@ const availableModels = computed(() => {
 });
 
 // ===== Methods =====
+function openCreateDialog() {
+  resetForm();
+  isEditing.value = false;
+  editingConfigId.value = null;
+  showAddDialog.value = true;
+}
+
+function openEditDialog(config: any) {
+  isEditing.value = true;
+  editingConfigId.value = config.id || null;
+
+  configForm.provider = config.provider as AIProvider;
+
+  // 优先使用保存的 modelId，其次回退到 model 字段
+  const models = AI_PROVIDERS[config.provider as AIProvider]?.models || [];
+  const modelId = config.modelId || config.model || models[0]?.id || "";
+  configForm.model = modelId;
+
+  configForm.apiKey = config.apiKey || "";
+  configForm.baseURL = config.apiEndpoint || "";
+  configForm.useProxy = config.useProxy ?? false;
+  configForm.temperature = config.temperature ?? 0.7;
+  configForm.maxTokens = config.maxTokens ?? 4096;
+  configForm.displayName = config.displayName || "AI 教练";
+  configForm.avatarUrl = config.avatarUrl || "";
+  configForm.isDefault = !!config.isDefault;
+
+  showAddDialog.value = true;
+}
+
 function getProviderName(provider: AIProvider): string {
   return AI_PROVIDERS[provider]?.name || provider;
 }
@@ -296,16 +358,26 @@ async function saveConfig() {
     await configFormRef.value.validate();
     saving.value = true;
 
-    await aiStore.saveConfig({
+    const payload: any = {
       provider: configForm.provider,
+      // 同时保存 modelId 和 model，保证后续使用一致
+      modelId: configForm.model,
       model: configForm.model,
       apiKey: configForm.apiKey,
       apiEndpoint: configForm.baseURL || undefined,
       useProxy: configForm.useProxy,
       temperature: configForm.temperature,
       maxTokens: configForm.maxTokens,
+      displayName: configForm.displayName,
+      avatarUrl: configForm.avatarUrl || undefined,
       isDefault: configForm.isDefault,
-    } as any);
+    };
+
+    if (isEditing.value && editingConfigId.value) {
+      await aiStore.updateConfig(editingConfigId.value, payload);
+    } else {
+      await aiStore.saveConfig(payload);
+    }
 
     ElMessage.success("配置保存成功");
     showAddDialog.value = false;
@@ -367,9 +439,14 @@ function resetForm() {
   configForm.baseURL = "";
   configForm.temperature = 0.7;
   configForm.maxTokens = 4096;
+  configForm.displayName = "AI 教练";
+  configForm.avatarUrl = "";
   configForm.isDefault = false;
 
   configFormRef.value?.resetFields();
+
+  isEditing.value = false;
+  editingConfigId.value = null;
 }
 
 async function loadUsageStats() {

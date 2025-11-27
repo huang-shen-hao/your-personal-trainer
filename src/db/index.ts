@@ -152,6 +152,14 @@ export interface AIConfig {
   apiEndpoint?: string
   temperature?: number
   maxTokens?: number
+  /**
+   * AI 教练在界面中展示的名字，例如「AI 教练」「小深」等
+   */
+  displayName?: string
+  /**
+   * AI 教练头像的 URL（可以是网络地址或 base64），用于聊天界面头像展示
+   */
+  avatarUrl?: string
   isDefault: boolean
   createdAt: Date
   updatedAt: Date

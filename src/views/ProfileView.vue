@@ -200,11 +200,11 @@
           <el-statistic title="年龄" :value="profile ? calculateAge(profile.birthYear) : 0" suffix="岁" />
         </el-col>
         <el-col :xs="12" :sm="6">
-          <el-statistic title="训练天数" :value="0" suffix="天" />
+          <el-statistic title="训练总天数" :value="trainingDays" suffix="天" />
           <div class="stat-label">即将开始</div>
         </el-col>
         <el-col :xs="12" :sm="6">
-          <el-statistic title="完成训练" :value="0" suffix="次" />
+          <el-statistic title="训练总时间" :value="trainingDuration" suffix="分钟" />
           <div class="stat-label">继续加油</div>
         </el-col>
       </el-row>
@@ -216,6 +216,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import { useWorkoutStore } from '@/stores/workout'
 import { userRepository } from '@/db/repositories/userRepository'
 import { calculateAge, calculateBMI, getBMICategory } from '@/utils/validation'
 import { ElMessage } from 'element-plus'
@@ -223,11 +224,16 @@ import type { User } from '@/db'
 
 const router = useRouter()
 const userStore = useUserStore()
+const workoutStore = useWorkoutStore()
 
 const profile = ref<User | null>(null)
 const isEditingBasic = ref(false)
 const isEditingPreference = ref(false)
 const saving = ref(false)
+
+// 训练统计
+const trainingDays = ref(0)
+const trainingDuration = ref(0)
 
 // 表单数据
 const basicForm = ref({
@@ -327,6 +333,17 @@ async function loadProfile() {
         typeof injury === 'string' ? injury : JSON.stringify(injury)
       ) || []
     } as User
+  }
+
+  // 加载训练统计数据
+  if (profile.value?.id) {
+    try {
+      const stats = await workoutStore.getWorkoutStats(profile.value.id)
+      trainingDays.value = stats.totalWorkouts
+      trainingDuration.value = stats.totalDuration
+    } catch (error) {
+      console.error('加载训练统计失败:', error)
+    }
   }
 }
 

@@ -69,6 +69,14 @@ export interface AIConfig {
   temperature?: number; // 温度 (0-2)
   maxTokens?: number; // 最大输出
   topP?: number; // Top P
+  /**
+   * AI 教练在界面中展示的名字，例如「AI 教练」「小深」等
+   */
+  displayName?: string;
+  /**
+   * AI 教练头像的 URL（可以是网络地址或 base64），用于聊天界面头像展示
+   */
+  avatarUrl?: string;
   isDefault: boolean; // 是否为默认配置
   createdAt: Date;
   updatedAt: Date;

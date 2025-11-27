@@ -233,7 +233,7 @@
         </el-table-column>
         <el-table-column prop="muscleMass" label="骨骼肌率 (%)" width="120">
           <template #default="{ row }">
-            {{ row.muscleMass ? row.muscleMass.toFixed(1) : '-' }}
+            {{ row.muscleMass ? row.muscleMass.toFixed(1) : '-' }}∂
           </template>
         </el-table-column>
         <el-table-column prop="waistCircumference" label="腰围 (cm)" width="100">

@@ -11,14 +11,14 @@
           <el-button 
             :type="isPaused ? 'success' : 'warning'"
             @click="togglePause"
-            :icon="isPaused ? 'VideoPlay' : 'VideoPause'"
+            :icon="isPaused ? VideoPlay : VideoPause"
           >
             {{ isPaused ? '继续' : '暂停' }}
           </el-button>
           <el-button 
             type="danger"
             @click="skip"
-            icon="Close"
+            :icon="Close"
           >
             跳过
           </el-button>
@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { VideoPlay, VideoPause, Close } from '@element-plus/icons-vue'
 
 interface Props {
   duration: number // 休息时长（秒）

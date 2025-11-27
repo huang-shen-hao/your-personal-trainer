@@ -1,13 +1,21 @@
 <template>
-  <el-card class="exercise-card" :class="{ 'is-completed': isExerciseFinalized || isCompleted || (isWorkoutCompleted && isCompleted) }">
+  <el-card
+    class="exercise-card"
+    :class="{
+      'is-completed':
+        isExerciseFinalized ||
+        isCompleted ||
+        (isWorkoutCompleted && isCompleted),
+    }"
+  >
     <template #header>
       <div class="exercise-header">
         <div class="exercise-info">
           <div class="exercise-title-row">
             <h3 class="exercise-name">{{ exerciseName }}</h3>
-            <el-tag 
-              v-if="isWorkoutCompleted && isCompleted" 
-              type="success" 
+            <el-tag
+              v-if="isWorkoutCompleted && isCompleted"
+              type="success"
               size="small"
               class="completed-tag"
             >
@@ -36,8 +44,71 @@
     <!-- 动作详情（可展开） -->
     <el-collapse-transition>
       <div v-show="isExpanded" class="exercise-details">
-        <div class="exercise-description" v-if="exerciseDescription">
-          <p>{{ exerciseDescription }}</p>
+        <div class="exercise-media" v-if="exerciseImageUrl">
+          <img
+            :src="exerciseImageUrl"
+            :alt="exerciseName"
+            class="exercise-image"
+          />
+        </div>
+        <div
+          class="exercise-instructions"
+          v-if="exerciseInstructions && exerciseInstructions.length > 0"
+        >
+          <h4>动作步骤：</h4>
+          <ol>
+            <li
+              v-for="(step, index) in exerciseInstructions"
+              :key="index"
+              class="instruction-item"
+            >
+              {{ step }}
+            </li>
+          </ol>
+        </div>
+        <div
+          class="exercise-meta"
+          v-if="
+            equipmentLabels.length ||
+            primaryMuscleLabels.length ||
+            secondaryMuscleLabels.length
+          "
+        >
+          <div class="meta-section" v-if="equipmentLabels.length">
+            <h4>器械：</h4>
+            <el-tag
+              v-for="(label, index) in equipmentLabels"
+              :key="`eq-${index}`"
+              size="small"
+              class="meta-tag"
+            >
+              {{ label }}
+            </el-tag>
+          </div>
+          <div class="meta-section" v-if="primaryMuscleLabels.length">
+            <h4>主要肌群：</h4>
+            <el-tag
+              v-for="(label, index) in primaryMuscleLabels"
+              :key="`pm-${index}`"
+              size="small"
+              type="success"
+              class="meta-tag"
+            >
+              {{ label }}
+            </el-tag>
+          </div>
+          <div class="meta-section" v-if="secondaryMuscleLabels.length">
+            <h4>次要肌群：</h4>
+            <el-tag
+              v-for="(label, index) in secondaryMuscleLabels"
+              :key="`sm-${index}`"
+              size="small"
+              type="info"
+              class="meta-tag"
+            >
+              {{ label }}
+            </el-tag>
+          </div>
         </div>
         <div
           class="exercise-tips"
@@ -72,15 +143,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { VideoPlay } from "@element-plus/icons-vue";
+import {
+  EQUIPMENT_CONFIG,
+  MUSCLE_GROUP_CONFIG,
+  type ExerciseEquipment,
+  type MuscleGroup,
+} from "@/types/exercise";
 
 interface Props {
   exerciseId: string;
   exerciseName: string;
-  exerciseDescription?: string;
   exerciseTips?: string[];
   exerciseVideoUrl?: string;
+  exerciseInstructions?: string[];
+  exerciseImageUrl?: string;
+  equipment?: ExerciseEquipment[];
+  primaryMuscles?: MuscleGroup[];
+  secondaryMuscles?: MuscleGroup[];
   plannedSets?: number;
   plannedReps?: number | string;
   plannedIntensity?: string;
@@ -98,6 +179,26 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits(["complete", "rest-timer"]);
+
+const equipmentLabels = computed(() =>
+  (props.equipment || []).map(
+    (eq) => EQUIPMENT_CONFIG[eq]?.label || (eq as string)
+  )
+);
+
+const primaryMuscleLabels = computed(
+  () =>
+    (props.primaryMuscles || [])
+      .map((m) => MUSCLE_GROUP_CONFIG[m])
+      .filter(Boolean) as string[]
+);
+
+const secondaryMuscleLabels = computed(
+  () =>
+    (props.secondaryMuscles || [])
+      .map((m) => MUSCLE_GROUP_CONFIG[m])
+      .filter(Boolean) as string[]
+);
 
 // UI state only (no data state)
 const isExpanded = ref(true); // 默认展开详情
@@ -219,9 +320,58 @@ function openVideo() {
   margin-bottom: 16px;
 }
 
+.exercise-media {
+  margin-bottom: 16px;
+}
+
+.exercise-image {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
 .exercise-description {
   margin-bottom: 16px;
   color: var(--el-text-color-regular);
+}
+
+.exercise-instructions {
+  margin-bottom: 16px;
+
+  h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  ol {
+    margin: 0;
+    padding-left: 20px;
+
+    .instruction-item {
+      margin-bottom: 4px;
+      color: var(--el-text-color-regular);
+      line-height: 1.5;
+    }
+  }
+}
+
+.exercise-meta {
+  margin-bottom: 16px;
+
+  .meta-section {
+    margin-bottom: 8px;
+
+    h4 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .meta-tag {
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+  }
 }
 
 .exercise-tips {

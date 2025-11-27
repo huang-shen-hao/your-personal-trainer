@@ -189,7 +189,8 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePlanStore } from '@/stores/plan'
 import { planRepository } from '@/db/repositories/planRepository'
 import { PLAN_GOAL_CONFIG, TRAINING_SPLIT_CONFIG } from '@/types/plan'
-import type { TrainingPlan } from '@/types/plan'
+import type { TrainingPlan, TrainingDay, ExerciseSet } from '@/types/plan'
+import { getExerciseById } from '@/utils/exerciseUtils'
 
 const route = useRoute()
 const router = useRouter()
@@ -225,8 +226,32 @@ async function loadPlan() {
   loading.value = true
   try {
     const planId = route.params.id as string
-    plan.value = await planRepository.getPlanById(planId) || null
-    
+    const loadedPlan = await planRepository.getPlanById(planId)
+
+    if (loadedPlan) {
+      // 确保每个动作集都有最新的动作详情（兼容旧计划 & 新动作库）
+      loadedPlan.trainingDays = loadedPlan.trainingDays.map((day: TrainingDay) => {
+        const updatedExercises = day.exercises.map((set: ExerciseSet) => {
+          // 如果没有附带的 exercise 详情，或者只存在 id，则从新动作库补齐
+          if (!set.exercise || !set.exercise.name) {
+            const exercise = getExerciseById(set.exerciseId)
+            return {
+              ...set,
+              exercise: exercise ?? set.exercise
+            }
+          }
+          return set
+        })
+
+        return {
+          ...day,
+          exercises: updatedExercises
+        }
+      })
+    }
+
+    plan.value = loadedPlan || null
+
     if (plan.value) {
       stats.value = await planRepository.getPlanStats(planId)
     }
