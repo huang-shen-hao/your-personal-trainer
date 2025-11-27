@@ -272,6 +272,11 @@ a {
   box-shadow: $--el-box-shadow-card;
 }
 
+/* Ensure el-select dropdown uses white background */
+.el-scrollbar {
+  background: #ffffff !important;
+}
+
 .el-popover__title {
   color: #333333 !important; // title text
   font-weight: var(--font-weight-medium);

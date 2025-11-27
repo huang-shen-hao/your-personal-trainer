@@ -253,8 +253,17 @@ const barChartOptions = computed<ChartOptions<"bar">>(() => {
 <style scoped lang="scss">
 .chart-container {
   width: 100%;
-  height: 300px;
+  height: 100%;
+  min-height: 260px;
   position: relative;
+  display: flex;
+}
+
+/* 让图表真正撑满父容器高度，避免卡片底部出现大块空白 */
+:deep(canvas) {
+  flex: 1 1 auto;
+  width: 100% !important;
+  height: 100% !important;
 }
 </style>
 

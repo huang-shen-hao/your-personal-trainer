@@ -35,11 +35,17 @@ async function initApp() {
     // 加载用户档案
     const userStore = useUserStore()
     await userStore.loadProfile()
+
+    // 如果用户尚未完成引导，默认跳转到 Onboarding 页面
+    if (!userStore.isOnboarded && router.currentRoute.value.name !== 'Onboarding') {
+      await router.replace({ name: 'Onboarding' })
+    }
   } catch (error) {
     console.error('应用初始化失败:', error)
+  } finally {
+    // 确保无论初始化是否成功，都能挂载应用
+    app.mount('#app')
   }
 }
 
 initApp()
-
-app.mount('#app')

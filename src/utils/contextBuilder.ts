@@ -85,7 +85,8 @@ export function buildBodyMetricsContext(metrics: BodyMetric[]): string {
   
   const recent = metrics.slice(0, 5)
   
-  recent.forEach((metric, index) => {
+  recent.forEach((_metric, _index) => {
+    const metric = _metric as any // Type assertion for database schema compatibility
     const date = new Date(metric.date).toLocaleDateString('zh-CN')
     context += `**${date}**：`
     
@@ -115,8 +116,8 @@ export function buildBodyMetricsContext(metrics: BodyMetric[]): string {
 
   // 体重变化趋势
   if (metrics.length >= 2) {
-    const latest = metrics[0]
-    const previous = metrics[1]
+    const latest = metrics[0] as any
+    const previous = metrics[1] as any
     
     if (latest.weight && previous.weight) {
       const change = latest.weight - previous.weight
@@ -143,23 +144,26 @@ export function buildTrainingPlanContext(plan: TrainingPlan): string {
     context += `- **说明**：${plan.description}\n`
   }
   
+  const planData = plan as any // Type assertion for database schema compatibility
   context += `- **周期**：${plan.weeks}周\n`
-  context += `- **频次**：每周${plan.frequency}次\n`
+  context += `- **频次**：每周${planData.daysPerWeek || planData.frequency || 3}次\n`
   context += `- **分化方式**：${getSplitName(plan.split)}\n`
   
-  const startDate = new Date(plan.startDate).toLocaleDateString('zh-CN')
-  const endDate = new Date(plan.endDate).toLocaleDateString('zh-CN')
+  const startDate = plan.startDate ? new Date(plan.startDate).toLocaleDateString('zh-CN') : '未设置'
+  const endDate = plan.endDate ? new Date(plan.endDate).toLocaleDateString('zh-CN') : '未设置'
   context += `- **时间**：${startDate} 至 ${endDate}\n`
   
   // 计算进度
-  const now = new Date()
-  const start = new Date(plan.startDate)
-  const end = new Date(plan.endDate)
-  const total = end.getTime() - start.getTime()
-  const passed = now.getTime() - start.getTime()
-  const progress = Math.min(100, Math.max(0, (passed / total) * 100))
-  
-  context += `- **进度**：${progress.toFixed(0)}%\n`
+  if (plan.startDate && plan.endDate) {
+    const now = new Date()
+    const start = new Date(plan.startDate)
+    const end = new Date(plan.endDate)
+    const total = end.getTime() - start.getTime()
+    const passed = now.getTime() - start.getTime()
+    const progress = Math.min(100, Math.max(0, (passed / total) * 100))
+    
+    context += `- **进度**：${progress.toFixed(0)}%\n`
+  }
 
   return context
 }

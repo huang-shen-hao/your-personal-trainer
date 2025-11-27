@@ -24,7 +24,7 @@ export async function clearAllData() {
     await db.plans.clear()
     await db.workouts.clear()
     await db.messages.clear()
-    await db.sessions.clear()
+    await db.chatSessions.clear()
     await db.images.clear()
     await db.analysisResults.clear()
     await db.aiConfigs.clear()
@@ -48,7 +48,7 @@ export async function exportData() {
       plans: await db.plans.toArray(),
       workouts: await db.workouts.toArray(),
       exercises: await db.exercises.toArray(),
-      sessions: await db.sessions.toArray(),
+      chatSessions: await db.chatSessions.toArray(),
       aiConfigs: await db.aiConfigs.toArray(),
       apiUsageStats: await db.apiUsageStats.toArray(),
       // 注意：images 包含 Blob，需要特殊处理
@@ -78,7 +78,7 @@ export async function importData(jsonString: string) {
     if (data.plans) await db.plans.bulkAdd(data.plans)
     if (data.workouts) await db.workouts.bulkAdd(data.workouts)
     if (data.exercises) await db.exercises.bulkAdd(data.exercises)
-    if (data.sessions) await db.sessions.bulkAdd(data.sessions)
+    if (data.chatSessions) await db.chatSessions.bulkAdd(data.chatSessions)
     if (data.aiConfigs) await db.aiConfigs.bulkAdd(data.aiConfigs)
     if (data.apiUsageStats) await db.apiUsageStats.bulkAdd(data.apiUsageStats)
     
@@ -101,7 +101,7 @@ export async function getDatabaseStats() {
       workouts: await db.workouts.count(),
       exercises: await db.exercises.count(),
       messages: await db.messages.count(),
-      sessions: await db.sessions.count(),
+      chatSessions: await db.chatSessions.count(),
       images: await db.images.count(),
       analysisResults: await db.analysisResults.count(),
       aiConfigs: await db.aiConfigs.count(),

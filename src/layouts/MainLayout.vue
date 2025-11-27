@@ -327,8 +327,6 @@ import {
   // MoonIcon,
   // SunIcon,
   Bars3Icon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
 import logo from "@/assets/images/logo.svg";
@@ -425,9 +423,10 @@ onUnmounted(() => {
 //   settingsStore.setTheme(newTheme);
 // }
 
-function toggleSidebar() {
-  sidebarCollapsed.value = !sidebarCollapsed.value;
-}
+// Sidebar toggle is handled by mobile drawer
+// function toggleSidebar() {
+//   sidebarCollapsed.value = !sidebarCollapsed.value;
+// }
 
 function handleMenuSelect(index: string) {
   console.log("Menu selected:", index);

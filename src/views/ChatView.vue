@@ -366,6 +366,21 @@
           </div>
         </div>
       </div>
+      <!-- 移动端侧边栏悬浮展开按钮（仅在侧边栏收起时显示） -->
+      <div v-if="isMobile && sidebarCollapsed" class="mobile-sidebar-fab">
+        <el-button
+          circle
+          plain
+          size="small"
+          class="mobile-sidebar-toggle"
+          @click="sidebarCollapsed = false"
+        >
+          <span
+            class="icon-wrapper"
+            v-html="menuUnfoldIcon"
+          ></span>
+        </el-button>
+      </div>
     </div>
 
     <!-- 历史聊天记录弹窗 -->
@@ -412,7 +427,6 @@ import {
   PaperAirplaneIcon,
   ChevronDownIcon,
 } from "@heroicons/vue/24/outline";
-import logo from "@/assets/images/logo.svg";
 import menuFoldIcon from "@/assets/images/menu-fold.svg?raw";
 import menuUnfoldIcon from "@/assets/images/menu-unfold.svg?raw";
 import newChatIcon from "@/assets/images/new_chat.svg?raw";
@@ -1401,6 +1415,40 @@ watch(
       .history-title {
         color: $--el-color-primary;
       }
+    }
+  }
+}
+
+.mobile-sidebar-fab {
+  position: fixed;
+  left: $--el-spacing-md;
+  top: 20%;
+  transform: translateY(-50%);
+  z-index: 110;
+
+  .mobile-sidebar-toggle {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+    background-color: rgba(0, 0, 0, 0.55);
+    border: none;
+    color: #fff;
+    backdrop-filter: blur(8px);
+
+    .icon-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+
+      :deep(svg) {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
     }
   }
 }

@@ -1,5 +1,5 @@
 import { db } from '@/db'
-import type { WorkoutLog, LoggedExercise, LoggedSet } from '@/stores/workout'
+import type { WorkoutLog, LoggedExercise } from '@/stores/workout'
 
 export interface WorkoutStats {
   totalWorkouts: number
@@ -197,20 +197,18 @@ export const workoutRepository = {
     let pr: ExercisePR | null = null
     
     for (const workout of workouts) {
-      const exercise = workout.exercises.find(e => e.exerciseId === exerciseId)
+      const exercise = workout.exercises.find((e: any) => e.exerciseId === exerciseId)
       if (exercise && exercise.sets) {
         for (const set of exercise.sets) {
-          if (set.completed && set.weight && set.reps) {
-            const volume = set.weight * set.reps
-            const currentPRVolume = pr ? pr.weight * pr.reps : 0
-            
+          const typedSet = set as any
+          if (typedSet.completed && typedSet.weight && typedSet.reps) {
             // 如果重量更大，或者重量相同但次数更多，则更新PR
-            if (set.weight > (pr?.weight || 0) || 
-                (set.weight === (pr?.weight || 0) && set.reps > (pr?.reps || 0))) {
+            if (typedSet.weight > (pr?.weight || 0) || 
+                (typedSet.weight === (pr?.weight || 0) && typedSet.reps > (pr?.reps || 0))) {
               pr = {
                 exerciseId,
-                weight: set.weight,
-                reps: set.reps,
+                weight: typedSet.weight,
+                reps: typedSet.reps,
                 date: workout.date instanceof Date ? workout.date : new Date(workout.date),
                 workoutId: workout.id
               }

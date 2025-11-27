@@ -54,14 +54,20 @@ export interface TrainingPlan {
   userId: string
   name: string
   description?: string
-  startDate: Date
-  endDate: Date
-  weeks: number
-  frequency: number
+  goal: string
   split: string
-  sessions: any[]
+  cycle: string
+  weeks: number
+  daysPerWeek: number
+  trainingDays: any[]
+  startDate?: Date
+  endDate?: Date
   isActive: boolean
+  isCompleted: boolean
   createdAt: Date
+  updatedAt: Date
+  createdBy: string
+  tags?: string[]
 }
 
 export interface WorkoutLog {

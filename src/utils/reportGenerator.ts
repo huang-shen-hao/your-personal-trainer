@@ -1,4 +1,4 @@
-import type { WorkoutLog, LoggedExercise } from '@/stores/workout'
+import type { WorkoutLog } from '@/stores/workout'
 import type { ExercisePR, WorkoutStats } from '@/db/repositories/workoutRepository'
 import { workoutRepository } from '@/db/repositories/workoutRepository'
 
@@ -89,7 +89,7 @@ async function calculateComparison(
   userId: string,
   currentStats: WorkoutStats,
   currentStart: Date,
-  currentEnd: Date,
+  _currentEnd: Date,
   type: 'weekly' | 'monthly'
 ): Promise<ReportData['comparison']> {
   let previousStart: Date

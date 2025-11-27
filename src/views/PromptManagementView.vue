@@ -123,7 +123,7 @@
         <h4>⚠️ 注意事项</h4>
         <ul>
           <li>修改后立即生效，会影响后续所有对话</li>
-          <li>可以使用 <code>{{`{{变量名}}`}}</code> 来动态注入用户数据</li>
+          <li>可以使用 <code v-text="'{{变量名}}'"></code> 来动态注入用户数据</li>
           <li>建议保留原有的专业性和安全提醒</li>
           <li>如果不确定，可以点击"恢复默认"</li>
         </ul>
@@ -151,7 +151,9 @@ const basePrompt = computed(() =>
 )
 
 const personalityPrompts = computed(() => 
-  aiStore.promptTemplates.filter(p => p.type === 'personality')
+  aiStore.promptTemplates.filter(p => 
+    ['strict', 'encouraging', 'humorous', 'academic'].includes(p.type)
+  )
 )
 
 const imagePrompts = computed(() => 
@@ -178,7 +180,7 @@ function editPrompt(prompt: PromptTemplate) {
 
 async function savePrompt(prompt: PromptTemplate) {
   try {
-    await aiStore.savePromptTemplate(prompt)
+    await aiStore.savePrompt(prompt)
     ElMessage.success('Prompt 已更新')
   } catch (error: any) {
     ElMessage.error(error.message || '保存失败')
@@ -192,7 +194,7 @@ async function handleSave(prompt: PromptTemplate) {
 }
 
 onMounted(async () => {
-  await aiStore.loadPromptTemplates()
+  await aiStore.loadPrompts()
 })
 </script>
 

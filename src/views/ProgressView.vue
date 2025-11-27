@@ -9,7 +9,6 @@
       <el-col :xs="24" :sm="12" :md="8">
         <el-card shadow="hover" class="link-card" @click="goToBodyMetrics">
           <div class="card-content">
-            <ChartBarIcon style="width: 48px; height: 48px" class="card-icon" />
             <div class="card-text">
               <h3>体测数据</h3>
               <p>查看体重、体脂等数据变化</p>
@@ -24,10 +23,9 @@
           @click="showWorkoutHistory = true"
         >
           <div class="card-content">
-            <ChartBarIcon style="width: 48px; height: 48px" class="card-icon" />
             <div class="card-text">
               <h3>训练记录</h3>
-              <p>查看训练历史和 PR</p>
+              <p>查看训练历史</p>
             </div>
           </div>
         </el-card>
@@ -39,7 +37,6 @@
           @click="showWorkoutReport = true"
         >
           <div class="card-content">
-            <CalendarIcon style="width: 48px; height: 48px" class="card-icon" />
             <div class="card-text">
               <h3>周报/月报</h3>
               <p>查看训练总结报告</p>
@@ -156,7 +153,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
-import { ChartBarIcon, CalendarIcon } from "@heroicons/vue/24/outline";
 import { useWorkoutStore } from "@/stores/workout";
 import { useUserStore } from "@/stores/user";
 import WorkoutHistory from "@/components/WorkoutHistory.vue";

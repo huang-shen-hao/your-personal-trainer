@@ -18,7 +18,7 @@
         />
         <div class="editor-hint">
           <InformationCircleIcon style="width: 20px; height: 20px;" />
-          <span>可使用 <code>{{`{{变量名}}`}}</code> 来动态注入数据</span>
+          <span>可使用 <code v-text="'{{变量名}}'"></code> 来动态注入数据</span>
         </div>
       </el-form-item>
 
@@ -29,7 +29,7 @@
           type="info"
           style="margin-right: 8px;"
         >
-          {{ `{{${variable}}}` }}
+          {{ '{{' + variable + '}}' }}
         </el-tag>
       </el-form-item>
 

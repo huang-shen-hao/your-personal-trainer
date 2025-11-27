@@ -102,7 +102,7 @@ function generateTrainingDays(
   split: TrainingSplit
 ): TrainingDay[] {
   const { daysPerWeek } = config;
-  const splitConfig = TRAINING_SPLIT_CONFIG[split];
+  // const splitConfig = TRAINING_SPLIT_CONFIG[split];
   const days: TrainingDay[] = [];
 
   // 根据分化类型安排训练日
@@ -263,7 +263,7 @@ function assignExercisesToDay(
 function selectFullBodyExercises(
   exercises: Exercise[],
   count: number,
-  config: PlanGenerationConfig
+  _config: PlanGenerationConfig
 ): Exercise[] {
   const categories = ["legs", "chest", "back", "shoulders", "core"];
   const selected: Exercise[] = [];
@@ -428,7 +428,7 @@ function generateWarmupSuggestions(type: TrainingDayType): string[] {
 /**
  * 生成放松建议
  */
-function generateCooldownSuggestions(type: TrainingDayType): string[] {
+function generateCooldownSuggestions(_type: TrainingDayType): string[] {
   return ["5分钟轻度有氧", "目标肌群静态拉伸", "泡沫轴放松", "深呼吸放松"];
 }
 

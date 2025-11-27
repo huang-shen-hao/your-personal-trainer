@@ -18,25 +18,31 @@ const props = defineProps<{
   content: string
 }>()
 
-// 配置 marked
-marked.setOptions({
-  highlight: function(code, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(code, { language: lang }).value
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    return code
-  },
+// 配置 marked（新版本 API）
+marked.use({
   breaks: true,
   gfm: true
 })
 
 const renderedHtml = computed(() => {
   try {
-    return marked(props.content)
+    const html = marked.parse(props.content) as string
+    // 手动高亮代码块
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = html
+    const codeBlocks = tempDiv.querySelectorAll('pre code')
+    codeBlocks.forEach((block) => {
+      const codeElement = block as HTMLElement
+      const lang = codeElement.className.match(/language-(\w+)/)?.[1]
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          codeElement.innerHTML = hljs.highlight(codeElement.textContent || '', { language: lang }).value
+        } catch (err) {
+          console.error(err)
+        }
+      }
+    })
+    return tempDiv.innerHTML
   } catch (error) {
     console.error('Markdown rendering error:', error)
     return props.content
