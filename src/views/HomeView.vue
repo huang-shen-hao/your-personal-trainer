@@ -50,12 +50,46 @@
             <template #header>
               <div class="card-header">
                 <span>今日训练</span>
-                <el-button type="primary" @click="router.push('/workout')"
-                  >开始训练</el-button
+                <el-button
+                  v-if="todayTrainingDay"
+                  type="primary"
+                  @click="router.push('/workout')"
+                  >{{ isTodayWorkoutCompleted ? "查看详情" : "开始训练" }}</el-button
                 >
               </div>
             </template>
-            <el-empty description="今日暂无训练计划" />
+            <div v-if="todayTrainingDay">
+              <div class="today-plan-content">
+                <div class="plan-header-info">
+                  <h4>{{ todayTrainingDay.name }}</h4>
+                  <el-tag
+                    :type="isTodayWorkoutCompleted ? 'success' : 'primary'"
+                    size="large"
+                  >
+                    {{ isTodayWorkoutCompleted ? "已完成" : "待训练" }}
+                  </el-tag>
+                </div>
+                <div class="plan-exercises-list">
+                  <div
+                    v-for="(exercise, index) in todayTrainingDay.exercises"
+                    :key="index"
+                    class="exercise-item"
+                  >
+                    <span class="exercise-name">{{
+                      getExerciseName(exercise.exerciseId)
+                    }}</span>
+                    <span class="exercise-sets">{{
+                      `${exercise.sets}×${exercise.reps}`
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <el-empty v-else description="今日暂无训练计划">
+              <el-button type="primary" @click="router.push('/plan')"
+                >查看计划</el-button
+              >
+            </el-empty>
           </el-card>
 
           <el-row :gutter="20" style="margin-top: 20px">
@@ -103,6 +137,8 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { useWorkoutStore } from "@/stores/workout";
 import { useBodyMetricsStore } from "@/stores/bodyMetrics";
+import { usePlanStore } from "@/stores/plan";
+import { getExerciseById } from "@/utils/exerciseUtils";
 import {
   ChatBubbleLeftRightIcon,
   CalendarIcon,
@@ -113,32 +149,72 @@ const router = useRouter();
 const userStore = useUserStore();
 const workoutStore = useWorkoutStore();
 const bodyMetricsStore = useBodyMetricsStore();
+const planStore = usePlanStore();
 
-const weeklyWorkouts = computed(
-  () =>
-    workoutStore.workoutHistory.filter((w) => {
-      const weekAgo = new Date();
-      weekAgo.setDate(weekAgo.getDate() - 7);
-      return new Date(w.date) > weekAgo;
-    }).length
-);
+// 使用 workoutStore 的 totalWorkoutsThisWeek，它已经正确计算了本周训练次数（从周一开始）
+const weeklyWorkouts = computed(() => workoutStore.totalWorkoutsThisWeek);
 
-const trainingDays = computed(() => workoutStore.workoutHistory.length);
+// 统计不同的训练天数（去重日期）
+const trainingDays = computed(() => {
+  const uniqueDates = new Set<string>();
+  workoutStore.workoutHistory.forEach((w) => {
+    const workoutDate = w.date instanceof Date ? w.date : new Date(w.date);
+    const dateStr = workoutDate.toDateString();
+    uniqueDates.add(dateStr);
+  });
+  return uniqueDates.size;
+});
 
 // 优先使用最新的体测记录体重，如果没有则使用用户档案中的体重
 const currentWeight = computed(() => {
   return bodyMetricsStore.latestWeight || userStore.profile?.currentWeight || 0;
 });
 
-// 加载用户档案和体测数据
+// 获取今日训练计划
+const todayTrainingDay = computed(() => {
+  return planStore.getTodayTrainingDay();
+});
+
+// 检查今日是否已完成训练
+const isTodayWorkoutCompleted = computed(() => {
+  if (!todayTrainingDay.value || !userStore.profile?.id) return false;
+  
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  // 检查训练历史中是否有今天完成的训练记录
+  return workoutStore.workoutHistory.some((workout) => {
+    const workoutDate = workout.date instanceof Date ? workout.date : new Date(workout.date);
+    const workoutDay = new Date(workoutDate);
+    workoutDay.setHours(0, 0, 0, 0);
+    
+    return (
+      workoutDay.getTime() === today.getTime() &&
+      workout.sessionId === todayTrainingDay.value?.id &&
+      workout.endTime // 有结束时间表示已完成
+    );
+  });
+});
+
+// 获取动作名称
+function getExerciseName(exerciseId: string): string {
+  const exercise = getExerciseById(exerciseId);
+  return exercise ? exercise.name : exerciseId;
+}
+
+// 加载用户档案、体测数据、训练历史和计划
 onMounted(async () => {
   if (!userStore.profile) {
     await userStore.loadProfile();
   }
 
-  // 加载体测数据以获取最新体重
   if (userStore.profile) {
-    await bodyMetricsStore.loadMetrics();
+    // 并行加载数据
+    await Promise.all([
+      bodyMetricsStore.loadMetrics(),
+      workoutStore.loadWorkoutHistory(userStore.profile.id),
+      planStore.loadPlans(userStore.profile.id),
+    ]);
   }
 });
 </script>
@@ -247,6 +323,48 @@ onMounted(async () => {
   }
   .el-button + .el-button {
     margin-left: 0 !important;
+  }
+}
+
+.today-plan-content {
+  .plan-header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $--el-spacing-md;
+
+    h4 {
+      margin: 0;
+      font-size: $--el-font-size-large;
+      font-weight: 600;
+      color: $--text-color-primary;
+    }
+  }
+
+  .plan-exercises-list {
+    display: flex;
+    flex-direction: column;
+    gap: $--el-spacing-sm;
+  }
+
+  .exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $--el-spacing-sm $--el-spacing-md;
+    background: $--bg-color-base;
+    border-radius: $--el-border-radius-small;
+    border: 1px solid $--border-color-lighter;
+
+    .exercise-name {
+      font-weight: 500;
+      color: $--text-color-primary;
+    }
+
+    .exercise-sets {
+      color: $--text-color-regular;
+      font-size: $--el-font-size-small;
+    }
   }
 }
 </style>
