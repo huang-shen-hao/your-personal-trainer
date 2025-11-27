@@ -1,51 +1,101 @@
 <template>
   <div class="chat-view">
     <!-- 侧边栏：会话列表 -->
-    <div class="chat-sidebar" :class="{ collapsed: sidebarCollapsed, 'is-mobile': isMobile }">
-      <div class="sidebar-header">
-        <h3 v-if="!sidebarCollapsed">对话历史</h3>
+    <div
+      class="chat-sidebar"
+      :class="{ collapsed: sidebarCollapsed, 'is-mobile': isMobile }"
+    >
+      <!-- 顶部区域：Logo + 折叠按钮 -->
+      <div class="sidebar-top">
+        <div class="sidebar-logo-wrapper" v-if="!sidebarCollapsed">
+
+          <el-button
+            class="collapse-btn-top"
+            text
+            size="small"
+            @click="sidebarCollapsed = !sidebarCollapsed"
+          >
+            <span class="icon-wrapper" v-html="menuFoldIcon"></span>
+          </el-button>
+        </div>
         <el-button
-          @click="createNewSession"
-          type="primary"
-          :icon="PlusIcon"
-          :circle="sidebarCollapsed"
+          v-else
+          class="collapse-btn-top collapsed-only"
+          text
+          circle
+          @click="sidebarCollapsed = !sidebarCollapsed"
         >
-          {{ sidebarCollapsed ? "" : "新对话" }}
+          <span class="icon-wrapper" v-html="menuUnfoldIcon"></span>
         </el-button>
       </div>
 
-      <div class="session-list" v-if="!sidebarCollapsed">
-        <div
-          v-for="session in aiStore.sessions"
-          :key="session.id"
-          class="session-item"
-          :class="{ active: currentSessionId === session.id }"
-          @click="switchSession(session.id)"
+      <!-- 新对话按钮 -->
+      <div class="new-chat-section">
+        <button
+          @click="createNewSession"
+          class="new-chat-btn"
+          :class="{ collapsed: sidebarCollapsed }"
         >
-          <div class="session-title">{{ session.title }}</div>
-          <div class="session-meta">
-            {{ formatSessionTime(session.lastMessageAt) }}
+          <span class="icon-wrapper" v-html="newChatIcon"></span>
+          <span v-if="!sidebarCollapsed" class="btn-text">新聊天</span>
+        </button>
+      </div>
+
+      <!-- 会话列表区域 -->
+      <div class="session-section" v-if="!sidebarCollapsed">
+        <div
+          class="session-section-header"
+          @click="sessionListExpanded = !sessionListExpanded"
+        >
+          <div class="section-title-wrapper">
+            <span class="icon-wrapper small" v-html="chatHistoryIcon"></span>
+            <span class="section-title">你的聊天</span>
           </div>
-          <el-button
-            class="delete-btn"
-            type="danger"
-            text
-            :icon="TrashIcon"
-            size="small"
-            @click.stop="deleteSession(session.id)"
+          <ChevronDownIcon
+            class="chevron-icon"
+            :class="{ expanded: sessionListExpanded }"
           />
         </div>
 
-        <el-empty
-          v-if="aiStore.sessions.length === 0"
-          description="暂无对话"
-          :image-size="80"
-        />
+        <div class="session-list" v-show="sessionListExpanded">
+          <div
+            v-for="session in aiStore.sessions"
+            :key="session.id"
+            class="session-item"
+            :class="{ active: currentSessionId === session.id }"
+            @click="switchSession(session.id)"
+          >
+            <div class="session-title">{{ session.title }}</div>
+            <div class="session-meta">
+              {{ formatSessionTime(session.lastMessageAt) }}
+            </div>
+            <el-button
+              class="delete-btn"
+              type="danger"
+              text
+              :icon="TrashIcon"
+              size="small"
+              @click.stop="deleteSession(session.id)"
+            />
+          </div>
+
+          <el-empty
+            v-if="aiStore.sessions.length === 0"
+            description="暂无对话"
+            :image-size="80"
+          />
+        </div>
       </div>
 
-      <div class="sidebar-toggle" @click="sidebarCollapsed = !sidebarCollapsed">
-        <ArrowRightIcon v-if="sidebarCollapsed" style="width: 20px; height: 20px;" />
-        <ArrowLeftIcon v-else style="width: 20px; height: 20px;" />
+      <!-- 折叠时的历史聊天入口，仅展示图标，保持与其他折叠项一致 -->
+      <div
+        v-else
+        class="session-section collapsed-only"
+        @click="openHistoryDialog"
+      >
+        <div class="history-icon-button" title="历史聊天">
+          <span class="icon-wrapper" v-html="chatHistoryIcon"></span>
+        </div>
       </div>
     </div>
 
@@ -72,17 +122,17 @@
           <p>我可以帮你：</p>
           <div class="feature-cards">
             <div class="feature-card">
-              <ChatBubbleLeftRightIcon style="width: 32px; height: 32px;" />
+              <ChatBubbleLeftRightIcon style="width: 32px; height: 32px" />
               <h3>训练指导</h3>
               <p>制定个性化训练计划，解答训练疑问</p>
             </div>
             <div class="feature-card">
-              <PhotoIcon style="width: 32px; height: 32px;" />
+              <PhotoIcon style="width: 32px; height: 32px" />
               <h3>图片分析</h3>
               <p>分析饮食、体态和器械照片</p>
             </div>
             <div class="feature-card">
-              <ChartBarIcon style="width: 32px; height: 32px;" />
+              <ChartBarIcon style="width: 32px; height: 32px" />
               <h3>进度追踪</h3>
               <p>记录和分析你的训练进展</p>
             </div>
@@ -110,9 +160,13 @@
               <el-avatar
                 v-else
                 :size="36"
-                :style="{ backgroundColor: '#409eff' }"
+                :src="aiAvatarUrl"
+                :style="aiAvatarUrl ? {} : { backgroundColor: '#409eff' }"
               >
-                <ChatBubbleLeftRightIcon style="width: 20px; height: 20px;" />
+                <ChatBubbleLeftRightIcon
+                  v-if="!aiAvatarUrl"
+                  style="width: 20px; height: 20px"
+                />
               </el-avatar>
             </div>
 
@@ -122,7 +176,7 @@
                   {{
                     message.role === "user"
                       ? userStore.profile?.nickname || "你"
-                      : "AI 教练"
+                      : aiDisplayName
                   }}
                 </span>
                 <span class="message-time">
@@ -172,7 +226,7 @@
                           >
                             <template #error>
                               <div class="image-error">
-                                <PhotoIcon style="width: 20px; height: 20px;" />
+                                <PhotoIcon style="width: 20px; height: 20px" />
                                 <span>图片加载失败</span>
                               </div>
                             </template>
@@ -213,13 +267,20 @@
             class="message-wrapper assistant"
           >
             <div class="message-avatar">
-              <el-avatar :size="36" :style="{ backgroundColor: '#409eff' }">
-                <ChatBubbleLeftRightIcon style="width: 20px; height: 20px;" />
+              <el-avatar
+                :size="36"
+                :src="aiAvatarUrl"
+                :style="aiAvatarUrl ? {} : { backgroundColor: '#409eff' }"
+              >
+                <ChatBubbleLeftRightIcon
+                  v-if="!aiAvatarUrl"
+                  style="width: 20px; height: 20px"
+                />
               </el-avatar>
             </div>
             <div class="message-content">
               <div class="message-header">
-                <span class="message-role">AI 教练</span>
+                <span class="message-role">{{ aiDisplayName }}</span>
                 <span class="message-time">正在输入...</span>
               </div>
               <div class="message-body">
@@ -234,7 +295,10 @@
             v-if="aiStore.isLoading && !isStreaming"
             class="loading-indicator"
           >
-            <ArrowPathIcon style="width: 20px; height: 20px;" class="is-loading" />
+            <ArrowPathIcon
+              style="width: 20px; height: 20px"
+              class="is-loading"
+            />
             <span>AI 正在思考...</span>
           </div>
         </div>
@@ -303,6 +367,35 @@
         </div>
       </div>
     </div>
+
+    <!-- 历史聊天记录弹窗 -->
+    <el-dialog
+      v-model="historyDialogVisible"
+      title="历史聊天记录"
+      width="480px"
+      class="history-dialog"
+    >
+      <div class="history-list">
+        <div
+          v-for="session in aiStore.sessions"
+          :key="session.id"
+          class="history-item"
+          :class="{ active: currentSessionId === session.id }"
+          @click="handleHistorySelect(session.id)"
+        >
+          <div class="history-title">{{ session.title }}</div>
+          <div class="history-meta">
+            {{ formatSessionTime(session.lastMessageAt) }}
+          </div>
+        </div>
+
+        <el-empty
+          v-if="aiStore.sessions.length === 0"
+          description="暂无对话"
+          :image-size="80"
+        />
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -311,16 +404,19 @@ import { ref, computed, onMounted, onUnmounted, nextTick, watch } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
 import {
-  PlusIcon,
   TrashIcon,
   ChatBubbleLeftRightIcon,
   PhotoIcon,
   ChartBarIcon,
   ArrowPathIcon,
   PaperAirplaneIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
+  ChevronDownIcon,
 } from "@heroicons/vue/24/outline";
+import logo from "@/assets/images/logo.svg";
+import menuFoldIcon from "@/assets/images/menu-fold.svg?raw";
+import menuUnfoldIcon from "@/assets/images/menu-unfold.svg?raw";
+import newChatIcon from "@/assets/images/new_chat.svg?raw";
+import chatHistoryIcon from "@/assets/images/chat-history.svg?raw";
 import { useAIStore } from "@/stores/ai";
 import { useUserStore } from "@/stores/user";
 import MarkdownRenderer from "@/components/MarkdownRenderer.vue";
@@ -337,6 +433,8 @@ const userStore = useUserStore();
 
 // ===== State =====
 const sidebarCollapsed = ref(false);
+const sessionListExpanded = ref(true);
+const historyDialogVisible = ref(false);
 const currentSessionId = ref<string | null>(null);
 const inputMessage = ref("");
 const enableContext = ref(true);
@@ -348,7 +446,9 @@ const imagePreviewUrls = ref<string[]>([]);
 const fileInputRef = ref<HTMLInputElement>();
 
 // 窗口宽度状态
-const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024);
+const windowWidth = ref(
+  typeof window !== "undefined" ? window.innerWidth : 1024
+);
 
 // 判断是否为移动端
 const isMobile = computed(() => {
@@ -371,6 +471,15 @@ const currentMessages = computed(() => {
     return [];
   }
   return aiStore.currentSession.messages || [];
+});
+
+// AI 头像和名字
+const aiAvatarUrl = computed(() => {
+  return aiStore.currentConfig?.avatarUrl || "";
+});
+
+const aiDisplayName = computed(() => {
+  return aiStore.currentConfig?.displayName || "AI 教练";
 });
 
 // ===== Methods =====
@@ -399,6 +508,15 @@ async function switchSession(sessionId: string) {
   } catch (error: any) {
     ElMessage.error(error.message || "切换会话失败");
   }
+}
+
+function openHistoryDialog() {
+  historyDialogVisible.value = true;
+}
+
+async function handleHistorySelect(sessionId: string) {
+  await switchSession(sessionId);
+  historyDialogVisible.value = false;
 }
 
 async function deleteSession(sessionId: string) {
@@ -441,7 +559,14 @@ async function sendMessage() {
     // 1. 获取基础身份 prompt
     const basePrompt = aiStore.getPromptByType("base");
     if (basePrompt) {
-      systemPrompt = basePrompt.content;
+      let basePromptContent = basePrompt.content;
+      // 替换 AI 教练名称
+      const coachName = aiStore.currentConfig?.displayName || "AI 教练";
+      basePromptContent = basePromptContent.replace(
+        /\{displayName\}/g,
+        coachName
+      );
+      systemPrompt = basePromptContent;
     }
 
     // 2. 获取性格 prompt（从用户档案中读取 coachPersonality）
@@ -623,13 +748,13 @@ onMounted(async () => {
   }
 
   // 监听窗口大小变化
-  window.addEventListener('resize', handleResize);
+  window.addEventListener("resize", handleResize);
   // 初始化时检查一次
   handleResize();
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', handleResize);
+  window.removeEventListener("resize", handleResize);
 });
 
 // 监听消息变化，自动滚动到底部
@@ -643,7 +768,7 @@ watch(
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@import "@/styles/variables.scss";
 
 .chat-view {
   display: flex;
@@ -652,17 +777,18 @@ watch(
 }
 
 .chat-sidebar {
-  width: 260px;
-  border-right: 1px solid $--border-color-light;
+  width: 280px;
   background-color: $--bg-color-card;
+
   display: flex;
   flex-direction: column;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  box-shadow: 1px 0 2px 0 rgba(0, 0, 0, 0.02);
 
   &.collapsed {
-    width: 60px;
+    width: 64px;
   }
 
   // PC端：不使用绝对定位
@@ -671,82 +797,290 @@ watch(
     transform: none !important;
   }
 
-  .sidebar-header {
-    padding: $--el-spacing-md;
-    border-bottom: 1px solid $--border-color-light;
+  // 顶部区域：Logo + 折叠按钮
+  .sidebar-top {
+    padding: 16px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: $--bg-color-card;
+    min-height: 60px;
 
-    h3 {
-      margin: 0;
-      font-size: $--el-font-size-large;
-      font-weight: 600;
-      color: $--text-color-primary;
+    .sidebar-logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+
+      .logo-img {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+      }
+
+      .collapse-btn-top {
+        padding: 6px;
+        color: $--text-color-secondary;
+        transition: $--transition-base;
+        border-radius: 6px;
+        margin-left: auto;
+
+        .icon-wrapper {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 16px;
+          height: 16px;
+
+          :deep(svg) {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+          }
+        }
+
+        &:hover {
+          color: $--text-color-primary;
+        }
+      }
+    }
+
+    .collapse-btn-top.collapsed-only {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      color: $--text-color-secondary;
+
+      .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+
+        :deep(svg) {
+          width: 18px;
+          height: 18px;
+          fill: currentColor;
+        }
+      }
+
+      &:hover {
+        color: $--text-color-primary;
+        background-color: $--bg-color-hover;
+      }
     }
   }
 
-  .session-list {
+  // 新聊天按钮区域
+  .new-chat-section {
+    padding: 12px 16px;
+
+    .new-chat-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $--text-color-primary;
+      background-color: transparent;
+      cursor: pointer;
+      transition: $--transition-base;
+
+      .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        color: $--text-color-secondary;
+
+        :deep(svg) {
+          width: 16px;
+          height: 16px;
+          fill: currentColor;
+        }
+      }
+
+      .btn-text {
+        flex: 1;
+        text-align: left;
+      }
+
+      &:hover {
+        .icon-wrapper {
+          color: $--text-color-primary;
+        }
+      }
+
+      &.collapsed {
+        justify-content: center;
+        padding: 10px;
+        width: 100%;
+
+        .icon-wrapper {
+          width: 18px;
+          height: 18px;
+
+          :deep(svg) {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+  }
+
+  // 会话列表区域
+  .session-section {
     flex: 1;
-    overflow-y: auto;
-    padding: $--el-spacing-sm;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .session-section-header {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: $--transition-base;
+
+      .section-title-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .icon-wrapper.small {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        color: $--text-color-secondary;
+
+        :deep(svg) {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .section-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: $--text-color-primary;
+        letter-spacing: 0.01em;
+      }
+
+      .chevron-icon {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: $--text-color-secondary;
+        flex-shrink: 0;
+
+        &.expanded {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .session-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      margin-top: 0;
+    }
+
+    &.collapsed-only {
+      // 折叠态下不占满整个高度，避免图标被垂直居中“掉下去”
+      flex: 0 0 auto;
+      padding: 8px 0 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .history-icon-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: $--transition-base;
+        color: $--text-color-secondary;
+
+        .icon-wrapper {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          color: $--text-color-secondary;
+
+          :deep(svg) {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+          }
+        }
+
+        // hover 效果与 .new-chat-btn 一致：仅图标颜色从次要色变为主要色
+        &:hover {
+          .icon-wrapper {
+            color: $--text-color-primary;
+          }
+        }
+      }
+    }
   }
 
   .session-item {
-    padding: $--el-spacing-sm;
-    border-radius: $--el-border-radius-base;
+    padding: 10px 16px;
+    border-radius: 0;
     cursor: pointer;
-    margin-bottom: $--el-spacing-sm;
+    margin: 0;
     position: relative;
     transition: $--transition-base;
 
     &:hover {
-      background-color: $--bg-color-hover;
-
       .delete-btn {
         opacity: 1;
       }
     }
 
-    &.active {
-      background-color: $--el-color-primary-lighter;
-      border-left: 3px solid $--el-color-primary;
-    }
-
     .session-title {
-      font-weight: 500;
-      margin-bottom: $--el-spacing-xs;
+      font-weight: 400;
+      margin-bottom: 2px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       color: $--text-color-primary;
-      font-size: $--el-font-size-base;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .session-meta {
-      font-size: $--el-font-size-small;
+      font-size: 12px;
       color: $--text-color-secondary;
+      line-height: 1.4;
     }
 
     .delete-btn {
       position: absolute;
-      top: $--el-spacing-sm;
-      right: $--el-spacing-sm;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
       opacity: 0;
       transition: $--transition-fast;
-    }
-  }
-
-  .sidebar-toggle {
-    padding: $--el-spacing-sm;
-    text-align: center;
-    cursor: pointer;
-    border-top: 1px solid $--border-color-light;
-    transition: $--transition-base;
-
-    &:hover {
-      background-color: $--bg-color-hover;
+      padding: 4px;
     }
   }
 }
@@ -849,7 +1183,8 @@ watch(
     .user-message {
       background-color: $--el-color-primary;
       color: white;
-      border-radius: $--el-border-radius-base $--el-border-radius-base 0 $--el-border-radius-base;
+      border-radius: $--el-border-radius-base $--el-border-radius-base 0
+        $--el-border-radius-base;
     }
   }
 
@@ -857,7 +1192,8 @@ watch(
     .message-body {
       background-color: $--bg-color-card;
       border: 1px solid $--border-color-light;
-      border-radius: $--el-border-radius-base $--el-border-radius-base $--el-border-radius-base 0;
+      border-radius: $--el-border-radius-base $--el-border-radius-base
+        $--el-border-radius-base 0;
       box-shadow: $--el-box-shadow-card;
     }
   }
@@ -1020,6 +1356,51 @@ watch(
       display: flex;
       gap: $--el-spacing-sm;
       align-items: center;
+    }
+  }
+}
+
+.history-dialog {
+  .history-list {
+    max-height: 420px;
+    overflow-y: auto;
+  }
+
+  .history-item {
+    padding: 10px 12px;
+    border-radius: $--el-border-radius-base;
+    cursor: pointer;
+    transition: $--transition-base;
+    margin-bottom: 6px;
+    border: 1px solid transparent;
+
+    .history-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: $--text-color-primary;
+      margin-bottom: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .history-meta {
+      font-size: 12px;
+      color: $--text-color-secondary;
+    }
+
+    &:hover {
+      background-color: $--bg-color-hover;
+      border-color: $--border-color-light;
+    }
+
+    &.active {
+      background-color: $--el-color-primary-lighter;
+      border-color: $--el-color-primary;
+
+      .history-title {
+        color: $--el-color-primary;
+      }
     }
   }
 }

@@ -209,7 +209,7 @@
             </el-menu-item>
           </el-tooltip>
         </el-menu>
-        <div class="sidebar-footer">
+        <!-- <div class="sidebar-footer">
           <el-button
             v-if="!sidebarCollapsed"
             text
@@ -232,7 +232,7 @@
               style="width: 20px; height: 20px; display: block"
             />
           </el-button>
-        </div>
+        </div> -->
       </el-aside>
 
       <!-- 移动端抽屉侧边栏 -->
@@ -240,55 +240,64 @@
         v-model="mobileDrawerVisible"
         :with-header="false"
         direction="ltr"
-        size="240px"
+        size="160px"
         class="mobile-drawer"
       >
         <div class="drawer-header">
           <div class="logo">
             <img :src="logo" alt="GYM AI" class="logo-mark" />
-            <span class="brand-text">GYM AI</span>
           </div>
-          <el-button text circle @click="mobileDrawerVisible = false">
+          <el-button
+            text
+            circle
+            class="drawer-close"
+            @click="mobileDrawerVisible = false"
+          >
             <XMarkIcon style="width: 20px; height: 20px; display: block" />
           </el-button>
         </div>
-        <el-menu
-          :default-active="activeMenu"
-          router
-          @select="handleMobileMenuSelect"
-        >
-          <el-menu-item index="/">
-            <span class="menu-icon" v-html="getAsideIcon('/')"></span>
-            <span>首页</span>
-          </el-menu-item>
-          <el-menu-item index="/chat">
-            <span class="menu-icon" v-html="getAsideIcon('/chat')"></span>
-            <span>AI 对话</span>
-          </el-menu-item>
-          <el-menu-item index="/plan">
-            <span class="menu-icon" v-html="getAsideIcon('/plan')"></span>
-            <span>训练计划</span>
-          </el-menu-item>
-          <el-menu-item index="/workout">
-            <span class="menu-icon" v-html="getAsideIcon('/workout')"></span>
-            <span>开始训练</span>
-          </el-menu-item>
-          <el-menu-item index="/progress">
-            <span class="menu-icon" v-html="getAsideIcon('/progress')"></span>
-            <span>进度统计</span>
-          </el-menu-item>
-          <el-menu-item index="/body-metrics">
-            <span
-              class="menu-icon"
-              v-html="getAsideIcon('/body-metrics')"
-            ></span>
-            <span>体测数据</span>
-          </el-menu-item>
-          <el-menu-item index="/ai-config">
-            <span class="menu-icon" v-html="getAsideIcon('/ai-config')"></span>
-            <span>AI 配置</span>
-          </el-menu-item>
-        </el-menu>
+        <div class="drawer-content">
+          <el-menu
+            :default-active="activeMenu"
+            router
+            @select="handleMobileMenuSelect"
+          >
+            <el-menu-item index="/">
+              <span class="menu-icon" v-html="getAsideIcon('/')"></span>
+              <span class="menu-text">首页</span>
+            </el-menu-item>
+            <el-menu-item index="/chat">
+              <span class="menu-icon" v-html="getAsideIcon('/chat')"></span>
+              <span class="menu-text">对话</span>
+            </el-menu-item>
+            <el-menu-item index="/plan">
+              <span class="menu-icon" v-html="getAsideIcon('/plan')"></span>
+              <span class="menu-text">计划</span>
+            </el-menu-item>
+            <el-menu-item index="/workout">
+              <span class="menu-icon" v-html="getAsideIcon('/workout')"></span>
+              <span class="menu-text">训练</span>
+            </el-menu-item>
+            <el-menu-item index="/progress">
+              <span class="menu-icon" v-html="getAsideIcon('/progress')"></span>
+              <span class="menu-text">统计</span>
+            </el-menu-item>
+            <el-menu-item index="/body-metrics">
+              <span
+                class="menu-icon"
+                v-html="getAsideIcon('/body-metrics')"
+              ></span>
+              <span class="menu-text">数据</span>
+            </el-menu-item>
+            <el-menu-item index="/ai-config">
+              <span
+                class="menu-icon"
+                v-html="getAsideIcon('/ai-config')"
+              ></span>
+              <span class="menu-text">配置</span>
+            </el-menu-item>
+          </el-menu>
+        </div>
       </el-drawer>
 
       <!-- 主内容区 -->
@@ -645,7 +654,8 @@ function handleMobileMenuSelect(index: string) {
 .main-content {
   background-color: #fff;
   border-radius: 18px;
-  padding: $--el-spacing-md;
+  // padding: $--el-spacing-md;
+  padding: 0 !important;
   overflow-y: auto;
   height: calc(100vh - 56px);
   transition: $--transition-base;
@@ -657,79 +667,130 @@ function handleMobileMenuSelect(index: string) {
 }
 
 .mobile-drawer {
-  :deep(.el-drawer__body) {
-    padding: 0;
-    background-color: $--bg-color-card;
-  }
-
-  :deep(.el-drawer) {
-    background-color: $--bg-color-card;
+  :deep(.mobile-drawer.el-drawer) {
+    background-color: transparent;
+    box-shadow: none;
   }
 
   .drawer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $--el-spacing-md;
-    border-bottom: 1px solid $--border-color-light;
-    background-color: $--bg-color-card;
+    padding: $--el-spacing-sm $--el-spacing-md;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+    background-color: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(18px);
 
     .logo {
       display: flex;
       align-items: center;
       gap: $--el-spacing-sm;
-      font-size: $--el-font-size-xl;
-      font-weight: 700;
-      color: #0b1429;
+      color: #020617;
 
       .logo-mark {
-        width: 36px;
-        height: 36px;
-        border-radius: 6px;
-        box-shadow: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .brand-text {
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+        }
+
+        .brand-subtitle {
+          font-size: 11px;
+          color: #6b7280;
+        }
       }
     }
+
+    .drawer-close {
+      color: #6b7280;
+      border-radius: 999px;
+
+      &:hover {
+        background-color: #f3f4f6;
+        color: #111827;
+      }
+    }
+  }
+
+  .drawer-content {
+    padding: $--el-spacing-sm $--el-spacing-xs $--el-spacing-md;
+    height: 100%;
+  }
+
+  .drawer-section-title {
+    padding: 0 $--el-spacing-lg;
+    margin-bottom: $--el-spacing-xs;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9ca3af;
   }
 
   .el-menu {
     border-right: none;
     background-color: transparent;
-    padding: $--el-spacing-sm 0;
+    padding: $--el-spacing-xs 0;
 
     :deep(.el-menu-item) {
       margin: 2px $--el-spacing-sm;
-      border-radius: $--el-border-radius-small;
+      border-radius: 999px;
       height: 44px;
       line-height: 44px;
-      color: $--text-color-regular;
+      color: #111827;
       transition: $--transition-base;
+      display: flex;
+      align-items: center;
+      padding-inline: $--el-spacing-lg;
 
       &:hover {
-        background-color: $--bg-color-hover;
-        color: $--el-color-primary;
+        background-color: #f3f4f6;
+        color: #111827;
       }
 
       &.is-active {
-        background-color: $--el-color-primary-lighter;
-        color: $--el-color-primary;
+        background: #111827;
+        color: #f9fafb;
         font-weight: 500;
       }
 
       .menu-icon {
         display: inline-flex;
         align-items: center;
-        margin-right: $--el-spacing-sm;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
       }
 
       .menu-icon :deep(svg) {
         width: 18px;
         height: 18px;
-        // color: currentColor;
-        // fill: currentColor;
         display: block;
+      }
+
+      .menu-text {
+        font-size: 14px;
+        font-weight: 500;
       }
     }
   }
+}
+
+:deep(.mobile-drawer .el-drawer__body) {
+  padding: 0 !important;
+  background-color: transparent;
 }
 
 .fade-enter-active,

@@ -10,7 +10,7 @@
       <div class="list-header">
         <h3>已配置的服务</h3>
         <el-button type="primary" @click="openCreateDialog">
-          <PlusIcon style="width: 20px; height: 20px;" />
+          <PlusIcon style="width: 20px; height: 20px" />
           添加配置
         </el-button>
       </div>
@@ -46,7 +46,7 @@
                 编辑
               </el-button>
               <el-button size="small" @click="testConfig(row)">
-                <LinkIcon style="width: 20px; height: 20px;" />
+                <LinkIcon style="width: 20px; height: 20px" />
                 测试
               </el-button>
               <el-button
@@ -61,7 +61,7 @@
                 type="danger"
                 @click="deleteConfig(row.id)"
               >
-                <TrashIcon style="width: 20px; height: 20px;" />
+                <TrashIcon style="width: 20px; height: 20px" />
               </el-button>
             </el-button-group>
           </template>
@@ -72,7 +72,7 @@
     <!-- 空状态 -->
     <el-empty v-else description="还没有配置 AI 服务">
       <el-button type="primary" @click="showAddDialog = true">
-        <PlusIcon style="width: 20px; height: 20px;" />
+        <PlusIcon style="width: 20px; height: 20px" />
         添加第一个配置
       </el-button>
     </el-empty>
@@ -135,18 +135,62 @@
             v-model="configForm.displayName"
             placeholder="在聊天界面中显示的 AI 名字，如「AI 教练」"
           />
-          <div class="form-hint">
-            用于聊天消息头部展示的教练名称
-          </div>
+          <div class="form-hint">用于聊天消息头部展示的教练名称</div>
         </el-form-item>
 
-        <el-form-item label="AI 头像 URL">
-          <el-input
-            v-model="configForm.avatarUrl"
-            placeholder="可选，支持网络图片地址或本地静态资源 URL"
-          />
-          <div class="form-hint">
-            留空则使用默认图标；填写后将在聊天界面显示为 AI 教练头像
+        <el-form-item label="AI 头像">
+          <div class="avatar-upload-container">
+            <!-- 预览区域 - 可点击上传 -->
+            <div
+              v-if="avatarPreview"
+              class="avatar-preview"
+              @click="triggerFileUpload"
+            >
+              <el-avatar :size="80" :src="avatarPreview" />
+              <div class="avatar-overlay">
+                <PhotoIcon style="width: 24px; height: 24px" />
+                <span>点击更换</span>
+              </div>
+            </div>
+            <div v-else class="avatar-placeholder" @click="triggerFileUpload">
+              <el-avatar :size="80">
+                <PhotoIcon style="width: 40px; height: 40px" />
+              </el-avatar>
+              <div class="avatar-hint">点击上传图片</div>
+            </div>
+
+            <!-- URL 输入框（可选） -->
+            <div class="url-input-section">
+              <el-button
+                text
+                type="primary"
+                size="small"
+                @click="showUrlInput = !showUrlInput"
+                style="margin-top: 12px"
+              >
+                {{ showUrlInput ? "隐藏" : "或手动输入 URL" }}
+              </el-button>
+              <el-input
+                v-if="showUrlInput"
+                v-model="configForm.avatarUrl"
+                placeholder="输入网络图片地址"
+                style="margin-top: 8px"
+                @input="onUrlInput"
+              />
+            </div>
+
+            <!-- 隐藏的文件输入 -->
+            <input
+              ref="fileInputRef"
+              type="file"
+              accept="image/*"
+              style="display: none"
+              @change="handleFileSelect"
+            />
+
+            <div class="form-hint">
+              点击头像上传本地图片，或输入网络图片地址；留空则使用默认图标
+            </div>
           </div>
         </el-form-item>
 
@@ -244,11 +288,17 @@ import {
   type FormInstance,
   type FormRules,
 } from "element-plus";
-import { PlusIcon, TrashIcon, LinkIcon } from "@heroicons/vue/24/outline";
+import {
+  PlusIcon,
+  TrashIcon,
+  LinkIcon,
+  PhotoIcon,
+} from "@heroicons/vue/24/outline";
 import { useAIStore } from "@/stores/ai";
 import { useUserStore } from "@/stores/user";
 import { AI_PROVIDERS, type AIProvider } from "@/types/ai";
 import { getUsageStats, formatCost } from "@/utils/apiUsageTracker";
+import { fileToBase64, validateImageFile } from "@/utils/imageUtils";
 import dayjs from "dayjs";
 
 const aiStore = useAIStore();
@@ -265,6 +315,9 @@ const usageStats = ref({
   totalTokens: 0,
   totalCost: 0,
 });
+const fileInputRef = ref<HTMLInputElement>();
+const avatarPreview = ref<string>("");
+const showUrlInput = ref(false);
 
 const configForm = reactive({
   provider: "deepseek" as AIProvider,
@@ -320,6 +373,10 @@ function openEditDialog(config: any) {
   configForm.displayName = config.displayName || "AI 教练";
   configForm.avatarUrl = config.avatarUrl || "";
   configForm.isDefault = !!config.isDefault;
+
+  // 设置头像预览
+  avatarPreview.value = config.avatarUrl || "";
+  showUrlInput.value = false;
 
   showAddDialog.value = true;
 }
@@ -443,10 +500,54 @@ function resetForm() {
   configForm.avatarUrl = "";
   configForm.isDefault = false;
 
+  avatarPreview.value = "";
+  showUrlInput.value = false;
+
   configFormRef.value?.resetFields();
 
   isEditing.value = false;
   editingConfigId.value = null;
+}
+
+function triggerFileUpload() {
+  fileInputRef.value?.click();
+}
+
+async function handleFileSelect(event: Event) {
+  const target = event.target as HTMLInputElement;
+  const files = target.files;
+
+  if (!files || files.length === 0) return;
+
+  const file = files[0];
+
+  // 验证文件
+  const validation = validateImageFile(file, 5 * 1024 * 1024); // 5MB 限制
+  if (!validation.valid) {
+    ElMessage.error(validation.error || "无效的图片文件");
+    target.value = "";
+    return;
+  }
+
+  try {
+    // 转换为 base64
+    const base64 = await fileToBase64(file);
+    configForm.avatarUrl = base64;
+    avatarPreview.value = base64;
+    showUrlInput.value = false;
+    ElMessage.success("图片上传成功");
+  } catch (error) {
+    console.error("Failed to process image:", error);
+    ElMessage.error("图片处理失败");
+  }
+
+  // 清空 input
+  target.value = "";
+}
+
+function onUrlInput() {
+  // 当用户手动输入 URL 时，更新预览
+  avatarPreview.value = configForm.avatarUrl || "";
 }
 
 async function loadUsageStats() {
@@ -472,8 +573,9 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .ai-config-view {
+  padding: 16px;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: 24px;
 }
 
 .config-header {
@@ -481,6 +583,7 @@ onMounted(async () => {
 
   h2 {
     margin: 0 0 8px 0;
+    font-size: 20px;
     color: var(--el-text-color-primary);
   }
 
@@ -521,5 +624,64 @@ onMounted(async () => {
 .el-button-group {
   display: flex;
   gap: 4px;
+}
+
+.avatar-upload-container {
+  .avatar-preview {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+    .avatar-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.2s;
+      color: white;
+      font-size: 12px;
+      gap: 4px;
+
+      span {
+        font-size: 12px;
+      }
+    }
+
+    &:hover .avatar-overlay {
+      opacity: 1;
+    }
+  }
+
+  .avatar-placeholder {
+    position: relative;
+    margin-bottom: 12px;
+    display: inline-block;
+    cursor: pointer;
+
+    .avatar-hint {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--el-text-color-secondary);
+      transition: color 0.2s;
+    }
+
+    &:hover .avatar-hint {
+      color: var(--el-color-primary);
+    }
+  }
+
+  .url-input-section {
+    margin-top: 8px;
+  }
 }
 </style>

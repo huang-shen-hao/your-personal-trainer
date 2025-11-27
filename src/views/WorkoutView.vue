@@ -10,16 +10,14 @@
         <!-- 今日训练计划 -->
         <div v-if="todayTrainingDay" class="today-plan">
           <h3>今日训练计划</h3>
-          <el-card 
-            shadow="hover" 
+          <el-card
+            shadow="hover"
             class="plan-card"
             :class="{ 'is-completed': isTodayWorkoutCompleted }"
           >
             <div class="plan-header">
               <h4>{{ todayTrainingDay.name }}</h4>
-              <el-tag 
-                :type="isTodayWorkoutCompleted ? 'success' : 'primary'"
-              >
+              <el-tag :type="isTodayWorkoutCompleted ? 'success' : 'primary'">
                 {{ todayTrainingDay.exercises.length }} 个动作
               </el-tag>
             </div>
@@ -37,10 +35,14 @@
               <el-button
                 type="primary"
                 size="large"
-                @click="isTodayWorkoutCompleted ? viewTodayCompletedWorkout() : startTodayWorkout()"
+                @click="
+                  isTodayWorkoutCompleted
+                    ? viewTodayCompletedWorkout()
+                    : startTodayWorkout()
+                "
                 :loading="loading"
               >
-                {{ isTodayWorkoutCompleted ? '查看详情' : '开始今日训练' }}
+                {{ isTodayWorkoutCompleted ? "查看详情" : "开始今日训练" }}
               </el-button>
             </div>
           </el-card>
@@ -166,8 +168,8 @@
 
       <!-- 底部操作栏 -->
       <div class="workout-actions">
-        <el-button 
-          size="large" 
+        <el-button
+          size="large"
           @click="handleCancelWorkout"
           v-if="!isWorkoutCompleted"
         >
@@ -317,23 +319,24 @@ const completedExerciseIds = computed(() => {
 const todayCompletedWorkout = computed(() => {
   const todayDay = todayTrainingDay.value;
   if (!todayDay || !userStore.profile?.id) return null;
-  
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
+
   // 检查训练历史中是否有今天完成的训练记录
   const workout = workoutStore.workoutHistory.find((workout) => {
-    const workoutDate = workout.date instanceof Date ? workout.date : new Date(workout.date);
+    const workoutDate =
+      workout.date instanceof Date ? workout.date : new Date(workout.date);
     const workoutDay = new Date(workoutDate);
     workoutDay.setHours(0, 0, 0, 0);
-    
+
     return (
       workoutDay.getTime() === today.getTime() &&
       workout.sessionId === todayDay.id &&
       workout.endTime // 有结束时间表示已完成
     );
   });
-  
+
   return workout || null;
 });
 
@@ -347,7 +350,6 @@ function getExerciseName(exerciseId: string): string {
   const exercise = getExerciseById(exerciseId);
   return exercise ? exercise.name : exerciseId;
 }
-
 
 // 开始今日训练
 async function startTodayWorkout() {
@@ -386,14 +388,17 @@ function viewTodayCompletedWorkout() {
   // 从已完成的训练记录中恢复状态
   localWorkout.value = {
     userId: completedWorkout.userId,
-    sessionId: completedWorkout.sessionId || todayTrainingDay.value?.id || '',
+    sessionId: completedWorkout.sessionId || todayTrainingDay.value?.id || "",
     planId: completedWorkout.planId,
-    startTime: completedWorkout.startTime instanceof Date 
-      ? completedWorkout.startTime 
-      : new Date(completedWorkout.startTime),
-    completedExercises: new Set(completedWorkout.exercises.map(ex => ex.exerciseId)),
+    startTime:
+      completedWorkout.startTime instanceof Date
+        ? completedWorkout.startTime
+        : new Date(completedWorkout.startTime),
+    completedExercises: new Set(
+      completedWorkout.exercises.map((ex) => ex.exerciseId)
+    ),
   };
-  
+
   // 标记为已完成状态（查看模式）
   isWorkoutCompleted.value = true;
 }
@@ -429,7 +434,7 @@ async function startWorkoutFromDay(day: TrainingDay) {
 // 动作完成
 function onExerciseComplete(exerciseId: string) {
   if (!localWorkout.value) return;
-  
+
   localWorkout.value.completedExercises.add(exerciseId);
   ElMessage.success(`${getExerciseName(exerciseId)} 已完成`);
 }
@@ -534,7 +539,7 @@ async function handleCancelWorkout() {
 async function handleReturnToSelection() {
   localWorkout.value = null;
   isWorkoutCompleted.value = false;
-  
+
   // 重新加载训练历史，以便检测完成状态
   if (userStore.profile?.id) {
     await workoutStore.loadWorkoutHistory(userStore.profile.id);
@@ -573,7 +578,7 @@ onMounted(async () => {
 <style scoped lang="scss">
 .workout-view {
   padding: 16px;
-
+  box-sizing: border-box;
   margin: 0 auto;
 }
 

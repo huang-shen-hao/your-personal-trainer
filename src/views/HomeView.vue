@@ -54,7 +54,9 @@
                   v-if="todayTrainingDay"
                   type="primary"
                   @click="router.push('/workout')"
-                  >{{ isTodayWorkoutCompleted ? "查看详情" : "开始训练" }}</el-button
+                  >{{
+                    isTodayWorkoutCompleted ? "查看详情" : "开始训练"
+                  }}</el-button
                 >
               </div>
             </template>
@@ -97,19 +99,27 @@
               <el-card>
                 <template #header>快捷操作</template>
                 <div class="quick-actions">
-                  <el-button
-                    @click="router.push('/chat')"
-                    :icon="ChatBubbleLeftRightIcon"
-                    >与 AI 对话</el-button
-                  >
-                  <el-button @click="router.push('/plan')" :icon="CalendarIcon"
-                    >查看计划</el-button
-                  >
-                  <el-button
-                    @click="router.push('/progress')"
-                    :icon="ChartBarIcon"
-                    >查看进度</el-button
-                  >
+                  <el-button @click="router.push('/chat')">
+                    <span
+                      class="quick-action-icon"
+                      v-html="chatSmileAiLine"
+                    ></span>
+                    <span>与 AI 对话</span>
+                  </el-button>
+                  <el-button @click="router.push('/plan')">
+                    <span
+                      class="quick-action-icon"
+                      v-html="calendarScheduleLine"
+                    ></span>
+                    <span>查看计划</span>
+                  </el-button>
+                  <el-button @click="router.push('/progress')">
+                    <span
+                      class="quick-action-icon"
+                      v-html="pieChartLine"
+                    ></span>
+                    <span>查看进度</span>
+                  </el-button>
                 </div>
               </el-card>
             </el-col>
@@ -139,11 +149,9 @@ import { useWorkoutStore } from "@/stores/workout";
 import { useBodyMetricsStore } from "@/stores/bodyMetrics";
 import { usePlanStore } from "@/stores/plan";
 import { getExerciseById } from "@/utils/exerciseUtils";
-import {
-  ChatBubbleLeftRightIcon,
-  CalendarIcon,
-  ChartBarIcon,
-} from "@heroicons/vue/24/outline";
+import chatSmileAiLine from "@/assets/images/aside/chat-smile-ai-line.svg?raw";
+import calendarScheduleLine from "@/assets/images/aside/calendar-schedule-line.svg?raw";
+import pieChartLine from "@/assets/images/aside/pie-chart-2-line.svg?raw";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -178,16 +186,17 @@ const todayTrainingDay = computed(() => {
 // 检查今日是否已完成训练
 const isTodayWorkoutCompleted = computed(() => {
   if (!todayTrainingDay.value || !userStore.profile?.id) return false;
-  
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
+
   // 检查训练历史中是否有今天完成的训练记录
   return workoutStore.workoutHistory.some((workout) => {
-    const workoutDate = workout.date instanceof Date ? workout.date : new Date(workout.date);
+    const workoutDate =
+      workout.date instanceof Date ? workout.date : new Date(workout.date);
     const workoutDay = new Date(workoutDate);
     workoutDay.setHours(0, 0, 0, 0);
-    
+
     return (
       workoutDay.getTime() === today.getTime() &&
       workout.sessionId === todayTrainingDay.value?.id &&
@@ -316,6 +325,9 @@ onMounted(async () => {
     justify-content: flex-start;
     border-radius: $--el-border-radius-small;
     transition: $--transition-base;
+    display: inline-flex;
+    align-items: center;
+    gap: $--el-spacing-xs;
 
     &:hover {
       background-color: $--bg-color-hover;
@@ -323,6 +335,21 @@ onMounted(async () => {
   }
   .el-button + .el-button {
     margin-left: 0 !important;
+  }
+
+  .quick-action-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+
+    :deep(svg) {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
   }
 }
 

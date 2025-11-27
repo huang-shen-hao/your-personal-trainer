@@ -295,10 +295,12 @@ watch(overviewRange, () => {
 
 <style scoped lang="scss">
 .progress-view {
+  padding: 16px;
+  box-sizing: border-box;
   margin: 0 auto;
 
   .page-header {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 
     h1 {
       font-size: 24px;
