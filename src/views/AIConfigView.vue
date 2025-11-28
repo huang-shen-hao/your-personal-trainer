@@ -16,7 +16,7 @@
       </div>
 
       <el-table :data="aiStore.configs" style="width: 100%">
-        <el-table-column label="提供商" width="150">
+        <el-table-column label="提供商" min-width="120">
           <template #default="{ row }">
             <el-tag :type="getProviderTagType(row.provider)">
               {{ getProviderName(row.provider) }}
@@ -24,7 +24,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="模型" prop="model" />
+        <el-table-column label="模型" prop="model" min-width="160" />
 
         <el-table-column label="状态" width="100">
           <template #default="{ row }">
@@ -39,14 +39,18 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" width="260">
+        <el-table-column
+          label="操作"
+          :width="actionColumnWidth"
+          fixed="right"
+          class-name="action-column"
+        >
           <template #default="{ row }">
-            <el-button-group>
+            <div class="action-buttons">
               <el-button size="small" @click="openEditDialog(row)">
                 编辑
               </el-button>
               <el-button size="small" @click="testConfig(row)">
-                <LinkIcon style="width: 20px; height: 20px" />
                 测试
               </el-button>
               <el-button
@@ -61,9 +65,9 @@
                 type="danger"
                 @click="deleteConfig(row.id)"
               >
-                <TrashIcon style="width: 20px; height: 20px" />
+                删除
               </el-button>
-            </el-button-group>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -81,13 +85,15 @@
     <el-dialog
       v-model="showAddDialog"
       :title="isEditing ? '编辑 AI 配置' : '添加 AI 配置'"
-      width="600px"
+      :width="dialogWidth"
+      class="config-dialog"
     >
       <el-form
         ref="configFormRef"
         :model="configForm"
         :rules="configRules"
-        label-width="120px"
+        :label-width="formLabelWidth"
+        :label-position="formLabelPosition"
       >
         <el-form-item label="AI 提供商" prop="provider">
           <el-select
@@ -262,7 +268,7 @@
     <!-- 使用统计 -->
     <el-card class="usage-stats" v-if="aiStore.configs.length > 0">
       <h3>使用统计（最近30天）</h3>
-      <el-descriptions :column="2" border>
+      <el-descriptions :column="descriptionsColumn" border>
         <el-descriptions-item label="请求次数">
           {{ usageStats.totalRequests }}
         </el-descriptions-item>
@@ -281,19 +287,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from "vue";
+import { ref, reactive, computed, onMounted, onUnmounted } from "vue";
 import {
   ElMessage,
   ElMessageBox,
   type FormInstance,
   type FormRules,
 } from "element-plus";
-import {
-  PlusIcon,
-  TrashIcon,
-  LinkIcon,
-  PhotoIcon,
-} from "@heroicons/vue/24/outline";
+import { PlusIcon, PhotoIcon } from "@heroicons/vue/24/outline";
 import { useAIStore } from "@/stores/ai";
 import { useUserStore } from "@/stores/user";
 import { AI_PROVIDERS, type AIProvider } from "@/types/ai";
@@ -318,6 +319,7 @@ const usageStats = ref({
 const fileInputRef = ref<HTMLInputElement>();
 const avatarPreview = ref<string>("");
 const showUrlInput = ref(false);
+const windowWidth = ref(window.innerWidth);
 
 const configForm = reactive({
   provider: "deepseek" as AIProvider,
@@ -345,6 +347,20 @@ const configRules: FormRules = {
 const availableModels = computed(() => {
   return AI_PROVIDERS[configForm.provider]?.models || [];
 });
+
+// 响应式适配
+const isMobile = computed(() => windowWidth.value < 768);
+const dialogWidth = computed(() => {
+  if (windowWidth.value < 768) return "calc(100% - 32px)";
+  if (windowWidth.value < 1024) return "90%";
+  return "600px";
+});
+const formLabelWidth = computed(() => (isMobile.value ? "auto" : "120px"));
+const formLabelPosition = computed<"top" | "right" | "left">(() =>
+  isMobile.value ? "top" : "right"
+);
+const actionColumnWidth = computed(() => (isMobile.value ? "60" : "180"));
+const descriptionsColumn = computed(() => (isMobile.value ? 1 : 2));
 
 // ===== Methods =====
 function openCreateDialog() {
@@ -565,9 +581,18 @@ async function loadUsageStats() {
   }
 }
 
+function handleResize() {
+  windowWidth.value = window.innerWidth;
+}
+
 onMounted(async () => {
   await aiStore.loadConfigs();
   await loadUsageStats();
+  window.addEventListener("resize", handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
 });
 </script>
 
@@ -612,6 +637,7 @@ onMounted(async () => {
 .usage-stats {
   h3 {
     margin-top: 0;
+    margin-bottom: 24px;
   }
 }
 
@@ -624,6 +650,38 @@ onMounted(async () => {
 .el-button-group {
   display: flex;
   gap: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+
+  .el-button {
+    margin: 0;
+  }
+
+  // 移动端优化
+  @media (max-width: 768px) {
+    gap: 4px;
+    flex-direction: column;
+    align-items: stretch;
+
+    .el-button {
+      font-size: 11px;
+      padding: 4px 6px;
+      width: 100%;
+      min-width: auto;
+    }
+  }
+}
+
+// 操作列在移动端的宽度调整
+:deep(.action-column) {
+  @media (max-width: 767px) {
+    min-width: 200px;
+  }
 }
 
 .avatar-upload-container {
@@ -682,6 +740,58 @@ onMounted(async () => {
 
   .url-input-section {
     margin-top: 8px;
+  }
+}
+
+// 移动端对话框间距优化
+:deep(.config-dialog) {
+  @media (max-width: 767px) {
+    .el-dialog {
+      margin: 16px;
+      width: calc(100% - 32px) !important;
+      max-height: calc(100vh - 32px);
+      border-radius: 8px;
+    }
+
+    .el-dialog__body {
+      padding: 16px;
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .el-dialog__header {
+      padding: 16px 16px 12px;
+    }
+
+    .el-dialog__footer {
+      padding: 12px 16px 16px;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+
+      .el-button {
+        flex: 1;
+        max-width: 120px;
+      }
+    }
+
+    // 表单在移动端的优化
+    .el-form {
+      .el-form-item {
+        margin-bottom: 20px;
+      }
+
+      .el-form-item__label {
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+    }
+
+    // 滑块在移动端的优化
+    .el-slider {
+      margin: 12px 0;
+    }
   }
 }
 </style>

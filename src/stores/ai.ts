@@ -182,12 +182,34 @@ export const useAIStore = defineStore("ai", () => {
           provider: c.provider as AIConfig["provider"],
         }));
 
-      // 设置当前配置为默认配置
-      if (!currentConfig.value && configs.value.length > 0) {
+      // 更新当前配置：如果当前配置存在，从更新后的列表中重新获取
+      if (currentConfig.value && currentConfig.value.id) {
+        const updatedConfig = configs.value.find(
+          (c) => c.id === currentConfig.value!.id
+        );
+        if (updatedConfig) {
+          // 更新当前配置的引用，保持响应式
+          currentConfig.value = updatedConfig;
+          aiService = createAIService(updatedConfig);
+        } else {
+          // 如果当前配置不存在了，切换到默认配置或第一个配置
+          currentConfig.value = defaultConfig.value || configs.value[0] || null;
+          if (currentConfig.value) {
+            aiService = createAIService(currentConfig.value);
+          } else {
+            aiService = null;
+          }
+        }
+      } else if (configs.value.length > 0) {
+        // 如果当前配置不存在，设置默认配置或第一个配置
         currentConfig.value = defaultConfig.value || configs.value[0];
         if (currentConfig.value) {
           aiService = createAIService(currentConfig.value);
         }
+      } else {
+        // 没有配置时，清空当前配置
+        currentConfig.value = null;
+        aiService = null;
       }
     } catch (err: any) {
       error.value = err.message;

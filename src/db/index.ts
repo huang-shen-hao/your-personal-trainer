@@ -154,10 +154,13 @@ export interface AIConfig {
   userId: string
   provider: string
   modelId: string
+  model?: string  // 添加 model 字段以兼容旧数据
   apiKey: string
   apiEndpoint?: string
+  useProxy?: boolean  // 添加代理模式字段
   temperature?: number
   maxTokens?: number
+  topP?: number
   /**
    * AI 教练在界面中展示的名字，例如「AI 教练」「小深」等
    */
