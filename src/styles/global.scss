@@ -319,3 +319,15 @@ button:focus-visible,
   outline: none;
   box-shadow: var(--focus-ring);
 }
+
+.el-input__wrapper .el-input__inner{
+  font-size: 16px !important;
+}
+
+.el-select__input{
+  font-size: 16px !important;
+}
+
+.el-select__selected-item.el-select__placeholder span{
+  font-size: 16px !important;
+}
