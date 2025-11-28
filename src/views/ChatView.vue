@@ -1520,6 +1520,10 @@ watch(
     }
   }
 
+  :deep(.el-textarea__inner) {
+    font-size: 16px;
+  }
+
   .input-actions {
     display: flex;
     justify-content: space-between;
