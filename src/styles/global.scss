@@ -264,12 +264,16 @@ a {
 }
 
 /* Element Plus popper / popover styling */
-.el-popover.el-popper {
-  background-color: #ffffff !important;
+.el-popover.el-popper.is-light {
+  background: #ffffff !important;
   color: #666666 !important; // description / body text
   border-radius: $--el-border-radius-base;
   border: 1px solid $--border-color-light;
   box-shadow: $--el-box-shadow-card;
+}
+
+.el-dropdown-menu{
+  background: #ffffff !important;
 }
 
 /* Ensure el-select dropdown uses white background */
@@ -320,14 +324,29 @@ button:focus-visible,
   box-shadow: var(--focus-ring);
 }
 
-.el-input__wrapper .el-input__inner{
-  font-size: 16px !important;
-}
+/* PC 默认 14px，移动端 16px */
+// .el-input__wrapper .el-input__inner {
+//   font-size: 14px !important;
+// }
 
-.el-select__input{
-  font-size: 16px !important;
-}
+// .el-select__input {
+//   font-size: 14px !important;
+// }
 
-.el-select__selected-item.el-select__placeholder span{
-  font-size: 16px !important;
+// .el-select__selected-item.el-select__placeholder span {
+//   font-size: 14px !important;
+// }
+
+@media (max-width: 768px) {
+  .el-input__wrapper .el-input__inner {
+    font-size: 16px !important;
+  }
+
+  .el-select__input {
+    font-size: 16px !important;
+  }
+
+  .el-select__selected-item.el-select__placeholder span {
+    font-size: 16px !important;
+  }
 }
