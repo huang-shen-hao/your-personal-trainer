@@ -1,29 +1,21 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
-import { setThemeBySetting, resolveThemeName, themes, type ThemeSetting, type ThemeName } from '@/theme'
+import { ref } from 'vue'
+
+const baseFontSize = {
+  xs: 12,
+  sm: 13,
+  md: 14,
+  lg: 16,
+  xl: 18,
+}
 
 export const useSettingsStore = defineStore('settings', () => {
-  const theme = ref<ThemeSetting>('auto')
   const language = ref<'zh-CN' | 'en-US'>('zh-CN')
   const fontSize = ref<'small' | 'medium' | 'large' | 'extra-large'>('medium')
   const enableNotifications = ref(true)
   const enableSounds = ref(true)
   const autoSaveWorkouts = ref(true)
   const measurementUnit = ref<'metric' | 'imperial'>('metric') // kg/cm vs lb/in
-
-  const resolvedTheme = computed<ThemeName>(() => resolveThemeName(theme.value))
-
-  function applyThemeSetting(setting: ThemeSetting = theme.value) {
-    const applied = setThemeBySetting(setting)
-    theme.value = setting
-    return applied
-  }
-
-  function setTheme(newTheme: ThemeSetting) {
-    applyThemeSetting(newTheme)
-    applyFontSize()
-    saveToLocalStorage()
-  }
 
   function setLanguage(newLanguage: 'zh-CN' | 'en-US') {
     language.value = newLanguage
@@ -38,7 +30,6 @@ export const useSettingsStore = defineStore('settings', () => {
 
   function applyFontSize() {
     const root = document.documentElement
-    const baseSize = themes.light.typography.size
     const scaleMap: Record<typeof fontSize.value, number> = {
       small: 0.93,
       medium: 1,
@@ -48,11 +39,11 @@ export const useSettingsStore = defineStore('settings', () => {
     const scale = scaleMap[fontSize.value]
 
     const scaled = {
-      xs: `${(baseSize.xs * scale).toFixed(2)}px`,
-      sm: `${(baseSize.sm * scale).toFixed(2)}px`,
-      md: `${(baseSize.md * scale).toFixed(2)}px`,
-      lg: `${(baseSize.lg * scale).toFixed(2)}px`,
-      xl: `${(baseSize.xl * scale).toFixed(2)}px`,
+      xs: `${(baseFontSize.xs * scale).toFixed(2)}px`,
+      sm: `${(baseFontSize.sm * scale).toFixed(2)}px`,
+      md: `${(baseFontSize.md * scale).toFixed(2)}px`,
+      lg: `${(baseFontSize.lg * scale).toFixed(2)}px`,
+      xl: `${(baseFontSize.xl * scale).toFixed(2)}px`,
     }
 
     root.style.setProperty('--font-size-xs', scaled.xs)
@@ -88,7 +79,6 @@ export const useSettingsStore = defineStore('settings', () => {
 
   function saveToLocalStorage() {
     const settings = {
-      theme: theme.value,
       language: language.value,
       fontSize: fontSize.value,
       enableNotifications: enableNotifications.value,
@@ -104,65 +94,42 @@ export const useSettingsStore = defineStore('settings', () => {
     if (saved) {
       try {
         const settings = JSON.parse(saved)
-        theme.value = settings.theme || 'auto'
         language.value = settings.language || 'zh-CN'
         fontSize.value = settings.fontSize || 'medium'
         enableNotifications.value = settings.enableNotifications ?? true
         enableSounds.value = settings.enableSounds ?? true
         autoSaveWorkouts.value = settings.autoSaveWorkouts ?? true
         measurementUnit.value = settings.measurementUnit || 'metric'
-        
-        applyThemeSetting(theme.value)
+
         applyFontSize()
       } catch (error) {
         console.error('Failed to load settings:', error)
       }
     } else {
       // 首次使用，应用默认设置
-      applyThemeSetting(theme.value)
       applyFontSize()
     }
   }
 
   function resetToDefaults() {
-    theme.value = 'auto'
     language.value = 'zh-CN'
     fontSize.value = 'medium'
     enableNotifications.value = true
     enableSounds.value = true
     autoSaveWorkouts.value = true
     measurementUnit.value = 'metric'
-    
-    applyThemeSetting(theme.value)
+
     applyFontSize()
     saveToLocalStorage()
   }
 
-  // 监听系统主题变化
-  if (typeof window !== 'undefined') {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    mediaQuery.addEventListener('change', () => {
-      if (theme.value === 'auto') {
-        applyThemeSetting('auto')
-        applyFontSize()
-      }
-    })
-  }
-
   return {
-    theme,
     language,
     fontSize,
-    resolvedTheme,
     enableNotifications,
     enableSounds,
     autoSaveWorkouts,
     measurementUnit,
-    setTheme,
-    applyTheme: () => {
-      applyThemeSetting(theme.value)
-      applyFontSize()
-    },
     setLanguage,
     setFontSize,
     applyFontSize,

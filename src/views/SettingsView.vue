@@ -7,14 +7,6 @@
       
       <el-form label-width="120px">
         <el-divider content-position="left">外观设置</el-divider>
-        
-        <el-form-item label="主题模式">
-          <el-radio-group v-model="settingsStore.theme" @change="settingsStore.applyTheme()">
-            <el-radio label="light">浅色</el-radio>
-            <el-radio label="dark">深色</el-radio>
-            <el-radio label="auto">跟随系统</el-radio>
-          </el-radio-group>
-        </el-form-item>
 
         <el-form-item label="字体大小">
           <el-radio-group v-model="settingsStore.fontSize">
@@ -58,4 +50,3 @@ const settingsStore = useSettingsStore()
   margin: 0 auto;
 }
 </style>
-

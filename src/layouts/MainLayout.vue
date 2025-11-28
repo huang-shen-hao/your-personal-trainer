@@ -17,20 +17,6 @@
         <span class="brand-text">GYM AI</span>
       </div>
       <div class="header-actions">
-        <!-- <el-button
-          circle
-          @click="router.push('/settings')"
-          class="settings-btn"
-        >
-          <Cog6ToothIcon style="width: 20px; height: 20px; display: block" />
-        </el-button> -->
-        <!-- <el-button circle @click="toggleTheme">
-          <MoonIcon
-            v-if="settingsStore.theme !== 'dark'"
-            style="width: 20px; height: 20px; display: block"
-          />
-          <SunIcon v-else style="width: 20px; height: 20px; display: block" />
-        </el-button> -->
         <el-popover
           placement="bottom-end"
           :width="280"
@@ -318,14 +304,10 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-// import { useSettingsStore } from "@/stores/settings";
 import { useUserStore } from "@/stores/user";
 import { EXPERIENCE_LEVEL_LABELS } from "@/types/user";
 import {
   UserIcon,
-  // Cog6ToothIcon,
-  // MoonIcon,
-  // SunIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
@@ -347,7 +329,6 @@ import settingsLine from "@/assets/images/aside/settings-2-line.svg?raw";
 
 const route = useRoute();
 const router = useRouter();
-// const settingsStore = useSettingsStore();
 const userStore = useUserStore();
 
 // 经验等级标签
@@ -417,11 +398,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", handleResize);
 });
-
-// function toggleTheme() {
-//   const newTheme = settingsStore.theme === "dark" ? "light" : "dark";
-//   settingsStore.setTheme(newTheme);
-// }
 
 // Sidebar toggle is handled by mobile drawer
 // function toggleSidebar() {
