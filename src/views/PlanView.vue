@@ -4,7 +4,7 @@
     <div class="top-bar">
       <h2>训练计划</h2>
       <el-button type="primary" @click="showCreateDialog = true">
-        <PlusIcon style="width: 20px; height: 20px;" />
+        <PlusIcon style="width: 20px; height: 20px" />
         创建计划
       </el-button>
     </div>
@@ -12,11 +12,11 @@
     <!-- 活跃计划卡片 -->
     <div v-if="planStore.activePlan" class="active-plan-section">
       <h3 class="section-title">
-        <StarIcon style="width: 20px; height: 20px;" />
+        <StarIcon style="width: 20px; height: 20px" />
         当前计划
       </h3>
-      <PlanCard 
-        :plan="planStore.activePlan" 
+      <PlanCard
+        :plan="planStore.activePlan"
         @click="viewPlanDetail"
         @command="handlePlanCommand"
       />
@@ -27,24 +27,32 @@
       <!-- 标签筛选 -->
       <div class="filter-tabs">
         <el-radio-group v-model="activeTab" size="large">
-          <el-radio-button label="all">全部 ({{ allPlans.length }})</el-radio-button>
-          <el-radio-button label="active">进行中 ({{ planStore.activePlans.length }})</el-radio-button>
-          <el-radio-button label="archived">未启用 ({{ planStore.archivedPlans.length }})</el-radio-button>
-          <el-radio-button label="completed">已完成 ({{ planStore.completedPlans.length }})</el-radio-button>
+          <el-radio-button label="all"
+            >全部 ({{ allPlans.length }})</el-radio-button
+          >
+          <el-radio-button label="active"
+            >进行中 ({{ planStore.activePlans.length }})</el-radio-button
+          >
+          <el-radio-button label="archived"
+            >未启用 ({{ planStore.archivedPlans.length }})</el-radio-button
+          >
+          <el-radio-button label="completed"
+            >已完成 ({{ planStore.completedPlans.length }})</el-radio-button
+          >
         </el-radio-group>
       </div>
 
       <!-- 计划网格 -->
       <div v-loading="planStore.loading" class="plans-grid">
-        <PlanCard 
-          v-for="plan in filteredPlans" 
-          :key="plan.id" 
+        <PlanCard
+          v-for="plan in filteredPlans"
+          :key="plan.id"
           :plan="plan"
           @click="viewPlanDetail"
           @command="handlePlanCommand"
         />
-        
-        <el-empty 
+
+        <el-empty
           v-if="filteredPlans.length === 0 && !planStore.loading"
           description="暂无计划"
           :image-size="120"
@@ -65,7 +73,7 @@
       @close="resetCreateForm"
     >
       <el-form :model="createForm" label-width="120px" label-position="left">
-        <el-form-item label="训练目标" required>
+        <el-form-item label="训练目标" required label-position="top">
           <el-select v-model="createForm.goal" placeholder="选择训练目标">
             <el-option
               v-for="(config, key) in PLAN_GOAL_CONFIG"
@@ -81,28 +89,33 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="每周训练天数" required>
-          <el-slider 
-            v-model="createForm.daysPerWeek" 
-            :min="2" 
-            :max="6" 
+        <el-form-item label="每周训练天数" required label-position="top">
+          <el-slider
+            v-model="createForm.daysPerWeek"
+            :min="2"
+            :max="6"
             :marks="{ 2: '2天', 3: '3天', 4: '4天', 5: '5天', 6: '6天' }"
             show-stops
           />
         </el-form-item>
 
         <el-form-item label="单次训练时长" required>
-          <el-slider 
-            v-model="createForm.sessionDuration" 
-            :min="30" 
-            :max="120" 
+          <el-slider
+            v-model="createForm.sessionDuration"
+            :min="30"
+            :max="120"
             :step="15"
-            :marks="{ 30: '30分钟', 60: '60分钟', 90: '90分钟', 120: '120分钟' }"
+            :marks="{
+              30: '30分钟',
+              60: '60分钟',
+              90: '90分钟',
+              120: '120分钟',
+            }"
             show-stops
           />
         </el-form-item>
 
-        <el-form-item label="训练分化">
+        <el-form-item label="训练分化" label-position="top">
           <el-select v-model="createForm.preferredSplit" placeholder="自动选择">
             <el-option label="自动选择" value="" />
             <el-option
@@ -119,7 +132,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="偏好设置">
+        <el-form-item label="偏好设置" label-position="top">
           <el-checkbox-group v-model="preferences">
             <el-checkbox label="compound">偏好复合动作</el-checkbox>
             <el-checkbox label="isolation">包含孤立动作</el-checkbox>
@@ -140,142 +153,147 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { PlusIcon, StarIcon } from '@heroicons/vue/24/outline'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { usePlanStore } from '@/stores/plan'
-import { useUserStore } from '@/stores/user'
-import { PLAN_GOAL_CONFIG, TRAINING_SPLIT_CONFIG } from '@/types/plan'
-import type { TrainingPlan, PlanGoal, TrainingSplit, PlanGenerationConfig } from '@/types/plan'
-import PlanCard from '@/components/PlanCard.vue'
+import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { PlusIcon, StarIcon } from "@heroicons/vue/24/outline";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { usePlanStore } from "@/stores/plan";
+import { useUserStore } from "@/stores/user";
+import { PLAN_GOAL_CONFIG, TRAINING_SPLIT_CONFIG } from "@/types/plan";
+import type {
+  TrainingPlan,
+  PlanGoal,
+  TrainingSplit,
+  PlanGenerationConfig,
+} from "@/types/plan";
+import PlanCard from "@/components/PlanCard.vue";
 
-const router = useRouter()
-const planStore = usePlanStore()
-const userStore = useUserStore()
+const router = useRouter();
+const planStore = usePlanStore();
+const userStore = useUserStore();
 
-const activeTab = ref<'all' | 'active' | 'archived' | 'completed'>('all')
-const showCreateDialog = ref(false)
-const creating = ref(false)
+const activeTab = ref<"all" | "active" | "archived" | "completed">("all");
+const showCreateDialog = ref(false);
+const creating = ref(false);
 
 // 创建表单
 const createForm = ref({
-  goal: 'muscle_gain' as PlanGoal,
+  goal: "muscle_gain" as PlanGoal,
   daysPerWeek: 4,
   sessionDuration: 60,
-  preferredSplit: '' as TrainingSplit | ''
-})
+  preferredSplit: "" as TrainingSplit | "",
+});
 
-const preferences = ref<string[]>(['compound'])
+const preferences = ref<string[]>(["compound"]);
 
 // 计算属性
-const allPlans = computed(() => planStore.plans)
+const allPlans = computed(() => planStore.plans);
 
 const filteredPlans = computed(() => {
   switch (activeTab.value) {
-    case 'active':
-      return planStore.activePlans
-    case 'archived':
-      return planStore.archivedPlans
-    case 'completed':
-      return planStore.completedPlans
+    case "active":
+      return planStore.activePlans;
+    case "archived":
+      return planStore.archivedPlans;
+    case "completed":
+      return planStore.completedPlans;
     default:
-      return allPlans.value
+      return allPlans.value;
   }
-})
+});
 
 // 生命周期
 onMounted(async () => {
   // 加载用户档案
   if (!userStore.profile) {
-    await userStore.loadProfile()
+    await userStore.loadProfile();
   }
 
   // 加载训练计划
   if (userStore.profile) {
-    await planStore.loadPlans(userStore.profile.id)
+    await planStore.loadPlans(userStore.profile.id);
   }
-})
+});
 
 // 方法
 function viewPlanDetail(plan: TrainingPlan) {
-  router.push(`/plan/${plan.id}`)
+  router.push(`/plan/${plan.id}`);
 }
 
 async function handlePlanCommand(command: string, plan: TrainingPlan) {
   switch (command) {
-    case 'view':
-      viewPlanDetail(plan)
-      break
-    
-    case 'edit':
-      ElMessage.info('编辑功能开发中...')
-      break
-    
-    case 'activate':
+    case "view":
+      viewPlanDetail(plan);
+      break;
+
+    case "edit":
+      ElMessage.info("编辑功能开发中...");
+      break;
+
+    case "activate":
       try {
-        await planStore.setActivePlan(plan.id)
-        ElMessage.success('已设为活跃计划')
+        await planStore.setActivePlan(plan.id);
+        ElMessage.success("已设为活跃计划");
       } catch (error) {
-        ElMessage.error('操作失败')
+        ElMessage.error("操作失败");
       }
-      break
-    
-    case 'complete':
+      break;
+
+    case "complete":
       try {
-        await ElMessageBox.confirm('确认完成这个计划吗？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        await planStore.completePlan(plan.id)
-        ElMessage.success('计划已完成')
+        await ElMessageBox.confirm("确认完成这个计划吗？", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        });
+        await planStore.completePlan(plan.id);
+        ElMessage.success("计划已完成");
       } catch (error) {
-        if (error !== 'cancel') {
-          ElMessage.error('操作失败')
+        if (error !== "cancel") {
+          ElMessage.error("操作失败");
         }
       }
-      break
-    
-    case 'duplicate':
+      break;
+
+    case "duplicate":
       try {
-        const newPlanId = await planStore.duplicatePlan(plan.id)
-        ElMessage.success('计划已复制')
-        const newPlan = planStore.plans.find(p => p.id === newPlanId)
+        const newPlanId = await planStore.duplicatePlan(plan.id);
+        ElMessage.success("计划已复制");
+        const newPlan = planStore.plans.find((p) => p.id === newPlanId);
         if (newPlan) {
-          viewPlanDetail(newPlan)
+          viewPlanDetail(newPlan);
         }
       } catch (error) {
-        ElMessage.error('复制失败')
+        ElMessage.error("复制失败");
       }
-      break
-    
-    case 'delete':
+      break;
+
+    case "delete":
       try {
-        await ElMessageBox.confirm('确定要删除这个计划吗？', '提示', {
-          confirmButtonText: '删除',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        await planStore.deletePlan(plan.id)
-        ElMessage.success('计划已删除')
+        await ElMessageBox.confirm("确定要删除这个计划吗？", "提示", {
+          confirmButtonText: "删除",
+          cancelButtonText: "取消",
+          type: "warning",
+        });
+        await planStore.deletePlan(plan.id);
+        ElMessage.success("计划已删除");
       } catch (error) {
-        if (error !== 'cancel') {
-          ElMessage.error('删除失败')
+        if (error !== "cancel") {
+          ElMessage.error("删除失败");
         }
       }
-      break
+      break;
   }
 }
 
 async function handleCreatePlan() {
   if (!userStore.profile) {
-    ElMessage.error('请先完成个人档案设置')
-    router.push('/profile')
-    return
+    ElMessage.error("请先完成个人档案设置");
+    router.push("/profile");
+    return;
   }
 
-  creating.value = true
+  creating.value = true;
   try {
     const config: PlanGenerationConfig = {
       userId: userStore.profile.id,
@@ -285,42 +303,42 @@ async function handleCreatePlan() {
       experienceLevel: userStore.profile.experienceLevel,
       equipment: userStore.profile.equipment,
       preferredSplit: createForm.value.preferredSplit || undefined,
-      injuries: userStore.profile.injuries?.map(injury => injury.description),
+      injuries: userStore.profile.injuries?.map((injury) => injury.description),
       preferences: {
-        compound: preferences.value.includes('compound'),
-        isolation: preferences.value.includes('isolation'),
-        cardio: preferences.value.includes('cardio'),
-        highVolume: preferences.value.includes('highVolume')
-      }
-    }
+        compound: preferences.value.includes("compound"),
+        isolation: preferences.value.includes("isolation"),
+        cardio: preferences.value.includes("cardio"),
+        highVolume: preferences.value.includes("highVolume"),
+      },
+    };
 
-    const plan = await planStore.createPlan(config)
-    ElMessage.success('计划创建成功！')
-    showCreateDialog.value = false
-    
+    const plan = await planStore.createPlan(config);
+    ElMessage.success("计划创建成功！");
+    showCreateDialog.value = false;
+
     // 跳转到计划详情
-    viewPlanDetail(plan)
+    viewPlanDetail(plan);
   } catch (error) {
-    ElMessage.error('创建失败，请重试')
-    console.error('Create plan error:', error)
+    ElMessage.error("创建失败，请重试");
+    console.error("Create plan error:", error);
   } finally {
-    creating.value = false
+    creating.value = false;
   }
 }
 
 function resetCreateForm() {
   createForm.value = {
-    goal: 'muscle_gain',
+    goal: "muscle_gain",
     daysPerWeek: 4,
     sessionDuration: 60,
-    preferredSplit: ''
-  }
-  preferences.value = ['compound']
+    preferredSplit: "",
+  };
+  preferences.value = ["compound"];
 }
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+@import "@/styles/variables.scss";
 
 .plan-view {
   margin: 0 auto;
@@ -431,6 +449,17 @@ function resetCreateForm() {
     .plans-section {
       .filter-tabs {
         padding: $--el-spacing-xs;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .el-radio-group {
+          flex-wrap: nowrap;
+        }
       }
 
       .plans-grid {
@@ -441,17 +470,44 @@ function resetCreateForm() {
 
     .filter-tabs {
       .el-radio-group {
-        flex-direction: column;
         gap: $--el-spacing-xs;
 
         :deep(.el-radio-button) {
           .el-radio-button__inner {
             border-radius: $--el-border-radius-small !important;
+            white-space: nowrap;
           }
         }
       }
     }
+
+    // 创建计划对话框表单：移动端 label 在上、控件在下垂直排列
+    :deep(.el-dialog__body) {
+      padding: $--el-spacing-md $--el-spacing-sm;
+    }
+
+    :deep(.el-form-item) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    :deep(.el-form-item__label) {
+      width: 100%;
+      text-align: left;
+
+      padding-right: 0;
+    }
+
+    :deep(.el-form-item__content) {
+      width: 100%;
+    }
+
+    // 限制对话框内 slider 不左右溢出容器
+    :deep(.el-slider) {
+      width: 100%;
+      margin: 0;
+      box-sizing: border-box;
+    }
   }
 }
 </style>
-
