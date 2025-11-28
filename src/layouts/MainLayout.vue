@@ -662,6 +662,8 @@ function handleMobileMenuSelect(index: string) {
   @media (max-width: 768px) {
     height: calc(100vh - 52px);
     padding: $--el-spacing-sm;
+    // 移动端底部安全边距优化
+    padding-bottom: calc($--el-spacing-sm + env(safe-area-inset-bottom));
   }
 }
 
@@ -724,6 +726,8 @@ function handleMobileMenuSelect(index: string) {
 
   .drawer-content {
     padding: $--el-spacing-sm $--el-spacing-xs $--el-spacing-md;
+    // 为底部添加安全边距
+    padding-bottom: calc($--el-spacing-md + env(safe-area-inset-bottom));
     height: 100%;
   }
 
