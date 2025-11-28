@@ -367,13 +367,24 @@
         </div>
       </div>
       <!-- 移动端侧边栏悬浮展开按钮（仅在侧边栏收起时显示） -->
-      <div v-if="isMobile && sidebarCollapsed" class="mobile-sidebar-fab">
+      <div 
+        v-if="isMobile && sidebarCollapsed" 
+        class="mobile-sidebar-fab"
+        :class="{ dragging: isDragging }"
+        :style="{
+          left: fabPosition.y === 0 ? `${fabPosition.x}px` : `${fabPosition.x + dragOffset.x}px`,
+          top: fabPosition.y === 0 ? '20%' : `${fabPosition.y + dragOffset.y}px`,
+          transform: fabPosition.y === 0 && !isDragging ? 'translateY(-50%)' : 'none'
+        }"
+        @mousedown="onFabMouseDown"
+        @touchstart="onFabTouchStart"
+        @click="onFabClick"
+      >
         <el-button
           circle
           plain
           size="small"
           class="mobile-sidebar-toggle"
-          @click="sidebarCollapsed = false"
         >
           <span
             class="icon-wrapper"
@@ -446,7 +457,7 @@ const aiStore = useAIStore();
 const userStore = useUserStore();
 
 // ===== State =====
-const sidebarCollapsed = ref(false);
+const sidebarCollapsed = ref(true);
 const sessionListExpanded = ref(true);
 const historyDialogVisible = ref(false);
 const currentSessionId = ref<string | null>(null);
@@ -463,6 +474,13 @@ const fileInputRef = ref<HTMLInputElement>();
 const windowWidth = ref(
   typeof window !== "undefined" ? window.innerWidth : 1024
 );
+
+// 悬浮按钮拖动相关状态
+const fabPosition = ref({ x: 16, y: 0 }); // y: 0 表示使用 CSS 的 top: 20%
+const isDragging = ref(false);
+const dragStart = ref({ x: 0, y: 0 });
+const dragOffset = ref({ x: 0, y: 0 });
+const hasDragged = ref(false); // 标记是否发生了实际的拖动
 
 // 判断是否为移动端
 const isMobile = computed(() => {
@@ -749,6 +767,148 @@ function scrollToBottom() {
       messageListRef.value.scrollTop = messageListRef.value.scrollHeight;
     }
   });
+}
+
+// ===== 悬浮按钮拖动相关方法 =====
+function onFabMouseDown(event: MouseEvent) {
+  isDragging.value = true;
+  hasDragged.value = false;
+  dragStart.value = {
+    x: event.clientX,
+    y: event.clientY,
+  };
+  dragOffset.value = {
+    x: 0,
+    y: 0,
+  };
+
+  // 添加全局监听
+  document.addEventListener("mousemove", onFabMouseMove);
+  document.addEventListener("mouseup", onFabMouseUp);
+}
+
+function onFabTouchStart(event: TouchEvent) {
+  if (event.touches.length !== 1) return;
+
+  isDragging.value = true;
+  hasDragged.value = false;
+  const touch = event.touches[0];
+  dragStart.value = {
+    x: touch.clientX,
+    y: touch.clientY,
+  };
+  dragOffset.value = {
+    x: 0,
+    y: 0,
+  };
+
+  // 添加全局监听
+  document.addEventListener("touchmove", onFabTouchMove, { passive: false });
+  document.addEventListener("touchend", onFabTouchEnd);
+}
+
+function onFabMouseMove(event: MouseEvent) {
+  if (!isDragging.value) return;
+
+  const offsetX = event.clientX - dragStart.value.x;
+  const offsetY = event.clientY - dragStart.value.y;
+
+  // 如果移动距离超过 5px，认为是拖动
+  if (Math.abs(offsetX) > 5 || Math.abs(offsetY) > 5) {
+    if (!hasDragged.value) {
+      hasDragged.value = true;
+      // 只在真正开始拖动时才阻止默认行为
+      event.preventDefault();
+    }
+  }
+
+  dragOffset.value = {
+    x: offsetX,
+    y: offsetY,
+  };
+}
+
+function onFabTouchMove(event: TouchEvent) {
+  if (!isDragging.value || event.touches.length !== 1) return;
+
+  const touch = event.touches[0];
+  const offsetX = touch.clientX - dragStart.value.x;
+  const offsetY = touch.clientY - dragStart.value.y;
+
+  // 如果移动距离超过 5px，认为是拖动
+  if (Math.abs(offsetX) > 5 || Math.abs(offsetY) > 5) {
+    if (!hasDragged.value) {
+      hasDragged.value = true;
+    }
+    // 在拖动时阻止默认行为
+    event.preventDefault();
+  }
+
+  dragOffset.value = {
+    x: offsetX,
+    y: offsetY,
+  };
+}
+
+function onFabMouseUp(event: MouseEvent) {
+  if (!isDragging.value) return;
+
+  // 计算最终位置
+  const finalY = (fabPosition.value.y || window.innerHeight * 0.2) + dragOffset.value.y;
+
+  // 判断吸附到左侧还是右侧
+  const screenCenterX = window.innerWidth / 2;
+  const targetX = event.clientX < screenCenterX ? 16 : window.innerWidth - 56; // 56 是按钮宽度 + 右侧间距
+
+  // 更新位置
+  fabPosition.value = {
+    x: targetX,
+    y: Math.max(200, Math.min(finalY, window.innerHeight - 200)), // 限制在屏幕范围内，顶部留 60px，底部留 100px
+  };
+
+  // 重置拖动状态
+  isDragging.value = false;
+  dragOffset.value = { x: 0, y: 0 };
+
+  // 移除全局监听
+  document.removeEventListener("mousemove", onFabMouseMove);
+  document.removeEventListener("mouseup", onFabMouseUp);
+}
+
+function onFabTouchEnd(event: TouchEvent) {
+  if (!isDragging.value) return;
+
+  // 计算最终位置
+  const touch = event.changedTouches[0];
+  const finalY = (fabPosition.value.y || window.innerHeight * 0.2) + dragOffset.value.y;
+
+  // 判断吸附到左侧还是右侧
+  const screenCenterX = window.innerWidth / 2;
+  const targetX = touch.clientX < screenCenterX ? 16 : window.innerWidth - 56;
+
+  // 更新位置
+  fabPosition.value = {
+    x: targetX,
+    y: Math.max(60, Math.min(finalY, window.innerHeight - 100)),
+  };
+
+  // 重置拖动状态
+  isDragging.value = false;
+  dragOffset.value = { x: 0, y: 0 };
+
+  // 移除全局监听
+  document.removeEventListener("touchmove", onFabTouchMove);
+  document.removeEventListener("touchend", onFabTouchEnd);
+}
+
+function onFabClick(event: MouseEvent) {
+  // 只有在没有拖动的情况下才触发点击
+  if (!hasDragged.value) {
+    sidebarCollapsed.value = false;
+    // 只在真正点击时阻止事件冒泡
+    event.preventDefault();
+    event.stopPropagation();
+  }
 }
 
 // ===== Lifecycle =====
@@ -1425,6 +1585,21 @@ watch(
   top: 20%;
   transform: translateY(-50%);
   z-index: 110;
+  cursor: move;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+
+  &.dragging {
+    transition: none;
+    cursor: grabbing;
+
+    .mobile-sidebar-toggle {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+  }
 
   .mobile-sidebar-toggle {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
@@ -1432,6 +1607,8 @@ watch(
     border: none;
     color: #fff;
     backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+    cursor: inherit;
 
     .icon-wrapper {
       display: inline-flex;
@@ -1439,6 +1616,7 @@ watch(
       justify-content: center;
       width: 16px;
       height: 16px;
+      pointer-events: none;
 
       :deep(svg) {
         width: 16px;
@@ -1449,6 +1627,10 @@ watch(
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   }
 }
